@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'noreply@edmontononslaught.ca'
+  default from: 'noreply@hometown40k.ca'
   layout 'mailer'
 end

@@ -23,14 +23,14 @@ en:
   home:
     cta_submit_application: "Register Now!"
     cta_manage_cohort: "Manage Cohorts"
-    main_text: "Welcome to Onslaught!"
+    main_text: "Welcome to Hometown 40k!"
   seo:
-    home: "Welcome to Edmonton Onslaught! This is the home of Edmonton's premiere table top wargaming tournament."
+    home: "Welcome to Hometown 40k! This is the home of Edmonton's premiere table top wargaming tournament."
     tickets: "Shop for your tickets here."
     info: "Information about the event here."
     cart: "Checkout with your tickets"
     success: "Transaction success"
   social_links:
-    facebook: "https://facebook.com/Edmontononslaught/"
+    facebook: "https://facebook.com/hometown40k/"
     itc: "https://www.frontlinegaming.org/community/frontline-gamings-independent-tournament-circuit/"
     hnic: "http://www.hobbynight.ca"

@@ -53,7 +53,7 @@ class PaypalController < ApplicationController
     :amount =>  {
       :total =>  total,
       :currency =>  "CAD" },
-    :description =>  "Purchase of event tickets for Onslaught." }]})
+    :description =>  "Purchase of event tickets for Hometown 40k." }]})
 
     # Create Payment and return status
     if @payment.create

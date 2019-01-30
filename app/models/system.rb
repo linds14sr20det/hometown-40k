@@ -10,7 +10,7 @@ class System < ApplicationRecord
 
   def first_image
     html = Nokogiri::HTML.fragment(description)
-    image = ActionController::Base.helpers.asset_path("onslaughtlogo.png", :digest => false)
+    image = ActionController::Base.helpers.asset_path("hometownlogo.png", :digest => false)
     image = html.css('img')[0].attr('src') unless html.css('img')[0].nil?
     image
   end

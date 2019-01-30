@@ -8,9 +8,9 @@
         <span class="icon-bar"></span>
       </button>
     <% end %>
-    <%= link_to image_tag("onslaughtlogo.png", class: "round-image"), root_path, class: "navbar-brand" %>
+    <%= link_to image_tag("hometownlogo.png", class: "round-image"), root_path, class: "navbar-brand" %>
     <%= link_to sanitize("#{fa_icon("shopping-cart")}"), cart_tickets_path, class: "cart-icon logo-text pull-right #{Cart.badge_count(cookies)}" %>
-    <%= link_to "ONSLAUGHT.", root_path, class: "logo-text pull-right" %>
+    <%= link_to "hometown.", root_path, class: "logo-text pull-right" %>
   </div>
 
   <% if logged_in? %>
