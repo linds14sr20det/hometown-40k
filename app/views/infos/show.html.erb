@@ -5,7 +5,7 @@
   <div class="col-md-offset-2 col-md-8">
     <h1>Event Info</h1>
     <div class="btn-group-vertical btn-block button-pad-bottom">
-      <% if Cohort.active.attachment_url.blank? %>
+      <% if !Cohort.active.present? || Cohort.active.attachment_url.blank? %>
         <div class="btn btn-primary disabled">Player pack unavailable</div>
       <% else %>
         <%= link_to "Download player pack", Cohort.active.attachment_url, class: "btn btn-primary" %>
