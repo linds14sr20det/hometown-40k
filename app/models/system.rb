@@ -1,5 +1,5 @@
 class System < ApplicationRecord
-  belongs_to :cohort, inverse_of: :systems
+  belongs_to :cohort
   has_one :attachment, inverse_of: :system
   has_many :registrants, :dependent => :restrict_with_error
   accepts_nested_attributes_for :attachment, reject_if: :all_blank, allow_destroy: true

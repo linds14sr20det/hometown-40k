@@ -1,6 +1,10 @@
 <%= form_for(@cohort, html: { class: 'directUpload', data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } }) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="well">
+    <%= f.fields_for :info, @cohort.info do |info| %>
+      <%= render 'info_fields', :f => info %>
+    <% end %>
+
     <div class="form-group">
       <%= f.label :descriptive_date %>
       <%= f.text_field :descriptive_date, class: 'form-control' %>

@@ -3,16 +3,19 @@ class CohortsController < ApplicationController
   before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
   def index
-    @active_cohort = Cohort.where(active: true)
-    @cohorts = Cohort.where(active: false).paginate(page: params[:page], :per_page => 12)
+
+    @active_cohort = @current_user.cohorts.where(active: true)
+    @cohorts = @current_user.cohorts.where(active: false).paginate(page: params[:page], :per_page => 12)
   end
 
   def new
     @cohort = Cohort.new
+    @cohort.build_info
   end
 
   def create
-    @cohort = Cohort.new(cohort_params)
+    binding.pry
+    @cohort = @current_user.cohorts.create(cohort_params)
     @cohort.active = true if params[:activate_cohort]
     if @cohort.save
       flash[:success] = "Cohort created."
@@ -50,7 +53,7 @@ class CohortsController < ApplicationController
   private
 
     def cohort_params
-      params.require(:cohort).permit(:start_at, :end_at, :descriptive_date, :active, :attachment_url, systems_attributes: [:id, :title, :description, :descriptive_date, :start_date, :max_players, :cost, :rounds, :_destroy])
+      params.require(:cohort).permit(:start_at, :end_at, :descriptive_date, :active, :attachment_url, systems_attributes: [:id, :title, :description, :descriptive_date, :start_date, :max_players, :cost, :rounds, :_destroy], info_attributes: [:id, :body])
     end
 
     def set_s3_direct_post

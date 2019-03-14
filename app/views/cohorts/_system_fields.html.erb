@@ -31,9 +31,11 @@
 
   <div class="form-group">
     <%= f.label :cost %>
-    <%= f.number_field :cost, value: number_with_precision(f.object.cost, :precision => 2), step: "0.01", class: 'form-control' %>
+    <%= f.number_field :cost, value: f.object.present? ? number_with_precision(f.object.cost, :precision => 2) : 0, step: "0.01", class: 'form-control' %>
   </div>
 
-  <%= link_to_remove_association('Remove system', f, class: "btn btn-primary #{"disabled" unless f.object.registrants.empty?}") %>
-  <%= "There are players linked to this system, delete them first."  unless f.object.registrants.empty? %>
+  <% if f.object.present? %>
+    <%= link_to_remove_association('Remove system', f, class: "btn btn-primary #{"disabled" unless f.object.registrants.empty?}") %>
+    <%= "There are players linked to this system, delete them first."  unless f.object.registrants.empty? %>
+  <% end %>
 </div>
