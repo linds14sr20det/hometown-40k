@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  resources :users
+  resources :users #TODO: This needs to become protected unless editing self
+
   resources :cohorts
+  resources :infos, only: [:show, :edit, :update]
   resources :tickets, only: [:index, :show] do
     post :add_to_cart, on: :member
     get :remove_from_cart, on: :collection
@@ -14,7 +16,7 @@ Rails.application.routes.draw do
   end
   post '/checkout' => 'paypal#checkout'
   post '/execute' =>  'paypal#execute'
-  resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :infos, only: [:show, :edit, :update]
+  resources :password_resets, only: [:new, :create, :edit, :update]
+
   resources :registrants
 end

@@ -1,5 +1,8 @@
 class Cohort < ApplicationRecord
+  belongs_to :user
+  has_one :info
   has_many :systems, inverse_of: :cohort, dependent: :destroy
+  accepts_nested_attributes_for :info, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :systems, reject_if: :all_blank, allow_destroy: true
   validate :only_one_active_cohort
   scope :active, -> { where(:active => true).first }

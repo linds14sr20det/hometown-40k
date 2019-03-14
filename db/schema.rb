@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180930221404) do
+ActiveRecord::Schema.define(version: 20190314144224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,12 +31,16 @@ ActiveRecord::Schema.define(version: 20180930221404) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "attachment_url"
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_cohorts_on_user_id", using: :btree
   end
 
   create_table "infos", force: :cascade do |t|
     t.string   "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "cohort_id"
+    t.index ["cohort_id"], name: "index_infos_on_cohort_id", using: :btree
   end
 
   create_table "registrants", force: :cascade do |t|
@@ -109,6 +113,8 @@ ActiveRecord::Schema.define(version: 20180930221404) do
   end
 
   add_foreign_key "attachments", "systems"
+  add_foreign_key "cohorts", "users"
+  add_foreign_key "infos", "cohorts"
   add_foreign_key "round_aggregate", "registrants", column: "player_id"
   add_foreign_key "round_individual", "registrants", column: "opponent_id"
   add_foreign_key "round_individual", "registrants", column: "player_id"
