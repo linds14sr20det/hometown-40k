@@ -14,7 +14,6 @@ class CohortsController < ApplicationController
   end
 
   def create
-    binding.pry
     @cohort = @current_user.cohorts.create(cohort_params)
     @cohort.active = true if params[:activate_cohort]
     if @cohort.save
@@ -26,15 +25,15 @@ class CohortsController < ApplicationController
   end
 
   def edit
-    @cohort = Cohort.find(params[:id])
+    @cohort = @current_user.cohorts.find(params[:id])
   end
 
   def update
-    @cohort = Cohort.find(params[:id])
+    @cohort = @current_user.cohorts.find(params[:id])
     c_p = cohort_params
     c_p[:active] = true if params[:activate_cohort]
     if @cohort.update_attributes(c_p)
-      flash[:success] = "Profile updated"
+      flash[:success] = "Tournament updated"
       redirect_to cohorts_path
     else
       redirect_to edit_cohort_path(@cohort)
@@ -42,7 +41,7 @@ class CohortsController < ApplicationController
   end
 
   def destroy
-    if Cohort.find(params[:id]).destroy
+    if @current_user.cohorts.find(params[:id]).destroy
       flash[:success] = "Cohort deleted"
     else
       flash[:warning] = "Cohort has systems with players. The cohort was not deleted."
