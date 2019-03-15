@@ -42,6 +42,8 @@ gem 'font-awesome-rails'
 
 gem 'paypal-sdk-rest'
 
+gem 'devise'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
 
-  root   'application#home'
-  get    '/login',   to: 'sessions#new'
-  post   '/login',   to: 'sessions#create'
-  delete '/logout',  to: 'sessions#destroy'
+  root 'application#home'
   resources :users #TODO: This needs to become protected unless editing self
 
   resources :cohorts
-  resources :infos, only: [:show, :edit, :update]
   resources :tickets, only: [:index, :show] do
     post :add_to_cart, on: :member
     get :remove_from_cart, on: :collection

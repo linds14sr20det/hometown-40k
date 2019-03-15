@@ -1,5 +1,5 @@
 class RegistrantsController < ApplicationController
-  before_action :logged_in_user
+  before_filter :authenticate_user!
 
   def index
     @cohort = Cohort.find(params[:cohort_id])

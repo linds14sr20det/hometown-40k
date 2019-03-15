@@ -73,6 +73,12 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.4)
     crass (1.0.4)
+    devise (4.6.1)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0, < 6.0)
+      responders
+      warden (~> 1.2.3)
     dotenv (2.6.0)
     dotenv-rails (2.6.0)
       dotenv (= 2.6.0)
@@ -126,6 +132,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
+    orm_adapter (0.5.0)
     paypal-sdk-rest (1.7.3)
       multi_json (~> 1.0)
       xml-simple
@@ -175,6 +182,9 @@ GEM
       ffi (~> 1.0)
     render_anywhere (0.0.12)
       rails (>= 3.0.7)
+    responders (2.4.1)
+      actionpack (>= 4.2.0, < 6.0)
+      railties (>= 4.2.0, < 6.0)
     sass (3.7.3)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -209,6 +219,8 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
+    warden (1.2.8)
+      rack (>= 2.0.6)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -235,6 +247,7 @@ DEPENDENCIES
   byebug
   cocoon
   coffee-rails (~> 4.2)
+  devise
   dotenv-rails
   faker (= 1.6.6)
   font-awesome-rails

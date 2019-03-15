@@ -1,5 +1,5 @@
 class CohortsController < ApplicationController
-  before_action :logged_in_user
+  before_filter :authenticate_user!
   before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
   def index

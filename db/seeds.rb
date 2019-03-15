@@ -1,28 +1,31 @@
 # Create some users These shouldn't change after initial deploy
 
 if User.count == 0
-  admin = User.create!(
+  admin = User.new(
       email:  "hometown40k@gmail.com",
       name: "Ward Kapach",
-      password_digest: "$2a$10$OTvrczPu1h5zpo8.b61peOm6hHNyvu9aji3R1rKCVoR/JhCpPwXee", #password
-      activated: true,
-      activated_at: Time.zone.now
+      password: 'password',
+      password_confirmation: 'password',
+      # #confirmation_token: true,
+      # confirmation_sent_at: Time.zone.now,
+      # confirmed_at: Time.zone.now
   )
+  admin.skip_confirmation!
+  admin.save!
 
-  admin = User.create!(
+  admin = User.new(
       email:  "stephen.r.lind@gmail.com",
       name: "Stephen Lind",
-      password_digest: "$2a$10$OTvrczPu1h5zpo8.b61peOm6hHNyvu9aji3R1rKCVoR/JhCpPwXee", #password
-      activated: true,
-      activated_at: Time.zone.now
+      password: 'password',
+      password_confirmation: 'password',
+      # #confirmation_token: true,
+      # confirmation_sent_at: Time.zone.now,
+      # confirmed_at: Time.zone.now
   )
+  admin.skip_confirmation!
+  admin.save!
 end
 
-if Info.count == 0
-  info = Info.create!(
-      body: "Welcome to Hometown 40k!"
-  )
-end
 # Create a bunch of test accounts
 
 # 99.times do |n|
