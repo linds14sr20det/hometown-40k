@@ -1,8 +1,10 @@
 <% provide(:title, 'Welcome') %>
 <% provide(:meta_description, t('seo.home')) %>
 
-<%= link_to my_events_cohorts_path, class: "banner" do %>
-  <div class="banner-card tickets"><p>my events</p>    </div>
+<% if user_signed_in? %>
+  <%= link_to my_events_cohorts_path, class: "banner" do %>
+    <div class="banner-card tickets"><p>my events</p>    </div>
+  <% end %>
 <% end %>
 <div class="banner-spacer"></div>
 <%= link_to find_cohorts_path, class: "banner" do %>

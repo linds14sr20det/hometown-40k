@@ -1,7 +1,7 @@
 class TicketsController < ApplicationController
 
   def index
-    @active_cohort = Cohort.where(active: true).first
+    @active_cohort = Cohort.where(active: true).where(id: params[:cohort_id]).first
     @tickets = @active_cohort.systems.order(:start_date, :title) unless @active_cohort.nil?
   end
 

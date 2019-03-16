@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :cohorts do
     get :find, on: :collection
     get :my_events, on: :collection
+    post :search, on: :collection
   end
   resources :tickets, only: [:index, :show] do
     post :add_to_cart, on: :member

@@ -1,6 +1,6 @@
 Info | results |submit scores
 
-<%= link_to tickets_path, class: "banner" do %>
+<%= link_to tickets_path(cohort_id: @cohort.id), class: "banner" do %>
   <div class="banner-card tickets">
     <p class="banner-date"><%= @cohort.descriptive_date %></p>
     <p class="banner-cta-text">Buy Tickets</p>

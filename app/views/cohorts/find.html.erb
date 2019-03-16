@@ -1,5 +1,9 @@
-Throw a cool search up here
-<%= @location.coordinates %>
+<%= form_tag({controller: :cohorts, action: "search"}, method: "post") do %>
+  <div class="form-group">
+    <%= label_tag :search %>
+    <%= search_field(:cohort, :name, class: 'form-control') %>
+  </div>
+<% end %>
 <% @cohorts.each do |cohort| %>
   <%= render 'cohort_stub_banner', :cohort => cohort %>
   <div class="banner-spacer"></div>
