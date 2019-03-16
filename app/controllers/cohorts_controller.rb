@@ -4,8 +4,8 @@ class CohortsController < ApplicationController
 
   def index
 
-    @active_cohort = @current_user.cohorts.where(active: true)
-    @cohorts = @current_user.cohorts.where(active: false).paginate(page: params[:page], :per_page => 12)
+    @active_cohort = current_user.cohorts.where(active: true)
+    @cohorts = current_user.cohorts.where(active: false).paginate(page: params[:page], :per_page => 12)
   end
 
   def new
@@ -14,7 +14,7 @@ class CohortsController < ApplicationController
   end
 
   def create
-    @cohort = @current_user.cohorts.create(cohort_params)
+    @cohort = current_user.cohorts.create(cohort_params)
     @cohort.active = true if params[:activate_cohort]
     if @cohort.save
       flash[:success] = "Cohort created."
@@ -25,11 +25,11 @@ class CohortsController < ApplicationController
   end
 
   def edit
-    @cohort = @current_user.cohorts.find(params[:id])
+    @cohort = current_user.cohorts.find(params[:id])
   end
 
   def update
-    @cohort = @current_user.cohorts.find(params[:id])
+    @cohort = current_user.cohorts.find(params[:id])
     c_p = cohort_params
     c_p[:active] = true if params[:activate_cohort]
     if @cohort.update_attributes(c_p)
@@ -41,7 +41,7 @@ class CohortsController < ApplicationController
   end
 
   def destroy
-    if @current_user.cohorts.find(params[:id]).destroy
+    if current_user.cohorts.find(params[:id]).destroy
       flash[:success] = "Cohort deleted"
     else
       flash[:warning] = "Cohort has systems with players. The cohort was not deleted."
