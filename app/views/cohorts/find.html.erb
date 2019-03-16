@@ -1,11 +1,6 @@
 Throw a cool search up here
 <%= @location.coordinates %>
 <% @cohorts.each do |cohort| %>
-  <%= link_to tickets_path, class: "banner" do %>
-    <div class="banner-card tickets">
-      <p class="banner-date"><%= cohort.descriptive_date %></p>
-      <p class="banner-cta-text">EVENT NEAME</p>
-    </div>
-  <% end %>
+  <%= render 'cohort_stub_banner', :cohort => cohort %>
   <div class="banner-spacer"></div>
 <% end %>

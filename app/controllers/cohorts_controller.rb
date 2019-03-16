@@ -7,6 +7,10 @@ class CohortsController < ApplicationController
     @cohorts = current_user.cohorts.where(active: false).paginate(page: params[:page], :per_page => 12)
   end
 
+  def show
+    @cohort = Cohort.find(params[:id])
+  end
+
   def new
     @cohort = Cohort.new
     @cohort.build_info
@@ -61,7 +65,7 @@ class CohortsController < ApplicationController
   private
 
     def cohort_params
-      params.require(:cohort).permit(:body, :street, :city, :state, :country, :start_at, :end_at, :descriptive_date, :active, :attachment_url, systems_attributes: [:id, :title, :description, :descriptive_date, :start_date, :max_players, :cost, :rounds, :_destroy])
+      params.require(:cohort).permit(:name, :body, :street, :city, :state, :country, :start_at, :end_at, :descriptive_date, :active, :attachment_url, systems_attributes: [:id, :title, :description, :descriptive_date, :start_date, :max_players, :cost, :rounds, :_destroy])
     end
 
     def set_s3_direct_post

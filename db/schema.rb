@@ -39,21 +39,8 @@ ActiveRecord::Schema.define(version: 20190316035614) do
     t.string   "country"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "name"
     t.index ["user_id"], name: "index_cohorts_on_user_id", using: :btree
-  end
-
-  create_table "infos", force: :cascade do |t|
-    t.string   "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "cohort_id"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.string   "street"
-    t.string   "city"
-    t.string   "state"
-    t.string   "country"
-    t.index ["cohort_id"], name: "index_infos_on_cohort_id", using: :btree
   end
 
   create_table "registrants", force: :cascade do |t|
@@ -130,7 +117,6 @@ ActiveRecord::Schema.define(version: 20190316035614) do
 
   add_foreign_key "attachments", "systems"
   add_foreign_key "cohorts", "users"
-  add_foreign_key "infos", "cohorts"
   add_foreign_key "round_aggregate", "registrants", column: "player_id"
   add_foreign_key "round_individual", "registrants", column: "opponent_id"
   add_foreign_key "round_individual", "registrants", column: "player_id"
