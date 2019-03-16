@@ -83,10 +83,25 @@ GEM
     dotenv-rails (2.6.0)
       dotenv (= 2.6.0)
       railties (>= 3.2, < 6.0)
+    elasticsearch (6.2.0)
+      elasticsearch-api (= 6.2.0)
+      elasticsearch-transport (= 6.2.0)
+    elasticsearch-api (6.2.0)
+      multi_json
+    elasticsearch-model (6.0.0)
+      activesupport (> 3)
+      elasticsearch (> 1)
+      hashie
+    elasticsearch-rails (6.0.0)
+    elasticsearch-transport (6.2.0)
+      faraday
+      multi_json
     erubis (2.7.0)
     execjs (2.7.0)
     faker (1.6.6)
       i18n (~> 0.5)
+    faraday (0.15.4)
+      multipart-post (>= 1.2, < 3)
     ffi (1.10.0)
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
@@ -99,6 +114,7 @@ GEM
     geocoder (1.5.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    hashie (3.6.0)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     jbuilder (2.8.0)
@@ -130,6 +146,7 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.11.3)
     multi_json (1.13.1)
+    multipart-post (2.0.0)
     nio4r (2.3.1)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
@@ -250,6 +267,8 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   dotenv-rails
+  elasticsearch-model
+  elasticsearch-rails
   faker (= 1.6.6)
   font-awesome-rails
   froala-editor-sdk

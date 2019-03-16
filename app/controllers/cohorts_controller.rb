@@ -8,7 +8,7 @@ class CohortsController < ApplicationController
   end
 
   def show
-    @cohort = Cohort.where(active: true).where(id: params[:id])
+    @cohort = Cohort.where(active: true).where(id: params[:id]).first
   end
 
   def new
@@ -59,7 +59,9 @@ class CohortsController < ApplicationController
   end
 
   def search
-
+    binding.pry
+    response = Cohort.search params[:q]
+    render json: response
   end
 
   def my_events

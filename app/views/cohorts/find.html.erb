@@ -1,6 +1,6 @@
 <%= form_tag({controller: :cohorts, action: "search"}, method: "post") do %>
   <div class="form-group">
-    <%= label_tag :search %>
+    <%= label_tag :search, "Search for an event" %>
     <%= search_field(:cohort, :name, class: 'form-control') %>
   </div>
 <% end %>
@@ -8,3 +8,14 @@
   <%= render 'cohort_stub_banner', :cohort => cohort %>
   <div class="banner-spacer"></div>
 <% end %>
+
+<script>
+  Rails.ajax({
+    url: "<%= search_cohorts_path %>",
+    type: "POST",
+    data: "first_name=Ricky&last_name=Bobby",
+    success: function(data) {
+      console.log(data);
+    }
+  });
+</script>

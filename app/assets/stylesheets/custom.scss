@@ -192,7 +192,7 @@ span.picture {
     }
     &.tickets {
       height: 50%;
-      min-height: 120px;
+      min-height: 150px;
       background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("mike_stormcast.jpg");
       background-size: cover;
       background-position: 50% 50%;
@@ -372,4 +372,10 @@ div.datepicker{
   font-size: 12px;
   color: $main-font;
   z-index: 2;
+}
+
+/* Set the size of the div element that contains the map */
+#map {
+  height: 300px;  /* The height is 400 pixels */
+  width: 100%;  /* The width is the width of the web page */
 }

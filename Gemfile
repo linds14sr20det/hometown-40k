@@ -44,6 +44,8 @@ gem 'paypal-sdk-rest'
 
 gem 'devise'
 gem 'geocoder'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

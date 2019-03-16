@@ -1,8 +1,17 @@
 class Cohort < ApplicationRecord
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
   belongs_to :user
   has_many :systems, inverse_of: :cohort, dependent: :destroy
   accepts_nested_attributes_for :systems, reject_if: :all_blank, allow_destroy: true
   geocoded_by :address
+
+  # ElasticSearch Index
+  settings index: { number_of_shards: 1 } do
+    mappings dynamic: 'false' do
+      indexes :name, analyzer: 'english'
+    end
+  end
 
   after_validation :geocode, if: ->(obj){ obj.address_present? and obj.address_changed? }
 
