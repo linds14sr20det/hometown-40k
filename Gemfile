@@ -43,6 +43,7 @@ gem 'font-awesome-rails'
 gem 'paypal-sdk-rest'
 
 gem 'devise'
+gem 'geocoder'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

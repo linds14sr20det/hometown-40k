@@ -1,12 +1,14 @@
 class Cohort < ApplicationRecord
   belongs_to :user
-  has_one :info, inverse_of: :cohort
   has_many :systems, inverse_of: :cohort, dependent: :destroy
-  accepts_nested_attributes_for :info, reject_if: :all_blank
   accepts_nested_attributes_for :systems, reject_if: :all_blank, allow_destroy: true
-  validate :only_one_active_cohort
-  scope :active, -> { where(:active => true).first }
-  scope :active_validation, -> { where(:active => true) }
+  geocoded_by :address
+
+  after_validation :geocode, if: ->(obj){ obj.address_present? and obj.address_changed? }
+
+  def address
+    [street, city, state, country].compact.join(', ')
+  end
 
   def registration_open?
     start_at < Time.now && Time.now < end_at
@@ -16,17 +18,12 @@ class Cohort < ApplicationRecord
     active? && !registration_open?
   end
 
-  protected
-
-  def only_one_active_cohort
-    return unless active?
-
-    matches = Cohort.active_validation
-    if persisted?
-      matches = matches.where('id != ?', id)
-    end
-    if matches.exists?
-      matches.update_all(:active => false)
-    end
+  def address_present?
+    street.present? && city.present? && state.present? && country.present?
   end
+
+  def address_changed?
+    street_changed? || city_changed? || state_changed? || country_changed?
+  end
+
 end

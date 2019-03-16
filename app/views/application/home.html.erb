@@ -1,15 +1,13 @@
 <% provide(:title, 'Welcome') %>
 <% provide(:meta_description, t('seo.home')) %>
 
-<% unless Cohort.active.blank? %>
-  <%= link_to tickets_path, class: "banner" do %>
-    <div class="banner-card tickets">
-      <p class="banner-date"><%= Cohort.active.descriptive_date %></p>
-      <p class="banner-cta-text">buy tickets</p>
-    </div>
-  <% end %>
+<%= link_to my_events_cohorts_path, class: "banner" do %>
+  <div class="banner-card tickets"><p>my events</p>    </div>
 <% end %>
 <div class="banner-spacer"></div>
+<%= link_to find_cohorts_path, class: "banner" do %>
+  <div class="banner-card info"><p>find an event</p></div>
+<% end %>
 
 <!--This is a dirty hack to get the vh to expand when scrolling down-->
 <script>

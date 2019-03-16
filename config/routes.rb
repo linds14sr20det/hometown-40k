@@ -4,9 +4,13 @@ Rails.application.routes.draw do
   }
 
   root 'application#home'
+
   resources :users #TODO: This needs to become protected unless editing self
 
-  resources :cohorts
+  resources :cohorts do
+    get :find, on: :collection
+    get :my_events, on: :collection
+  end
   resources :tickets, only: [:index, :show] do
     post :add_to_cart, on: :member
     get :remove_from_cart, on: :collection

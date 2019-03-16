@@ -1,0 +1,9 @@
+<% @cohorts.each do |cohort| %>
+  <%= link_to tickets_path, class: "banner" do %>
+    <div class="banner-card tickets">
+      <p class="banner-date"><%= cohort.descriptive_date %></p>
+      <p class="banner-cta-text">Event Name</p>
+    </div>
+  <% end %>
+  <div class="banner-spacer"></div>
+<% end %>

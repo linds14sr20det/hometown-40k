@@ -1,9 +1,8 @@
 class CohortsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:find]
   before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
   def index
-
     @active_cohort = current_user.cohorts.where(active: true)
     @cohorts = current_user.cohorts.where(active: false).paginate(page: params[:page], :per_page => 12)
   end
@@ -49,10 +48,20 @@ class CohortsController < ApplicationController
     redirect_to cohorts_path
   end
 
+  def find
+    @location = request.location
+    @cohorts = Cohort.where(active: true).near(request.location.coordinates, 100, units: :km)
+  end
+
+  def my_events
+    #TODO: This actually needs to be events where the current user is a registrant
+    @cohorts = current_user.cohorts
+  end
+
   private
 
     def cohort_params
-      params.require(:cohort).permit(:start_at, :end_at, :descriptive_date, :active, :attachment_url, systems_attributes: [:id, :title, :description, :descriptive_date, :start_date, :max_players, :cost, :rounds, :_destroy], info_attributes: [:id, :body])
+      params.require(:cohort).permit(:body, :street, :city, :state, :country, :start_at, :end_at, :descriptive_date, :active, :attachment_url, systems_attributes: [:id, :title, :description, :descriptive_date, :start_date, :max_players, :cost, :rounds, :_destroy])
     end
 
     def set_s3_direct_post
