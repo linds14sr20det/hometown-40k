@@ -6,7 +6,7 @@
   </div>
 <% end %>
 <div class="info">
-  <%= @cohort.body %>
+  <%= sanitize(@cohort.body) %>
 </div>
 <div id="map"></div>
 
@@ -25,6 +25,6 @@
 * The callback parameter executes the initMap() function
 -->
 <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChUS85i-pFOiPZKDV-wgOcXnc-T1vqrec
+        src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["MAPS_KEY"] %>
 &callback=initMap">
 </script>
