@@ -1,5 +1,5 @@
 class DownloadsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   before_action :submissions_for_user_judge_or_admin, only: [:show]
   after_action :clear_tmp
 

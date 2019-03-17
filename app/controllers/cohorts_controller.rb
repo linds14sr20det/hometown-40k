@@ -1,5 +1,5 @@
 class CohortsController < ApplicationController
-  before_filter :authenticate_user!, except: [:find, :search, :show]
+  before_action :authenticate_user!, except: [:find, :search, :show]
   before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
   def index
@@ -13,7 +13,6 @@ class CohortsController < ApplicationController
 
   def new
     @cohort = Cohort.new
-    @cohort.build_info
   end
 
   def create
@@ -55,13 +54,15 @@ class CohortsController < ApplicationController
   def find
     location_raw = request.location.coordinates
     coordinates = location_raw.empty? ? [37.751425, -122.419443] : location_raw
+
     @cohorts = Cohort.where(active: true).near(coordinates, 3000).paginate(page: params[:page], per_page: 50)
   end
 
   def search
-    binding.pry
-    response = Cohort.search params[:q]
-    render json: response
+    response = Cohort.search params["search_term"]
+    ids = response.results.map { |r| r._id.to_i }
+    @cohorts = Cohort.where(id: ids).where(active: true).paginate(page: params[:page], per_page: 50)
+    render json: { html: render_to_string(partial: 'search') }
   end
 
   def my_events

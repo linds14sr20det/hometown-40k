@@ -1,21 +1,29 @@
-<%= form_tag({controller: :cohorts, action: "search"}, method: "post") do %>
-  <div class="form-group">
-    <%= label_tag :search, "Search for an event" %>
-    <%= search_field(:cohort, :name, class: 'form-control') %>
-  </div>
-<% end %>
+<div class="form-group">
+  <%= label_tag :search, "Search for an event" %>
+  <%= search_field_tag(:cohort_name, "", :onkeyup => 'sendSearch()', class: 'form-control') %>
+</div>
+
+<div id="cohorts_search_results">
 <% @cohorts.each do |cohort| %>
   <%= render 'cohort_stub_banner', :cohort => cohort %>
-  <div class="banner-spacer"></div>
+  Banner spacer is doing nothing
 <% end %>
+</div>
 
 <script>
-  Rails.ajax({
-    url: "<%= search_cohorts_path %>",
-    type: "POST",
-    data: "first_name=Ricky&last_name=Bobby",
-    success: function(data) {
-      console.log(data);
+  function sendSearch() {
+    const searchTerm = document.querySelector("#cohort_name").value;
+    if (searchTerm.length > 3) {
+      Rails.ajax({
+        url: "<%= search_cohorts_path %>",
+        type: "POST",
+        data: `search_term=${searchTerm}`,
+        success: function (data) {
+          document.querySelector("#cohorts_search_results").innerHTML = data.html;
+        }
+      });
     }
-  });
+  }
+
+
 </script>
