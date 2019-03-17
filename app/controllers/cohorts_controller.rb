@@ -52,16 +52,18 @@ class CohortsController < ApplicationController
   end
 
   def find
-    location_raw = request.location.coordinates
-    coordinates = location_raw.empty? ? [37.751425, -122.419443] : location_raw
-
-    @cohorts = Cohort.where(active: true).near(coordinates, 3000).paginate(page: params[:page], per_page: 50)
+    @cohorts = initial_find
   end
 
   def search
-    response = Cohort.search params["search_term"]
-    ids = response.results.map { |r| r._id.to_i }
-    @cohorts = Cohort.where(id: ids).where(active: true).paginate(page: params[:page], per_page: 50)
+    @cohorts = if params["search_term"].length == 0
+                 initial_find
+               else
+                 response = Cohort.search params["search_term"]
+                 ids = response.results.map { |r| r._id.to_i }
+                 Cohort.where(id: ids).where(active: true).paginate(page: params[:page], per_page: 50)
+               end
+
     render json: { html: render_to_string(partial: 'search') }
   end
 
@@ -78,5 +80,12 @@ class CohortsController < ApplicationController
 
     def set_s3_direct_post
       @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+    end
+
+    def initial_find
+      location_raw = request.location.coordinates
+      coordinates = location_raw.empty? ? [37.751425, -122.419443] : location_raw
+
+      Cohort.where(active: true).near(coordinates, 3000).paginate(page: params[:page], per_page: 50)
     end
 end

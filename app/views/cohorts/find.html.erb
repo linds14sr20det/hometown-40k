@@ -6,14 +6,13 @@
 <div id="cohorts_search_results">
 <% @cohorts.each do |cohort| %>
   <%= render 'cohort_stub_banner', :cohort => cohort %>
-  Banner spacer is doing nothing
 <% end %>
 </div>
 
 <script>
   function sendSearch() {
     const searchTerm = document.querySelector("#cohort_name").value;
-    if (searchTerm.length > 3) {
+    if (searchTerm.length > 3 || searchTerm.length === 0) {
       Rails.ajax({
         url: "<%= search_cohorts_path %>",
         type: "POST",
