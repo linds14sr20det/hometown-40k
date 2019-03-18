@@ -72,7 +72,7 @@ class PaypalController < ApplicationController
       registrants.each{ |registrant| registrant.paid = true }
       registrants.each(&:save)
       cookies.delete(:registrants)
-      registrant_groups = registrants.group_by{ |registrant| registrant.email }.values
+      registrant_groups = registrants.group_by{ |registrant| registrant.user.email }.values
       registrant_groups.each do |registrant_group|
         RegistrantMailer.registration_email(registrant_group).deliver_now
       end

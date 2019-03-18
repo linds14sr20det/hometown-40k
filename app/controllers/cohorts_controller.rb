@@ -51,13 +51,27 @@ class CohortsController < ApplicationController
     redirect_to cohorts_path
   end
 
+  def my_events
+    params['timeframe'] ||= 'future'
+    @cohorts = Cohort.where(id: my_registered_cohorts_ids).where(date_range)
+  end
+
+  def my_search
+    @cohorts = if params["search_term"].length == 0
+                 Cohort.where(id: my_registered_cohorts_ids).where(date_range)
+               else
+                 response = Cohort.search params["search_term"]
+                 ids = response.results.map { |r| r._id.to_i }
+                 # TODO: Use array operator where ids appear in both
+                 Cohort.where(id: ids-my_registered_cohorts_ids).where(date_range).paginate(page: params[:page], per_page: 50)
+               end
+
+    render json: { html: render_to_string(partial: 'search') }
+  end
+
   def find
     params['timeframe'] ||= 'future'
     @cohorts = find_cohorts_by_location
-    respond_to do |format|
-      format.js { render_to_string(partial: 'search') }
-      format.html { @cohorts }
-    end
   end
 
   def search
@@ -72,32 +86,32 @@ class CohortsController < ApplicationController
     render json: { html: render_to_string(partial: 'search') }
   end
 
-  def my_events
-    #TODO: This actually needs to be events where the current user is a registrant
-    # Registrant and cart need to change
-    @cohorts = current_user.cohorts
-  end
-
   private
 
-    def cohort_params
-      params.require(:cohort).permit(:name, :body, :street, :city, :state, :country, :start_at, :end_at, :descriptive_date, :active, :attachment_url, systems_attributes: [:id, :title, :description, :descriptive_date, :start_date, :max_players, :cost, :rounds, :_destroy])
-    end
+  def cohort_params
+    params.require(:cohort).permit(:name, :body, :street, :city, :state, :country, :start_at, :end_at, :descriptive_date, :active, :attachment_url, systems_attributes: [:id, :title, :description, :descriptive_date, :start_date, :max_players, :cost, :rounds, :_destroy])
+  end
 
-    def set_s3_direct_post
-      @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
-    end
+  def set_s3_direct_post
+    @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+  end
 
-    def find_cohorts_by_location
-      location_raw = request.location.coordinates
-      coordinates = location_raw.empty? ? [37.751425, -122.419443] : location_raw
+  def my_registered_cohorts_ids
+    # TODO: This needs to not be three queries :facepalm:
+    system_ids = current_user.registrants.map{ |registrant| registrant.system_id }
+    System.where(id: system_ids).map{ |system| system.cohort_id }
+  end
 
-      Cohort.where(active: true).where(date_range).near(coordinates, 3000).paginate(page: params[:page], per_page: 50)
-    end
+  def find_cohorts_by_location
+    location_raw = request.location.coordinates
+    coordinates = location_raw.empty? ? [37.751425, -122.419443] : location_raw
 
-    def date_range
-      return "end_at < '#{Time.now}'" if params['timeframe'] == 'past'
-      return "end_at >= '#{Time.now}' AND start_at <= '#{Time.now}'" if params['timeframe'] == 'in-progress'
-      "start_at > '#{Time.now}'" if params['timeframe'] == 'future'
-    end
+    Cohort.where(active: true).where(date_range).near(coordinates, 3000).paginate(page: params[:page], per_page: 50)
+  end
+
+  def date_range
+    return "end_at < '#{Time.now}'" if params['timeframe'] == 'past'
+    return "end_at >= '#{Time.now}' AND start_at <= '#{Time.now}'" if params['timeframe'] == 'current'
+    "start_at > '#{Time.now}'" if params['timeframe'] == 'future'
+  end
 end

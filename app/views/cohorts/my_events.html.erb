@@ -1,4 +1,2 @@
-<% @cohorts.each do |cohort| %>
-  <%= render 'cohort_stub_banner', :cohort => cohort %>
-  <div class="banner-spacer"></div>
-<% end %>
+<h2>My Events</h2>
+<%= render 'search_cohort_controls', cohorts: @cohorts, search_path: my_search_cohorts_path %>

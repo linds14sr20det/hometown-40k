@@ -103,7 +103,7 @@ form {
 }
 
 @media (max-width: 400px) {
-  .logo-text {
+  .branding-text {
     display: none;
   }
 }
@@ -176,7 +176,6 @@ span.picture {
     flex-direction: column;
     justify-content: center;
     resize: vertical;
-    margin: 0 auto;
     padding: 0;
     p {
       font-weight: 600;
