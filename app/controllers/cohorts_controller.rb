@@ -63,7 +63,7 @@ class CohortsController < ApplicationController
                  response = Cohort.search params["search_term"]
                  ids = response.results.map { |r| r._id.to_i }
                  # TODO: Use array operator where ids appear in both
-                 Cohort.where(id: ids-my_registered_cohorts_ids).where(date_range).paginate(page: params[:page], per_page: 50)
+                 Cohort.where(id: ids & my_registered_cohorts_ids).where(date_range).paginate(page: params[:page], per_page: 50)
                end
 
     render json: { html: render_to_string(partial: 'search') }
