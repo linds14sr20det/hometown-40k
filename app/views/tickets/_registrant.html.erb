@@ -10,9 +10,9 @@
         </div>
         <small><p><%= "Event size: #{registrant.system.max_players}" %></p></small>
         <div class="player-info">
-          <span><b>Player:</b> <%= registrant.name %></span>
+          <span><b>Player:</b> <%= registrant.user.name %></span>
           <br>
-          <span><b>Email:</b> <%= registrant.email %></span>
+          <span><b>Email:</b> <%= registrant.user.email %></span>
         </div>
       </div>
       <div class="price price-card pull-right">$<%= number_with_precision(registrant.system.cost, :precision => 0) %></div>

@@ -17,7 +17,7 @@ class TicketsController < ApplicationController
     unless @ticket.cohort.active? && @ticket.cohort.registration_open?
       redirect_to tickets_path and return
     end
-    @registrant = Registrant.new(:name => current_user.name, :email => current_user.email, :system_id => params["id"], :paid => false, :uuid => SecureRandom.uuid)
+    @registrant = current_user.registrants.create(:system_id => params["id"], :paid => false, :uuid => SecureRandom.uuid)
     if @ticket.full?
       flash[:warning] = "Unfortunately that system has sold out!"
       redirect_to tickets_path

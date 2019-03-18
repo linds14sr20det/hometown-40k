@@ -1,6 +1,6 @@
 <tr>
-  <td><%= registrant.name %></td>
-  <td><%= registrant.email %></td>
+  <td><%= registrant.user.name %></td>
+  <td><%= registrant.user.email %></td>
   <td><%= link_to 'edit', edit_registrant_path(registrant) %>
   | <%= link_to "delete", registrant, method: :delete, data: { confirm: "You sure?" } %>
   </td>
