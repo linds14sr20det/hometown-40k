@@ -52,16 +52,17 @@ class CohortsController < ApplicationController
   end
 
   def find
-    @cohorts = initial_find
+    params['timeframe'] ||= 'future'
+    @cohorts = find_cohorts_by_location
   end
 
   def search
     @cohorts = if params["search_term"].length == 0
-                 initial_find
+                 find_cohorts_by_location
                else
                  response = Cohort.search params["search_term"]
                  ids = response.results.map { |r| r._id.to_i }
-                 Cohort.where(id: ids).where(active: true).paginate(page: params[:page], per_page: 50)
+                 Cohort.where(id: ids).where(active: true).where(date_range).paginate(page: params[:page], per_page: 50)
                end
 
     render json: { html: render_to_string(partial: 'search') }
@@ -69,6 +70,7 @@ class CohortsController < ApplicationController
 
   def my_events
     #TODO: This actually needs to be events where the current user is a registrant
+    # Registrant and cart need to change
     @cohorts = current_user.cohorts
   end
 
@@ -82,10 +84,16 @@ class CohortsController < ApplicationController
       @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
     end
 
-    def initial_find
+    def find_cohorts_by_location
       location_raw = request.location.coordinates
       coordinates = location_raw.empty? ? [37.751425, -122.419443] : location_raw
 
-      Cohort.where(active: true).near(coordinates, 3000).paginate(page: params[:page], per_page: 50)
+      Cohort.where(active: true).where(date_range).near(coordinates, 3000).paginate(page: params[:page], per_page: 50)
+    end
+
+    def date_range
+      return "end_at < '#{Time.now}'" if params['timeframe'] == 'past'
+      return "end_at >= '#{Time.now}' AND start_at <= '#{Time.now}'" if params['timeframe'] == 'in-progress'
+      "start_at > '#{Time.now}'" if params['timeframe'] == 'future'
     end
 end

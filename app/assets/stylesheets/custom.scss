@@ -108,7 +108,6 @@ form {
   }
 }
 
-
 .cart-icon {
   margin-right: 20px;
 }
@@ -165,10 +164,6 @@ span.picture {
 
 .color {
   background-color: #ccc;
-}
-
-.banner-spacer {
-  height: 5%;
 }
 
 .banner {
@@ -247,6 +242,8 @@ span.picture {
 .button-pad-bottom {
   padding-bottom: 10px;
 }
+
+.bottom-buffer { margin-bottom:20px; }
 
 .ticket {
   .sold-out:after {

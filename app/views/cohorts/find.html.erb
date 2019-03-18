@@ -3,10 +3,20 @@
   <%= search_field_tag(:cohort_name, "", :onkeyup => 'sendSearch()', class: 'form-control') %>
 </div>
 
-<div id="cohorts_search_results">
-<% @cohorts.each do |cohort| %>
-  <%= render 'cohort_stub_banner', :cohort => cohort %>
-<% end %>
+<div class="row bottom-buffer">
+  <ul class="nav nav-tabs">
+    <li role="presentation" onclick="changeTab('past')"><a href="#">Past</a></li>
+    <li role="presentation" onclick="changeTab('in-progress')"><a href="#">In-progress</a></li>
+    <li role="presentation" class="active" onclick="changeTab('future')"><a href="#">Upcoming</a></li>
+  </ul>
+</div>
+
+<div id="cohorts_search_results" class="row">
+  <% @cohorts.each do |cohort| %>
+    <div class="row bottom-buffer">
+      <%= render 'cohort_stub_banner', :cohort => cohort %>
+    </div>
+  <% end %>
 </div>
 
 <script>
@@ -22,6 +32,19 @@
         }
       });
     }
+  }
+
+  function changeTab(event) {
+    debugger;
+    document.querySelector("body > div.container > div.row.bottom-buffer > ul > li:nth-child(2)")
+<!--    Rails.ajax({-->
+<!--      url: "<%= search_cohorts_path %>",-->
+<!--      type: "POST",-->
+<!--      data: `search_term=${searchTerm}`,-->
+<!--      success: function (data) {-->
+<!--        document.querySelector("#cohorts_search_results").innerHTML = data.html;-->
+<!--      }-->
+<!--    });-->
   }
 
 
