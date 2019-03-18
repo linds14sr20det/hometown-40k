@@ -54,6 +54,10 @@ class CohortsController < ApplicationController
   def find
     params['timeframe'] ||= 'future'
     @cohorts = find_cohorts_by_location
+    respond_to do |format|
+      format.js { render_to_string(partial: 'search') }
+      format.html { @cohorts }
+    end
   end
 
   def search

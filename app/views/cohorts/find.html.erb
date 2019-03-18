@@ -5,9 +5,9 @@
 
 <div class="row bottom-buffer">
   <ul class="nav nav-tabs">
-    <li role="presentation" onclick="changeTab('past')"><a href="#">Past</a></li>
-    <li role="presentation" onclick="changeTab('in-progress')"><a href="#">In-progress</a></li>
-    <li role="presentation" class="active" onclick="changeTab('future')"><a href="#">Upcoming</a></li>
+    <li role="presentation" onclick="changeTab()" data-timeframe="past"><a href="#">Past</a></li>
+    <li role="presentation" onclick="changeTab()" data-timeframe="current"><a href="#">In-progress</a></li>
+    <li role="presentation" class="active" onclick="changeTab()" data-timeframe="future"><a href="#">Upcoming</a></li>
   </ul>
 </div>
 
@@ -22,29 +22,21 @@
 <script>
   function sendSearch() {
     const searchTerm = document.querySelector("#cohort_name").value;
-    if (searchTerm.length > 3 || searchTerm.length === 0) {
-      Rails.ajax({
-        url: "<%= search_cohorts_path %>",
-        type: "POST",
-        data: `search_term=${searchTerm}`,
-        success: function (data) {
-          document.querySelector("#cohorts_search_results").innerHTML = data.html;
-        }
-      });
-    }
+    const tabActive = document.querySelector(".active").getAttribute("data-timeframe");
+    Rails.ajax({
+      url: "<%= search_cohorts_path %>",
+      type: "POST",
+      data: `search_term=${searchTerm}&timeframe=${tabActive}`,
+      success: function (data) {
+        document.querySelector("#cohorts_search_results").innerHTML = data.html;
+      }
+    });
   }
 
-  function changeTab(event) {
-    debugger;
-    document.querySelector("body > div.container > div.row.bottom-buffer > ul > li:nth-child(2)")
-<!--    Rails.ajax({-->
-<!--      url: "<%= search_cohorts_path %>",-->
-<!--      type: "POST",-->
-<!--      data: `search_term=${searchTerm}`,-->
-<!--      success: function (data) {-->
-<!--        document.querySelector("#cohorts_search_results").innerHTML = data.html;-->
-<!--      }-->
-<!--    });-->
+  function changeTab() {
+    document.querySelector(".active").removeAttribute("class");
+    event.currentTarget.setAttribute("class", "active");
+    sendSearch();
   }
 
 
