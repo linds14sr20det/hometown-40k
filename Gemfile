@@ -46,6 +46,7 @@ gem 'devise'
 gem 'geocoder'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+gem 'sendgrid-ruby'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
