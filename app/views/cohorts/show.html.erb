@@ -2,11 +2,12 @@
   <div class="banner-card tickets">
     <p class="banner-date"><%= @cohort.name %></p>
     <p class="banner-date"><%= @cohort.descriptive_date %></p>
-    <p class="banner-cta-text">Buy Tickets</p>
+    <p class="banner-cta-text">Register</p>
   </div>
 <% end %>
-<div class="info">
-  <%= sanitize(@cohort.body) %>
+<div class="well">
+  <h4>About <%= @cohort.name %>:</h4>
+  <p><%= sanitize(@cohort.body) %></p>
 </div>
 <div id="map"></div>
 
