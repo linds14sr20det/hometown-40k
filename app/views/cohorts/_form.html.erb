@@ -3,41 +3,91 @@
   <div class="well">
     <div class="form-group">
       <%= f.label :name, "Tournament Name" %>
+      <div class="small">
+        Your event is going to rock. Give it a name that shows how good it's going to be.
+      </div>
       <%= f.text_field :name, class: 'form-control' %>
     </div>
 
     <div class="form-group">
       <%= f.label :body, "Tournament Description" %>
+      <div class="small">
+        Tell your community about your event. What makes it special? What makes it unique?
+      </div>
       <%= f.text_area :body, class: 'form-control' %>
     </div>
 
     <div class="form-group">
-      <%= f.label :street %>
-      <%= f.text_field :street, class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :city %>
-      <%= f.text_field :city, class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :state %>
-      <%= f.text_field :state, class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :country %>
-      <%= f.text_field :country, class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
       <%= f.label :descriptive_date %>
+      <div class="small">
+        When is your event? When does it start and when does it end?
+      </div>
       <%= f.text_field :descriptive_date, class: 'form-control' %>
     </div>
 
     <div class="form-group">
+      <%= f.label :start_at, "Registration opens" %>
+      <div class="small">
+        Players will be able to register for your event on midnight on this date.
+      </div>
+      <%= f.text_field :start_at, data:{ provide:'datepicker' }, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :end_at, "Registration closes" %>
+      <div class="small">
+        Registration will close at 11:59PM on this date.
+      </div>
+      <%= f.text_field :end_at, data:{ provide:'datepicker' }, class: 'form-control' %>
+    </div>
+
+    <div class="well">
+      <h3 class="p-0 mt-0">Event Address</h3>
+      <div class="small pb-2">
+        We prioritize event searches based on how close a player is to your event. Fill this out to help us get players connected to your event!
+      </div>
+      <div class="form-group">
+        <%= f.label :street %>
+        <%= f.text_field :street, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :city %>
+        <%= f.text_field :city, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :state %>
+        <%= f.text_field :state, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :country %>
+        <%= f.text_field :country, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="well">
+      <h3 class="p-0 mt-0">Paypal Details</h3>
+      <div class="small pb-2">
+        Fill this out so players can register and pay for your event online. Avoid taking cash at the door! Not sure how this works? Get help here: <a href="https://developer.paypal.com/docs/integration/admin/manage-apps/#create-sandbox-and-live-apps" target="_blank">https://developer.paypal.com</a>
+      </div>
+      <div class="form-group">
+        <%= f.label :paypal_client_id %>
+        <%= f.text_field :paypal_client_id, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :paypal_client_secret %>
+        <%= f.text_field :paypal_client_secret, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
       <%= f.label :attachment_uploader, "Players pack" %>
+      <div class="small pb-2">
+        Upload a PDF version of your players pack so players can get all the details when registering for your event.
+      </div>
       <% unless f.object.attachment_url.blank? %>
         <br>
         <a href="<%=f.object.attachment_url %>" download>View Current Attached Players Pack</a>
@@ -47,21 +97,14 @@
       <%= f.file_field :attachment_uploader, class: 'form-control' %>
       <%= f.hidden_field :attachment_url, class: 'url-holder' %>
     </div>
-
-    <div class="form-group">
-      <%= f.label :start_at, "Registration opens" %>
-      <%= f.text_field :start_at, data:{ provide:'datepicker' }, class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :end_at, "Registration closes" %>
-      <%= f.text_field :end_at, data:{ provide:'datepicker' }, class: 'form-control' %>
-    </div>
   </div>
 
   <div class="row">
     <div class="col-md-12">
       <h3>Systems</h3>
+      <div class="small pb-2">
+        Add at least one system to your event (hopefully it's a 40k event, but we won't judge you if it isn't)
+      </div>
       <div id="systems">
         <%= f.fields_for :systems do |system| %>
           <%= render 'system_fields', :f => system %>
