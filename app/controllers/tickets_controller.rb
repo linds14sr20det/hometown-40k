@@ -3,8 +3,9 @@ class TicketsController < ApplicationController
 
 
   def index
-    @active_cohort = Cohort.where(active: true).where(id: params[:cohort_id]).first
-    @tickets = @active_cohort.systems.order(:start_date, :title) unless @active_cohort.nil?
+    @cohort = Cohort.find_by(id: params[:cohort_id])
+    @tickets = @cohort.systems.order(:start_date, :title) unless @cohort.nil? || @cohort.inactive?
+    redirect_to find_cohorts_path if @tickets.blank?
   end
 
   def show

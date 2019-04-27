@@ -1,6 +1,7 @@
 <% provide(:title, 'Tickets') %>
 <% provide(:meta_description, t('seo.tickets')) %>
 <% unless @tickets.nil? %>
+  <h3 class="mt-0"><%= @cohort.name %>'s Systems</h3>
   <!-- TODO: sort by day -->
   <% @tickets.in_groups_of(3) do |ticket_group| %>
     <div class="row">

@@ -35,4 +35,8 @@ class Cohort < ApplicationRecord
     street_changed? || city_changed? || state_changed? || country_changed?
   end
 
+  def inactive?
+    !active?
+  end
+
 end
