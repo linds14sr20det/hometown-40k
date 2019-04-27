@@ -1,8 +1,8 @@
 <div class="col-md-12 ticket">
     <div class="registrant-card <%= "sold-out" if registrant.system.full? %>">
       <div class="ticket-card-content">
-        <div class="ticket-date">
-          <%= registrant.system.descriptive_date %>
+        <div class="ticket-date small">
+            <%= registrant.system.cohort.name %> - <%= registrant.system.descriptive_date %>
         </div>
         <div class="ticket-title">
           <%= registrant.system.title %>
