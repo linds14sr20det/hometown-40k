@@ -40,9 +40,14 @@ en:
         body: "Tournament description"
         start_at: "Registration open"
         end_at: "Registration closes"
-      errors:
-        models:
-          registrant:
-            attributes:
-              system_id:
-                taken: "has already been registered for. Check your cart or \"My Events\""
+    errors:
+      models:
+        registrant:
+          attributes:
+            system_id:
+              taken: "has already been registered for. Check your cart or \"My Events\""
+        cohort:
+          attributes:
+            systems:
+              blank: "must have at least one"
+

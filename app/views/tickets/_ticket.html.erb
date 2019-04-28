@@ -11,7 +11,7 @@
         </div>
         <small><p><%= "Event size: #{ticket.max_players}" %></p></small>
       </div>
-      <div class="price price-card pull-right">$<%= number_with_precision(ticket.cost, :precision => 0) %></div>
+      <div class="price price-card pull-right"><%= number_to_currency(ticket.cost) %></div>
     </div>
   <% end %>
 </div>

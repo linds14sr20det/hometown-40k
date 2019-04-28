@@ -19,7 +19,7 @@ class Cohort < ApplicationRecord
   validates :start_at, :presence => true
   validates :end_at, :presence => true
   # TODO: Validate dates are actual datetimes.
-  validates_presence_of :systems, :message => "must have at least one"
+  validates :systems, :presence => true
 
   after_validation :geocode, if: ->(obj){ obj.address_present? and obj.address_changed? }
 

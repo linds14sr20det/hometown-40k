@@ -4,15 +4,15 @@
 
 <!-- TODO: Center these tabs -->
 <div class="row bottom-buffer">
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-tabs search-nav">
     <li role="presentation" onclick="changeTab()" data-timeframe="past"><a href="#">Past Events</a></li>
-    <li role="presentation" class="active" onclick="changeTab()" data-timeframe="current"><a href="#">Upcoming Events</a></li>
+    <li class="active" role="presentation" onclick="changeTab()" data-timeframe="current"><a href="#">Upcoming Events</a></li>
   </ul>
 </div>
 
 <div id="cohorts_search_results">
   <% cohorts.each do |cohort| %>
-      <%= render 'cohort_stub_banner', :cohort => cohort %>
+    <%= render 'cohort_stub_banner', :cohort => cohort %>
   <% end %>
 </div>
 
@@ -32,7 +32,7 @@
 
   function changeTab() {
     document.querySelector(".active").removeAttribute("class");
-    event.currentTarget.setAttribute("class", "active");
+    event.currentTarget.setAttribute("class", "search-nav active");
     sendSearch();
   }
 </script>
