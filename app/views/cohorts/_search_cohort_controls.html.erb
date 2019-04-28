@@ -1,5 +1,4 @@
 <div class="form-group">
-  <%= label_tag :search, "Search for an event" %>
   <%= search_field_tag(:cohort_name, "", :onkeyup => 'sendSearch()', class: 'form-control') %>
 </div>
 
@@ -11,11 +10,9 @@
   </ul>
 </div>
 
-<div id="cohorts_search_results" class="row">
+<div id="cohorts_search_results">
   <% cohorts.each do |cohort| %>
-    <div class="row bottom-buffer">
       <%= render 'cohort_stub_banner', :cohort => cohort %>
-    </div>
   <% end %>
 </div>
 

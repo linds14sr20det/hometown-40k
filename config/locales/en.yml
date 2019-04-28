@@ -34,3 +34,15 @@ en:
     facebook: "https://facebook.com/hometown40k/"
     itc: "https://www.frontlinegaming.org/community/frontline-gamings-independent-tournament-circuit/"
     hnic: "http://www.hobbynight.ca"
+  activerecord:
+    attributes:
+      cohort:
+        body: "Tournament description"
+        start_at: "Registration open"
+        end_at: "Registration closes"
+      errors:
+        models:
+          registrant:
+            attributes:
+              system_id:
+                taken: "has already been registered for. Check your cart or \"My Events\""
