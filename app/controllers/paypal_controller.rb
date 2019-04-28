@@ -31,6 +31,7 @@ class PaypalController < ApplicationController
     total = items.map { |item| item[:price] }.sum
 
     PayPal::SDK::REST.set_config(
+      :mode => "sandbox",
       :client_id => cohort.paypal_client_id,
       :client_secret => cohort.paypal_client_secret)
 
@@ -62,7 +63,6 @@ class PaypalController < ApplicationController
 
     # Create Payment and return status
     if @payment.create
-      binding.pry
       registrants.each do |registrant|
         persisted_registrant = registrant.id.present? ? Registrant.find_by(:id => registrant.id) : Registrant.create(registrant.attributes)
         persisted_registrant.update(:payment_id => @payment.id)
