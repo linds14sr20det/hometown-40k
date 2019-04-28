@@ -1,0 +1,91 @@
+<% provide(:title, 'Shopping Cart') %>
+<% provide(:meta_description, t('seo.cart')) %>
+<div class="ticket">
+  <div class="ticket-title">
+    Shopping cart
+  </div>
+  <% unless @registrants.nil? %>
+    <% @registrants.each do |registrant| %>
+      <div class="row">
+        <%= render :partial => 'registrant', :locals => {:registrant => registrant} %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <span class="price">Total: $<%= number_with_precision(@registrants.map { |registrant| registrant.system.cost }.sum, :precision => 2) %></span>
+    </div>
+  </div>
+  <% if @registrants.map { |registrant| registrant.system.cost }.sum > 0 %>
+    <div class="row">
+      <div class="col-md-12">
+        <div id="paypal-button-container"></div>
+      </div>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="btn-group-vertical cont-shopping">
+        <%= link_to "Continue shopping", tickets_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    paypal.Button.render({
+
+        style: {
+            size: 'responsive',
+            color: 'blue',
+            shape: 'pill',
+            label: 'checkout'
+        },
+
+        env: "<%= Rails.env == 'production' ? Rails.env : 'sandbox' %>",
+
+        // Show the buyer a 'Pay Now' button in the checkout flow
+        commit: true,
+
+        // payment() is called when the button is clicked
+        payment: function() {
+
+            // Set up a url on your server to create the payment
+            var CREATE_URL = "<%= checkout_url %>";
+            var registrants = <%= sanitize(@registrants.to_json) %>;
+
+            // Make a call to your server to set up the payment
+            return paypal.request.post(CREATE_URL, {registrants:JSON.stringify(registrants)})
+                .then(function(res) {
+                    if (res.success) {
+                        return res.paymentID;
+                    } else {
+                        window.location.replace("<%= cart_tickets_url %>");
+                    }
+
+                });
+        },
+
+        // onAuthorize() is called when the buyer approves the payment
+        onAuthorize: function(data, actions) {
+
+            // Set up a url on your server to execute the payment
+            var EXECUTE_URL = "<%= execute_url %>";
+
+            // Set up the data you need to pass to your server
+            var data = {
+                paymentID: data.paymentID,
+                payerID: data.payerID
+            };
+
+            // Make a call to your server to execute the payment
+            return paypal.request.post(EXECUTE_URL, data)
+                .then(function (res) {
+                    window.location.replace("<%= success_tickets_url %>");
+                });
+        }
+
+    }, '#paypal-button-container');
+</script>

@@ -7,7 +7,6 @@ class System < ApplicationRecord
   validates :rounds, numericality: {less_than_or_equal_to: 15}
 
 
-
   def first_image
     html = Nokogiri::HTML.fragment(description)
     image = ActionController::Base.helpers.asset_path("Hometown40K_100x100.png", :digest => false)

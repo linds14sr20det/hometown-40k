@@ -1,17 +1,3 @@
 <div class="col-md-4 ticket">
-  <%= link_to_if ticket.cohort.registration_open?, ticket_path(ticket) do %>
-    <div class="ticket-card <%= "sold-out" if ticket.full? %> <%= "coming-soon" if ticket.cohort.active_but_registration_closed? %>">
-      <img class="ticket-thumb-index" src="<%= ticket.first_image %>">
-      <div class="ticket-card-content">
-        <div class="ticket-date">
-          <%= ticket.descriptive_date %>
-        </div>
-        <div class="ticket-title">
-          <%= ticket.title %>
-        </div>
-        <small><p><%= "Event size: #{ticket.max_players}" %></p></small>
-      </div>
-      <div class="price price-card pull-right">$<%= number_with_precision(ticket.cost, :precision => 0) %></div>
-    </div>
-  <% end %>
+
 </div>

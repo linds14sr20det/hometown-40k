@@ -4,26 +4,31 @@
   <div class="ticket-title">
     Shopping cart
   </div>
-  <% unless @registrants.nil? %>
-    <% @registrants.each do |registrant| %>
-      <div class="row">
-        <%= render :partial => 'registrant', :locals => {:registrant => registrant} %>
+
+  <% @cohorts.each do |cohort| %>
+    <%= link_to cohorts_cart_tickets_path(:cohort_id => cohort.id) do %>
+      <div class="ticket-card">
+        <img class="ticket-thumb-index" src="<%= cohort.first_image %>">
+        <div class="ticket-card-content">
+          <div class="ticket-date">
+            <%= cohort.descriptive_date %>
+          </div>
+          <div class="ticket-title">
+            <%= cohort.name %>
+          </div>
+          <p>Click here to review and confirm your registration(s) for <%= cohort.name %>.</p>
+        </div>
+        <div class="price price-card pull-right"></div>
       </div>
     <% end %>
   <% end %>
 
   <div class="row">
     <div class="col-md-12 text-center">
-      <span class="price">Total: $<%= number_with_precision(@registrants.map { |registrant| registrant.system.cost }.sum, :precision => 2) %></span>
+      <span class="price">Total:</span>
     </div>
   </div>
-  <% if @registrants.map { |registrant| registrant.system.cost }.sum > 0 %>
-    <div class="row">
-      <div class="col-md-12">
-        <div id="paypal-button-container"></div>
-      </div>
-    </div>
-  <% end %>
+
   <div class="row">
     <div class="col-md-12">
       <div class="btn-group-vertical cont-shopping">
@@ -32,60 +37,3 @@
     </div>
   </div>
 </div>
-
-
-<script>
-    paypal.Button.render({
-
-        style: {
-            size: 'responsive',
-            color: 'blue',
-            shape: 'pill',
-            label: 'checkout'
-        },
-
-        env: "<%= Rails.env == 'production' ? Rails.env : 'sandbox' %>",
-
-        // Show the buyer a 'Pay Now' button in the checkout flow
-        commit: true,
-
-        // payment() is called when the button is clicked
-        payment: function() {
-
-            // Set up a url on your server to create the payment
-            var CREATE_URL = "<%= checkout_url %>";
-            var registrants = <%= sanitize(@registrants.to_json) %>;
-
-            // Make a call to your server to set up the payment
-            return paypal.request.post(CREATE_URL, {registrants:JSON.stringify(registrants)})
-                .then(function(res) {
-                    if (res.success) {
-                        return res.paymentID;
-                    } else {
-                        window.location.replace("<%= cart_tickets_url %>");
-                    }
-
-                });
-        },
-
-        // onAuthorize() is called when the buyer approves the payment
-        onAuthorize: function(data, actions) {
-
-            // Set up a url on your server to execute the payment
-            var EXECUTE_URL = "<%= execute_url %>";
-
-            // Set up the data you need to pass to your server
-            var data = {
-                paymentID: data.paymentID,
-                payerID: data.payerID
-            };
-
-            // Make a call to your server to execute the payment
-            return paypal.request.post(EXECUTE_URL, data)
-                .then(function (res) {
-                    window.location.replace("<%= success_tickets_url %>");
-                });
-        }
-
-    }, '#paypal-button-container');
-</script>

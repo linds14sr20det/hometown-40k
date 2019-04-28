@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     post :add_to_cart, on: :member
     get :remove_from_cart, on: :collection
     get :cart, on: :collection
+    get :cohorts_cart, on: :collection
     get :success, on: :collection
   end
   post '/checkout' => 'paypal#checkout'

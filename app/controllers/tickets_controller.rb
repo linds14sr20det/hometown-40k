@@ -41,6 +41,17 @@ class TicketsController < ApplicationController
   end
 
   def cart
-    @registrants = Cart.decode_cart(cookies)
+    registrants = Cart.decode_cart(cookies)
+    system_ids = registrants.map { |registrant| registrant.system_id }.uniq
+    systems = System.where(:id => system_ids)
+    cohort_ids = systems.map { |system| system.cohort_id }.uniq
+    @cohorts = Cohort.where(:id => cohort_ids)
+  end
+
+  def cohorts_cart
+    @cohort = Cohort.find_by(:id => params[:cohort_id])
+    all_registrants = Cart.decode_cart(cookies)
+    system_ids = @cohort.systems.map{ |system| system.id }
+    @registrants = all_registrants.select{ |registrant| system_ids.include?(registrant.system_id) }
   end
 end

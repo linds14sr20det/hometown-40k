@@ -39,4 +39,11 @@ class Cohort < ApplicationRecord
     !active?
   end
 
+  def first_image
+    html = Nokogiri::HTML.fragment(body)
+    image = ActionController::Base.helpers.asset_path("Hometown40K_100x100.png", :digest => false)
+    image = html.css('img')[0].attr('src') unless html.css('img')[0].nil?
+    image
+  end
+
 end
