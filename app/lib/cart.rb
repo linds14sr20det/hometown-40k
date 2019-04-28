@@ -18,4 +18,17 @@ class Cart
   def self.encode_cart(registrants)
     JSON.generate(registrants.map!{|registrant| registrant.to_json})
   end
+
+  def self.structured_cart(registrants)
+    cart = {}
+    registrants.each do |registrant|
+      cohort = registrant.system.cohort
+      cart.merge!({cohort => registrant}){ |key, val1, val2| Array(val1) << val2 }
+    end
+    cart
+  end
+
+  def self.registrants_total(registrants)
+    registrants.sum { |registrant| registrant.system.cost }
+  end
 end

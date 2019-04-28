@@ -14,7 +14,7 @@
 
   <div class="row">
     <div class="col-md-12 text-center">
-      <span class="price">Total: $<%= number_with_precision(@registrants.map { |registrant| registrant.system.cost }.sum, :precision => 2) %></span>
+      <span class="price">Total: <%= number_to_currency(Cart.registrants_total(@registrants)) %></span>
     </div>
   </div>
   <% if @registrants.map { |registrant| registrant.system.cost }.sum > 0 %>

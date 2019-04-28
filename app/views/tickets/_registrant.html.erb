@@ -15,6 +15,6 @@
           <span><b>Email:</b> <%= registrant.user.email %></span>
         </div>
       </div>
-      <div class="price price-card pull-right">$<%= number_with_precision(registrant.system.cost, :precision => 0) %></div>
+      <div class="price price-card pull-right"><%= number_to_currency(registrant.system.cost) %></div>
     </div>
 </div>

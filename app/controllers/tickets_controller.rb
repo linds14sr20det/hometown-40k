@@ -1,7 +1,6 @@
 class TicketsController < ApplicationController
   before_action :authenticate_user!, only: [:add_to_cart]
 
-
   def index
     @cohort = Cohort.find_by(id: params[:cohort_id])
     @tickets = @cohort.systems.order(:start_date, :title) unless @cohort.nil? || @cohort.inactive?
@@ -42,10 +41,7 @@ class TicketsController < ApplicationController
 
   def cart
     registrants = Cart.decode_cart(cookies)
-    system_ids = registrants.map { |registrant| registrant.system_id }.uniq
-    systems = System.where(:id => system_ids)
-    cohort_ids = systems.map { |system| system.cohort_id }.uniq
-    @cohorts = Cohort.where(:id => cohort_ids)
+    @structured_cart = Cart.structured_cart(registrants)
   end
 
   def cohorts_cart

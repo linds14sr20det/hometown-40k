@@ -5,7 +5,7 @@
     Shopping cart
   </div>
 
-  <% @cohorts.each do |cohort| %>
+  <% @structured_cart.each do |cohort, registrants| %>
     <%= link_to cohorts_cart_tickets_path(:cohort_id => cohort.id) do %>
       <div class="ticket-card">
         <img class="ticket-thumb-index" src="<%= cohort.first_image %>">
@@ -16,18 +16,12 @@
           <div class="ticket-title">
             <%= cohort.name %>
           </div>
-          <p>Click here to review and confirm your registration(s) for <%= cohort.name %>.</p>
+          <p>Click here to review, confirm and pay for your registration(s) for <%= cohort.name %>.</p>
+          <div class="price"><%= number_to_currency(Cart.registrants_total(registrants)) %> (<%= registrants.count %> systems)</div>
         </div>
-        <div class="price price-card pull-right"></div>
       </div>
     <% end %>
   <% end %>
-
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <span class="price">Total:</span>
-    </div>
-  </div>
 
   <div class="row">
     <div class="col-md-12">

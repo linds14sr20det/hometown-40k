@@ -311,7 +311,7 @@ span.picture {
     text-shadow: 3px 3px 5px #959595;
     color: #337ab7;
     bottom: 3px;
-    text-align: center;
+    text-align: right;
   }
   .price-card {
     position: absolute;
@@ -355,7 +355,7 @@ span.picture {
     -moz-transition: all 250ms;
     transition: all 250ms;
     box-shadow: 0 10px 10px rgba(0,0,0,0.30), 0 10px 10px rgba(0,0,0,0.22);
-    max-height: 150px;
+    max-height: 200px;
     min-height: 150px;
 
     .ticket-card-content{
