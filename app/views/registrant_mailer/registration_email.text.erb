@@ -1,8 +1,8 @@
-Thanks for registering for Hometown 40k, <%= @registrant_group[0].name %>!
+Thanks for registering for <%= @registrant_group[0].system.cohort.name %>, <%= @registrant_group[0].user.name %>!
 You registered for the following systems:
 <% @registrant_group.each do |registrant| %>
     -<%= "#{registrant.system.title} - #{registrant.system.descriptive_date}" %>
 <% end %>
 For further information please go here:
-<%= info_url(:id=>1) %>
+<%= cohort_url(@registrant_group[0].system.cohort.id) %>
 Receipt: you should receive a receipt email directly from paypal. If you do not, please reply to this email.

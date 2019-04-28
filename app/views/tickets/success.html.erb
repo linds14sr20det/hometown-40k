@@ -6,31 +6,5 @@
     <h3>You're registered!</h3>
     <p>Please check your email inbox for receipt of payment. You'll find a copy of the player pack attached to the email as well.
     If you lose your player pack, you can always come back here and download it from the event's ticket page.</p>
-
-    <p>If you registered multiple players with different email addresses, each email address will receive a proof of purchase
-    email with the players pack attached.</p>
-
-    <p>If you have any other questions, go to our <%= link_to "info", info_path(:id => 1) %> page for our contact details!</p>
   </div>
 </div>
-
-<div class="banner-spacer"></div>
-<%= link_to info_path(:id=>1), class: "banner" do %>
-  <div class="banner-card info"><p>info</p></div>
-<% end %>
-
-<script>
-    $(document).ready(function() {
-        setHeight();
-    });
-
-    $( window ).on( "orientationchange", function( event ) {
-        setHeight();
-    });
-
-    function setHeight () {
-        setTimeout(function () {
-            $('.container').css({height: window.innerHeight - 50});
-        }, 250);
-    }
-</script>

@@ -31,7 +31,6 @@ class PaypalController < ApplicationController
     total = items.map { |item| item[:price] }.sum
 
     PayPal::SDK::REST.set_config(
-      :mode => "sandbox",
       :client_id => cohort.paypal_client_id,
       :client_secret => cohort.paypal_client_secret)
 

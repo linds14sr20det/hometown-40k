@@ -6,10 +6,10 @@
 <body>
 <div style="max-width: 700px; margin: 0 auto; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; background-color:#f4f4f4; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3), 0 10px 10px rgba(0, 0, 0, 0.22);">
   <div style="">
-    <%= image_tag("email_banner", style: "max-width:100%") %>
+    <%= image_tag("Hometown40K_64x64.png", style: "max-width:100%") %>
   </div>
   <div style="padding: 20px">
-    <h1 style="font-size: 24px; font-weight: 500">Thanks for registering for Hometown 40k, <%= @registrant_group[0].name %>!</h1>
+    <h1 style="font-size: 24px; font-weight: 500">Thanks for registering for <%= @registrant_group[0].system.cohort.name %>, <%= @registrant_group[0].user.name %>!</h1>
     <p>You registered for the following systems:</p>
     <ul>
     <% @registrant_group.each do |registrant| %>
@@ -17,7 +17,7 @@
     <% end %>
     </ul>
     <p>For further information please go here:</p>
-    <%= link_to(info_url(:id=>1), info_url(:id=>1)) %>
+    <%= link_to(cohort_url(@registrant_group[0].system.cohort.id), cohort_url(@registrant_group[0].system.cohort.id)) %>
     <p><b>Receipt:</b> you should receive a receipt email directly from paypal. If you do not, please reply to this email.</p>
     </div>
 </div>

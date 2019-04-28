@@ -10,6 +10,6 @@ class RegistrantMailer < ApplicationMailer
       attachments[URI(attachment_url).path.split('/').last] = open(attachment_url).read unless registrant.system.cohort.attachment_url.blank?
     end
 
-    mail(to: @registrant_group[0].email, subject: 'Thanks for registering for Hometown 40k!')
+    mail(to: @registrant_group[0].user.email, subject: 'Thanks for registering for Hometown 40k!')
   end
 end
