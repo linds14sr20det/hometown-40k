@@ -55,9 +55,10 @@
             // Set up a url on your server to create the payment
             var CREATE_URL = "<%= checkout_url %>";
             var registrants = <%= sanitize(@registrants.to_json) %>;
+            var cohort_id = <%= @cohort.id %>;
 
             // Make a call to your server to set up the payment
-            return paypal.request.post(CREATE_URL, {registrants:JSON.stringify(registrants)})
+            return paypal.request.post(CREATE_URL, {registrants:JSON.stringify(registrants), cohort_id: cohort_id})
                 .then(function(res) {
                     if (res.success) {
                         return res.paymentID;

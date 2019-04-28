@@ -6,6 +6,7 @@ class PaypalController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def checkout
+    cohort = Cohort.find_by(:id => params["cohort_id"])
     registrants = JSON.parse(params["registrants"])
     registrants.map!{|registrant| Registrant.new(registrant)}
     systems_with_space = registrants.reject{|registrant| registrant.system.full? }
@@ -28,6 +29,10 @@ class PaypalController < ApplicationController
     end
 
     total = items.map { |item| item[:price] }.sum
+
+    PayPal::SDK::REST.set_config(
+      :client_id => cohort.paypal_client_id,
+      :client_secret => cohort.paypal_client_secret)
 
     @payment = Payment.new({
     :intent =>  "sale",

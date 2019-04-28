@@ -23,7 +23,7 @@ class Cart
     cart = {}
     registrants.each do |registrant|
       cohort = registrant.system.cohort
-      cart.merge!({cohort => registrant}){ |key, val1, val2| Array(val1) << val2 }
+      cart.merge!({cohort => [registrant]}){ |key, val1, val2| Array(val1) << val2.first }
     end
     cart
   end
