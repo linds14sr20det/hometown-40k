@@ -34,9 +34,17 @@ class TicketsController < ApplicationController
 
   def remove_from_cart
     registrants = Cart.decode_cart(cookies)
-    registrants.delete_if { |registrant| registrant.uuid == params[:uuid] }
+    deleted_registrants_cohort_id = nil
+    registrants.delete_if do |registrant|
+      if registrant.uuid == params[:uuid]
+        deleted_registrants_cohort_id = registrant.system.cohort.id
+        true
+      else
+        false
+      end
+    end
     cookies[:registrants] = Cart.encode_cart(registrants)
-    redirect_to cart_tickets_path
+    redirect_to cohorts_cart_tickets_path(:cohort_id => deleted_registrants_cohort_id)
   end
 
   def cart

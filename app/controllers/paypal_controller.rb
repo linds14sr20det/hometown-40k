@@ -62,8 +62,11 @@ class PaypalController < ApplicationController
 
     # Create Payment and return status
     if @payment.create
-      registrants.each{ |registrant| registrant.payment_id = @payment.id }
-      registrants.each(&:save)
+      binding.pry
+      registrants.each do |registrant|
+        persisted_registrant = registrant.id.present? ? Registrant.find_by(:id => registrant.id) : Registrant.create(registrant.attributes)
+        persisted_registrant.update(:payment_id => @payment.id)
+      end
       render json: {success: true, paymentID: @payment.id}
     else
       render json: {success: false}
