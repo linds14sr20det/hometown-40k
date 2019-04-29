@@ -59,4 +59,8 @@ class Cohort < ApplicationRecord
     image
   end
 
+  def truncate_body(n)
+    ActionView::Base.full_sanitizer.sanitize(body)[0...n]
+  end
+
 end
