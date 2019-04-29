@@ -55,10 +55,11 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'pry-nav'
-  gem 'pry-rails'
 end
 
+# Command line ============
 gem "rake"
+gem 'pry-rails'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
