@@ -87,12 +87,13 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = 'hometown-40k.herokuapp.com/'
-  config.action_mailer.default_url_options = { host: host }
+  host = 'hometown-40k.herokuapp.com'
+  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
+  config.action_mailer.asset_host = "https://#{host}"
   ActionMailer::Base.smtp_settings = {
     :user_name      => ENV['SENDGRID_USERNAME'],
     :password       => ENV['SENDGRID_PASSWORD'],
-    :domain         => 'heroku.com',
+    :domain         => 'hometown-40k.herokuapp.com',
     :address        => 'smtp.sendgrid.net',
     :port           => 587,
     :authentication => :plain,

@@ -54,7 +54,8 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = true
   host = 'localhost:3000' # Don't use this literally; use your local dev host instead
-  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
+  config.action_mailer.default_url_options = { host: host, protocol: 'http' }
+  config.action_mailer.asset_host = "http://#{host}"
 
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
