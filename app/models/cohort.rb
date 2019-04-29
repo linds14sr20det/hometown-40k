@@ -10,6 +10,11 @@ class Cohort < ApplicationRecord
   settings index: { number_of_shards: 1 } do
     mappings dynamic: 'false' do
       indexes :name, analyzer: 'english'
+      indexes :body, analyzer: 'english'
+      indexes :street, analyzer: 'english'
+      indexes :city, analyzer: 'english'
+      indexes :state, analyzer: 'english'
+      indexes :country, analyzer: 'english'
     end
   end
 
