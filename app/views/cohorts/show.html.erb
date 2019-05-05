@@ -2,12 +2,19 @@
   <div class="banner-card tickets">
     <p class="banner-date"><%= @cohort.name %></p>
     <p class="banner-date"><%= @cohort.descriptive_date %></p>
-    <p class="banner-cta-text">Register</p>
+    <p class="banner-cta-text"><%= @cohort.registered_user?(current_user) ? "View Events" : "Register" %></p>
   </div>
 <% end %>
 <div class="well">
   <h4>About <%= @cohort.name %>:</h4>
   <p><%= sanitize(@cohort.body) %></p>
+</div>
+<div class="btn-group-vertical btn-block">
+  <% if @cohort.attachment_url.blank? %>
+    <div class="btn btn-primary disabled">Player pack unavailable</div>
+  <% else %>
+    <%= link_to "Download player pack", @cohort.attachment_url, class: "btn btn-primary" %>
+  <% end %>
 </div>
 <div id="map"></div>
 

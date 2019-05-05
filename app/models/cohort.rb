@@ -63,4 +63,8 @@ class Cohort < ApplicationRecord
     ActionView::Base.full_sanitizer.sanitize(body)[0...n]
   end
 
+  def registered_user?(user)
+    return false if user.blank?
+    Registrant.where(:system_id => systems.map(&:id)).map(&:user_id).include?(user.id)
+  end
 end
