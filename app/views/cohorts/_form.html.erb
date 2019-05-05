@@ -162,7 +162,7 @@
                     progressBar.text("Uploading done");
                     // extract key and generate URL from response
                     var key = $(data.jqXHR.responseXML).find("Key").text();
-                    var url = '//' + form.data('host') + '/' + key;
+                    var url = 'https://' + form.data('host') + '/' + key;
                     // create hidden field
                     $(elem).parent().find('.url-holder').val(url);
                 },
