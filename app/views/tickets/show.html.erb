@@ -10,7 +10,7 @@
     <% if @ticket.cohort.attachment_url.blank? %>
       <div class="btn btn-primary disabled">Player pack unavailable</div>
     <% else %>
-      <%= link_to "Download player pack", @ticket.cohort.attachment_url, class: "btn btn-primary", download: @ticket.cohort.attachment_url %>
+      <%= link_to "Download player pack", @ticket.cohort.attachment_url, class: "btn btn-primary" %>
     <% end %>
   </div>
   <%= form_for(@registrant, url: add_to_cart_ticket_path) do |f| %>

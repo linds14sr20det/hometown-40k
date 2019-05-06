@@ -13,7 +13,7 @@
   <% if @cohort.attachment_url.blank? %>
     <div class="btn btn-primary disabled">Player pack unavailable</div>
   <% else %>
-    <%= link_to "Download player pack", @cohort.attachment_url, class: "btn btn-primary", download: @cohort.attachment_url %>
+    <%= link_to "Download player pack", @cohort.attachment_url, class: "btn btn-primary" %>
   <% end %>
 </div>
 <div id="map"></div>
