@@ -17,13 +17,14 @@ class TicketsController < ApplicationController
     unless @ticket.cohort.active? && @ticket.cohort.registration_open?
       redirect_to tickets_path and return
     end
-    @registrant = current_user.registrants.create(:system_id => params["id"], :paid => false, :uuid => SecureRandom.uuid)
+    @registrant = Registrant.find_by(user_id: current_user.id, system_id: params["id"], paid: false)
+    @registrant ||= current_user.registrants.create(:system_id => params["id"], :paid => false, :uuid => SecureRandom.uuid)
     if @ticket.full?
       flash[:warning] = "Unfortunately that system has sold out!"
       redirect_to tickets_path
     elsif @registrant.valid?
       registrants = Cart.decode_cart(cookies)
-      registrants << @registrant
+      registrants |= [@registrant]
       cookies[:registrants] = Cart.encode_cart(registrants)
       flash[:success] = "Ticket added to cart."
       redirect_to cart_tickets_path
