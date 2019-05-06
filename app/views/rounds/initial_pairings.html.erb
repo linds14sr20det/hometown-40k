@@ -1,0 +1,18 @@
+<div class="row bottom-buffer">
+  <div class="col-md-12">
+    <% @pairings.each do |pairing| %>
+      <%= render partial: "pairing", locals: {pairing: pairing} %>
+    <% end %>
+    <%= form_tag set_initial_pairings_rounds_path(id: @system.id) do %>
+      <div><%= submit_tag 'Set pairings', class: "btn btn-primary" %></div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  // Need to pass in a JSON array, js object needs to allow swapping of player cards
+  function changeTab() {
+    document.querySelector(".active").removeAttribute("class");
+    event.currentTarget.setAttribute("class", "search-nav active");
+  }
+</script>

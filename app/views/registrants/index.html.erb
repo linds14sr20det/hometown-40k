@@ -13,6 +13,8 @@
         </div>
         <div style="margin-left:auto">
           <%= link_to "Add Player", new_registrant_path(system_id: system.id), class: "btn btn-primary"%>
+          <%= link_to "Set Up Event", initial_pairings_rounds_path(id: system.id), class: "btn btn-primary"%>
+          <%= link_to "#{system.event_started? ? "Deactivate" : "Activate"} Event", toggle_start_event_rounds_path(id: system.id), class: "btn btn-primary"%>
         </div>
       </div>
       <table class="table table-striped">

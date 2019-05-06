@@ -18,7 +18,6 @@ class RegistrantsController < ApplicationController
     else
       render 'new'
     end
-
   end
 
   def edit

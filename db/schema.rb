@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_27_194824) do
+ActiveRecord::Schema.define(version: 2019_05_06_222049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2019_04_27_194824) do
     t.index ["user_id"], name: "index_registrants_on_user_id"
   end
 
-  create_table "round_aggregate", id: :serial, force: :cascade do |t|
+  create_table "round_aggregates", id: :serial, force: :cascade do |t|
     t.integer "player_id"
     t.integer "system_id"
     t.integer "wins"
@@ -66,11 +66,11 @@ ActiveRecord::Schema.define(version: 2019_04_27_194824) do
     t.integer "total_points"
     t.integer "opponents", array: true
     t.boolean "withdrawn"
-    t.index ["player_id"], name: "index_round_aggregate_on_player_id"
-    t.index ["system_id"], name: "index_round_aggregate_on_system_id"
+    t.index ["player_id"], name: "index_round_aggregates_on_player_id"
+    t.index ["system_id"], name: "index_round_aggregates_on_system_id"
   end
 
-  create_table "round_individual", id: :serial, force: :cascade do |t|
+  create_table "round_individuals", id: :serial, force: :cascade do |t|
     t.integer "player_id"
     t.integer "opponent_id"
     t.integer "system_id"
@@ -79,9 +79,9 @@ ActiveRecord::Schema.define(version: 2019_04_27_194824) do
     t.boolean "win"
     t.boolean "loss"
     t.boolean "draw"
-    t.index ["opponent_id"], name: "index_round_individual_on_opponent_id"
-    t.index ["player_id"], name: "index_round_individual_on_player_id"
-    t.index ["system_id"], name: "index_round_individual_on_system_id"
+    t.index ["opponent_id"], name: "index_round_individuals_on_opponent_id"
+    t.index ["player_id"], name: "index_round_individuals_on_player_id"
+    t.index ["system_id"], name: "index_round_individuals_on_system_id"
   end
 
   create_table "systems", id: :serial, force: :cascade do |t|
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 2019_04_27_194824) do
     t.datetime "start_date"
     t.integer "rounds"
     t.integer "current_round"
+    t.boolean "event_started"
     t.index ["cohort_id"], name: "index_systems_on_cohort_id"
   end
 
@@ -119,8 +120,8 @@ ActiveRecord::Schema.define(version: 2019_04_27_194824) do
 
   add_foreign_key "attachments", "systems"
   add_foreign_key "cohorts", "users"
-  add_foreign_key "round_aggregate", "registrants", column: "player_id"
-  add_foreign_key "round_individual", "registrants", column: "opponent_id"
-  add_foreign_key "round_individual", "registrants", column: "player_id"
+  add_foreign_key "round_aggregates", "users", column: "player_id"
+  add_foreign_key "round_individuals", "users", column: "opponent_id"
+  add_foreign_key "round_individuals", "users", column: "player_id"
   add_foreign_key "systems", "cohorts"
 end

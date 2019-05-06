@@ -12,8 +12,8 @@ Rails.application.routes.draw do
     get :my_events, on: :collection
     post :search, on: :collection
     post :my_search, on: :collection
-
   end
+
   resources :tickets, only: [:index, :show] do
     post :add_to_cart, on: :member
     get :remove_from_cart, on: :collection
@@ -21,6 +21,13 @@ Rails.application.routes.draw do
     get :cohorts_cart, on: :collection
     get :success, on: :collection
   end
+
+  resources :rounds, only: [:show] do
+    get :initial_pairings, on: :collection
+    get :toggle_start_event, on: :collection
+    post :set_initial_pairings, on: :collection
+  end
+
   post '/checkout' => 'paypal#checkout'
   post '/execute' =>  'paypal#execute'
   resources :password_resets, only: [:new, :create, :edit, :update]
