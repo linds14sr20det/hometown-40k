@@ -76,8 +76,7 @@ class PaypalController < ApplicationController
     payment = PayPal::SDK::REST::Payment.find(params[:paymentID])
     if payment.execute(payer_id: params[:payerID])
       registrants = Registrant.where(:payment_id => params[:paymentID])
-      registrants.each{ |registrant| registrant.paid = true }
-      registrants.each(&:save)
+      registrants.each{ |registrant| registrant.update_attributes(paid: true) }
       cookies.delete(:registrants)
       registrant_groups = registrants.group_by{ |registrant| registrant.user.email }.values
       registrant_groups.each do |registrant_group|

@@ -17,8 +17,11 @@ class TicketsController < ApplicationController
     unless @ticket.cohort.active? && @ticket.cohort.registration_open?
       redirect_to tickets_path and return
     end
-    @registrant = Registrant.find_by(user_id: current_user.id, system_id: params["id"], paid: false)
-    @registrant ||= current_user.registrants.create(:system_id => params["id"], :paid => false, :uuid => SecureRandom.uuid)
+    if Registrant.find_by(system_id: params["id"], user_id: current_user.id, paid: true)
+      flash[:warning] = "You've already registered for this system"
+      redirect_to ticket_path(params["id"]) and return
+    end
+    @registrant = current_user.registrants.create(:system_id => params["id"], :paid => false, :uuid => SecureRandom.uuid)
     if @ticket.full?
       flash[:warning] = "Unfortunately that system has sold out!"
       redirect_to tickets_path
@@ -58,5 +61,6 @@ class TicketsController < ApplicationController
     all_registrants = Cart.decode_cart(cookies)
     system_ids = @cohort.systems.map{ |system| system.id }
     @registrants = all_registrants.select{ |registrant| system_ids.include?(registrant.system_id) }
+    redirect_to cohort_path(params[:cohort_id]) if @registrants.blank?
   end
 end
