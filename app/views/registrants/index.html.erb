@@ -12,9 +12,10 @@
           <h3><%= system.title %></h3>
         </div>
         <div style="margin-left:auto">
-          <%= link_to "Add Player", new_registrant_path(system_id: system.id), class: "btn btn-primary"%>
-          <%= link_to "Set Up Event", initial_pairings_rounds_path(id: system.id), class: "btn btn-primary"%>
-          <%= link_to "#{system.event_started? ? "Deactivate" : "Activate"} Event", toggle_start_event_rounds_path(id: system.id), class: "btn btn-primary"%>
+          <%= link_to "Add Player", new_registrant_path(system_id: system.id), class: "btn btn-primary" %>
+          <%= link_to "Set Up Event", initial_pairings_round_individuals_path(id: system.id), class: "btn btn-primary" %>
+          <%= link_to "#{system.event_started? ? "Deactivate" : "Activate"} Event", toggle_start_event_round_individuals_path(id: system.id), class: "btn btn-primary" %>
+          <%= link_to "Enter Results", round_individual_path(id: 0, system_id: system.id), class: "btn btn-primary" if system.event_started? %>
         </div>
       </div>
       <table class="table table-striped">

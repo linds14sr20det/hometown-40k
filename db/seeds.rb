@@ -39,7 +39,7 @@ if Rails.env == "development"
       cost: 30,
       cohort: a,
       start_date: Time.zone.now,
-      rounds: 5,
+      round_individuals: 5,
       )
   end
 
@@ -68,7 +68,7 @@ if Rails.env == "development"
     cost: 30,
     cohort: event,
     start_date: Time.zone.now,
-    rounds: 4
+    round_individuals: 4
   )
 
   40.times do |n|

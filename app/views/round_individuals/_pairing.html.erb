@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-12 ticket">
+    <%= link_to edit_round_individual_path(pairing.id) do %>
+      <div class="ticket-card">
+        <div class="row">
+          <div class="col-sm-5">
+            <%= pairing.player_a.name %>
+            <%= pairing.player_a_points.present? ? pairing.player_a_points : 0 %>
+          </div>
+          <div class="col-sm-2">
+            vs.
+          </div>
+          <div class="col-sm-5">
+            <%= pairing.player_b.name %>
+            <%= pairing.player_b_points.present? ? pairing.player_b_points : 0 %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

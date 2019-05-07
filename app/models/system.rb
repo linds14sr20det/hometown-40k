@@ -11,7 +11,7 @@ class System < ApplicationRecord
   validates :description, :presence => true
   validates :max_players, :presence => true
   validates :cost, :presence => true
-  validates :rounds, numericality: {less_than_or_equal_to: 15}
+  validates :round_individuals, numericality: {less_than_or_equal_to: 15}
 
 
   def first_image

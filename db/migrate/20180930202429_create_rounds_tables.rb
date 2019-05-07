@@ -1,14 +1,12 @@
 class CreateRoundsTables < ActiveRecord::Migration[5.0]
   def change
     create_table :round_individuals do |t|
-    	t.references :player, index: true, foreign_key:{to_table: :users}
-    	t.references :opponent, index: true, foreign_key:{to_table: :users}
+    	t.references :player_a, index: true, foreign_key:{to_table: :users}
+    	t.references :player_b, index: true, foreign_key:{to_table: :users}
     	t.belongs_to :system
     	t.integer :round
-    	t.integer :points
-    	t.boolean :win
-    	t.boolean :loss
-    	t.boolean :draw
+    	t.integer :player_a_points
+    	t.integer :player_b_points
     end
 
     create_table :round_aggregates do |t|

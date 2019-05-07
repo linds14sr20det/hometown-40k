@@ -1,0 +1,34 @@
+<div class="row bottom-buffer">
+  <div class="col-md-12">
+    <% @pairings.each do |pairing| %>
+      <div class="row">
+        <div class="col-md-12 ticket">
+          <div class="ticket-card">
+            <div class="row">
+              <div class="col-sm-5">
+                <%= pairing[0].user.name %>
+              </div>
+              <div class="col-sm-2">
+                vs.
+              </div>
+              <div class="col-sm-5">
+                <%= pairing[1].user.name %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <%= form_tag set_initial_pairings_round_individuals_path(id: @system.id) do %>
+      <div><%= submit_tag 'Set pairings', class: "btn btn-primary" %></div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  // Need to pass in a JSON array, js object needs to allow swapping of player cards
+  function changeTab() {
+    document.querySelector(".active").removeAttribute("class");
+    event.currentTarget.setAttribute("class", "search-nav active");
+  }
+</script>

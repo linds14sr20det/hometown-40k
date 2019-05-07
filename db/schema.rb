@@ -71,16 +71,14 @@ ActiveRecord::Schema.define(version: 2019_05_06_222049) do
   end
 
   create_table "round_individuals", id: :serial, force: :cascade do |t|
-    t.integer "player_id"
-    t.integer "opponent_id"
+    t.integer "player_a_id"
+    t.integer "player_b_id"
     t.integer "system_id"
     t.integer "round"
-    t.integer "points"
-    t.boolean "win"
-    t.boolean "loss"
-    t.boolean "draw"
-    t.index ["opponent_id"], name: "index_round_individuals_on_opponent_id"
-    t.index ["player_id"], name: "index_round_individuals_on_player_id"
+    t.integer "player_a_points"
+    t.boolean "player_b_points"
+    t.index ["player_a_id"], name: "index_round_individuals_on_player_a_id"
+    t.index ["player_b_id"], name: "index_round_individuals_on_player_b_id"
     t.index ["system_id"], name: "index_round_individuals_on_system_id"
   end
 
@@ -121,7 +119,7 @@ ActiveRecord::Schema.define(version: 2019_05_06_222049) do
   add_foreign_key "attachments", "systems"
   add_foreign_key "cohorts", "users"
   add_foreign_key "round_aggregates", "users", column: "player_id"
-  add_foreign_key "round_individuals", "users", column: "opponent_id"
-  add_foreign_key "round_individuals", "users", column: "player_id"
+  add_foreign_key "round_individuals", "users", column: "player_a_id"
+  add_foreign_key "round_individuals", "users", column: "player_b_id"
   add_foreign_key "systems", "cohorts"
 end

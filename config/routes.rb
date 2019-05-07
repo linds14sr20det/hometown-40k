@@ -22,10 +22,11 @@ Rails.application.routes.draw do
     get :success, on: :collection
   end
 
-  resources :rounds, only: [:show] do
+  resources :round_individuals, only: [:show, :edit, :update] do
     get :initial_pairings, on: :collection
     get :toggle_start_event, on: :collection
     post :set_initial_pairings, on: :collection
+    post :finalize_round, on: :collection
   end
 
   post '/checkout' => 'paypal#checkout'
