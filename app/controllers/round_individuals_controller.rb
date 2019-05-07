@@ -4,7 +4,7 @@ class RoundIndividualsController < ApplicationController
   def show
     @round = params[:id]
     @system = System.find(params[:system_id])
-    @pairings = RoundIndividual.where(round: @round, system: @system)
+    @pairings = RoundIndividual.where(round: @round, system: @system).order(:id)
   end
 
   def edit
