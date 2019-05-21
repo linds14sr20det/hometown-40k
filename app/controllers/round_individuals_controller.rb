@@ -79,6 +79,8 @@ class RoundIndividualsController < ApplicationController
       )
     end
 
+    # TODO: Increment the round number so you can't mess up previous rounds
+
     # Setup the next round
     round_aggregates = RoundAggregate.where(system: params[:system_id]).order(total_points: :desc)
     # TODO: Sort pairings to avoid prior played opponents
