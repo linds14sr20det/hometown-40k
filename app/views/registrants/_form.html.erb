@@ -2,12 +2,8 @@
   <%= render 'shared/error_messages', object: f.object %>
   <div class="well">
     <div class="form-group">
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :email %>
-      <%= f.text_field :email, class: 'form-control' %>
+      <!-- TODO: This is a huge performance hit here potentially -->
+      <%= collection_select(:registrant, :user_id, User.all, :id, :name, class: "form-control") %>
     </div>
     <div class="form-group">
         <%= f.check_box :paid %> Paid?

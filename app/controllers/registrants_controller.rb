@@ -45,7 +45,7 @@ class RegistrantsController < ApplicationController
   private
 
     def registrant_params
-      params.require(:registrant).permit(:name, :email, :system_id, :paid)
+      params.require(:registrant).permit(:user_id, :system_id, :paid)
     end
 
     # Before filters
