@@ -5,6 +5,9 @@ class RoundIndividualsController < ApplicationController
     @round = params[:id]
     @system = System.find(params[:system_id])
     @pairings = RoundIndividual.where(round: @round, system: @system).order(:id)
+    if @pairings.empty?
+      redirect_to new_round_individual_path(:round => params[:id], :system_id => params[:system_id])
+    end
   end
 
   def edit
@@ -18,12 +21,7 @@ class RoundIndividualsController < ApplicationController
     redirect_to round_individual_path(id: pairing.round, system_id: pairing.system_id)
   end
 
-  def initial_pairings
-    # TODO: Send over a JS object that will be manipulable by the front end
-    @system = System.find(params[:id])
-    @pairings = get_initial_pairings(@system.registrants)
-  end
-
+  # TODO This needs to be the generated js object pairings set before each round starts
   def set_initial_pairings
     system = System.find(params[:id])
     RoundIndividual.where(round: 0, system_id: system.id, player_a: system.registrants.map(&:user_id)).destroy_all
@@ -33,7 +31,7 @@ class RoundIndividualsController < ApplicationController
       RoundAggregate.create(player: pairing[0].user, system: system, wins: 0, losses: 0, draws: 0, total_points: 0, withdrawn: false, opponents: [])
       RoundAggregate.create(player: pairing[1].user, system: system, wins: 0, losses: 0, draws: 0, total_points: 0, withdrawn: false, opponents: [])
     end
-    redirect_to registrants_path(cohort_id: system.cohort.id)
+    redirect_to show, :round => 0, :system_id => params[:id]
   end
 
   def toggle_start_event

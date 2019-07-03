@@ -1,5 +1,10 @@
 <div class="row bottom-buffer">
   <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <% @system.round_count.times do |round| %>
+        <li <%= "class=active" if round == @round.round.to_i %> role="presentation"><a href="<%= round_individual_path(id: round, system_id: @system.id) %>">Round <%= round + 1 %></a></li>
+      <% end %>
+    </ul>
     <% @pairings.each do |pairing| %>
       <div class="row">
         <div class="col-md-12 ticket">
@@ -24,11 +29,3 @@
     <% end %>
   </div>
 </div>
-
-<script>
-  // Need to pass in a JSON array, js object needs to allow swapping of player cards
-  function changeTab() {
-    document.querySelector(".active").removeAttribute("class");
-    event.currentTarget.setAttribute("class", "search-nav active");
-  }
-</script>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_06_222049) do
+ActiveRecord::Schema.define(version: 2019_07_03_063023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,13 +73,22 @@ ActiveRecord::Schema.define(version: 2019_05_06_222049) do
   create_table "round_individuals", id: :serial, force: :cascade do |t|
     t.integer "player_a_id"
     t.integer "player_b_id"
-    t.integer "system_id"
     t.integer "round"
     t.integer "player_a_points"
-    t.boolean "player_b_points"
+    t.integer "player_b_points"
+    t.bigint "round_id"
     t.index ["player_a_id"], name: "index_round_individuals_on_player_a_id"
     t.index ["player_b_id"], name: "index_round_individuals_on_player_b_id"
-    t.index ["system_id"], name: "index_round_individuals_on_system_id"
+    t.index ["round_id"], name: "index_round_individuals_on_round_id"
+  end
+
+  create_table "rounds", force: :cascade do |t|
+    t.bigint "system_id"
+    t.integer "round"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "finalized"
+    t.index ["system_id"], name: "index_rounds_on_system_id"
   end
 
   create_table "systems", id: :serial, force: :cascade do |t|
@@ -92,7 +101,7 @@ ActiveRecord::Schema.define(version: 2019_05_06_222049) do
     t.datetime "updated_at", null: false
     t.integer "cohort_id"
     t.datetime "start_date"
-    t.integer "rounds"
+    t.integer "round_count"
     t.integer "current_round"
     t.boolean "event_started"
     t.index ["cohort_id"], name: "index_systems_on_cohort_id"

@@ -1,0 +1,15 @@
+<div class="row bottom-buffer">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <% @system.rounds.times do |round| %>
+        <li <%= "class=active" if round == @round.to_i %> role="presentation"><a href="<%= round_individual_path(id: round, system_id: @system.id) %>">Round <%= round + 1 %></a></li>
+      <% end %>
+    </ul>
+    <% @pairings.each do |pairing| %>
+      <%= render partial: "pairing", locals: {pairing: pairing} %>
+    <% end %>
+    <%= form_tag finalize_round_round_individuals_path(id: @round, system_id: @system.id) do %>
+      <%= submit_tag "Finalize Round", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

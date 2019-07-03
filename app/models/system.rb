@@ -2,6 +2,8 @@ class System < ApplicationRecord
   belongs_to :cohort
   has_one :attachment, inverse_of: :system
   has_many :registrants, :dependent => :restrict_with_error
+
+  has_many :rounds
   accepts_nested_attributes_for :attachment, reject_if: :all_blank, allow_destroy: true
   before_destroy :check_for_registrants
 
@@ -11,7 +13,7 @@ class System < ApplicationRecord
   validates :description, :presence => true
   validates :max_players, :presence => true
   validates :cost, :presence => true
-  validates :round_individuals, numericality: {less_than_or_equal_to: 15}
+  validates :round_count, numericality: {less_than_or_equal_to: 15}
 
 
   def first_image
