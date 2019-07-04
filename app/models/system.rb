@@ -4,6 +4,7 @@ class System < ApplicationRecord
   has_many :registrants, :dependent => :restrict_with_error
 
   has_many :rounds
+  has_many :round_aggregates
   accepts_nested_attributes_for :attachment, reject_if: :all_blank, allow_destroy: true
   before_destroy :check_for_registrants
 

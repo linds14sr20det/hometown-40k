@@ -1,5 +1,14 @@
 <%= form_for @pairing do |f| %>
-  <%= f.text_field :player_a_points %>
-  <%= f.text_field :player_b_points %>
-  <%= f.submit "Submit scores" %>
+
+  <div class="form-group">
+    <%= f.label :player_a_points, "#{f.object.player_a.name}'s Score" %>
+    <%= f.text_field :player_a_points, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :player_b_points, "#{f.object.player_b.name}'s Score" %>
+    <%= f.text_field :player_b_points, class: 'form-control' %>
+  </div>
+
+  <%= f.submit "Submit scores", class: 'btn btn-primary' %>
 <% end %>

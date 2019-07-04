@@ -45,15 +45,23 @@ class RegistrantsController < ApplicationController
   def toggle_start_event
     system = System.find(params[:id])
     system.update_attributes(event_started: !system.event_started?)
+    system.registrants.where(checked_in: true).each do |registrant|
+      system.round_aggregates.create(
+        player: registrant.user,
+        wins: 0,
+        losses: 0,
+        draws: 0,
+        total_points: 0,
+        opponents: [],
+        withdrawn: false,
+      )
+    end
     redirect_to registrants_path(cohort_id: system.cohort.id)
   end
 
   private
 
-    def registrant_params
-      params.require(:registrant).permit(:user_id, :system_id, :paid)
-    end
-
-    # Before filters
-
+  def registrant_params
+    params.require(:registrant).permit(:user_id, :system_id, :paid)
+  end
 end
