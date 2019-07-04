@@ -74,20 +74,14 @@ class RoundsController < ApplicationController
   end
 
   def set_initial_pairings(registrants)
-    # TODO: This needs to be based on the previous round
-    # # # TODO: Increment the round number so you can't mess up previous rounds
-    #     #
-    #     # # Setup the next round
-    #     # round_aggregates = RoundAggregate.where(system: params[:system_id]).order(total_points: :desc)
-    #     # # TODO: Sort pairings to avoid prior played opponents
-    #     # new_pairings = round_aggregates.in_groups_of(2, RoundAggregate.new(player_id: 1, system_id: params[:system_id]))
-    #     # new_pairings.each do |pairing|
-    #     #   RoundIndividual.create(player_a: pairing[0].player, player_b: pairing[1].player, system: pairing[0].system, round: round + 1)
-    #     # end
-    #     # redirect_to round_individual_path(id: round + 1, system_id: params[:system_id])
-    pairings = registrants.where(checked_in: true).in_groups_of(2, Registrant.new(:user_id => 1))
-    pairings.each do |pairing|
-      @round.round_individuals.new(player_a_id: pairing[0].user.id, player_b_id: pairing[1].user.id, player_a_points: 0, player_b_points: 0)
+    if @round.round == 0
+      pairings = registrants.where(checked_in: true).map(&:user_id)
+    else
+      # TODO: This is where we can get fancy to avoid people who have already played having collisions.
+      pairings = RoundAggregate.where(system_id: @round.system.id).where(withdrawn: false).order(total_points: :desc).map(&:player_id)
+    end
+    pairings.in_groups_of(2, 1).each do |pairing|
+      @round.round_individuals.new(player_a_id: pairing[0], player_b_id: pairing[1], player_a_points: 0, player_b_points: 0)
     end
   end
 

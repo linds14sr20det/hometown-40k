@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12 ticket">
-    <div class="ticket-card">
+    <div class="ticket-card" style="<%= "background: #c76565" if already_played?(f.object.round.system.id, f.object.player_a_id, f.object.player_b_id) %>">
       <div class="row">
         <div class="col-sm-5">
           <%= f.object.player_a.name %>
