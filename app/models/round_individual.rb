@@ -9,7 +9,7 @@ class RoundIndividual < ApplicationRecord
   end
 
   def player_a_loss?
-    true if player_a_points < player_b_points
+    return true if player_a_points < player_b_points
     false
   end
 end
