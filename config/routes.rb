@@ -23,17 +23,17 @@ Rails.application.routes.draw do
     get :success, on: :collection
   end
 
-  resources :rounds, only: [:index, :new, :show]
-
-  resources :round_individuals, only: [:show, :edit, :update] do
-    get :toggle_start_event, on: :collection
-    post :set_initial_pairings, on: :collection
-    post :finalize_round, on: :collection
+  resources :rounds, only: [:index, :new, :show] do
+    post :complete_round, on: :collection
   end
+
+  resources :round_individuals, only: [:edit, :update]
 
   post '/checkout' => 'paypal#checkout'
   post '/execute' =>  'paypal#execute'
   resources :password_resets, only: [:new, :create, :edit, :update]
 
-  resources :registrants
+  resources :registrants do
+    get :toggle_start_event, on: :collection
+  end
 end

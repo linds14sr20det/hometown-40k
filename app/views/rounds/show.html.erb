@@ -1,15 +1,26 @@
 <div class="row bottom-buffer">
   <div class="col-md-12">
     <ul class="nav nav-tabs">
-      <% @system.rounds.times do |round| %>
-        <li <%= "class=active" if round == @round.to_i %> role="presentation"><a href="<%= round_individual_path(id: round, system_id: @system.id) %>">Round <%= round + 1 %></a></li>
+      <% @round.system.rounds.each do |round| %>
+        <li <%= "class=active" if round.id == @round.id %> role="presentation">
+          <a href="<%= round_path(id: round.id ) %>">
+            Round <%= round.round + 1 %>
+          </a>
+        </li>
+      <% end %>
+      <% if @round.system.rounds.last.complete? %>
+        <li role="presentation">
+          <a href="<%= new_round_path(system_id: @round.system.id) %>">
+            Round <%= @round.system.rounds.count + 1 %>
+          </a>
+        </li>
       <% end %>
     </ul>
-    <% @pairings.each do |pairing| %>
-      <%= render partial: "pairing", locals: {pairing: pairing} %>
+    <% @round.round_individuals.order(:id).each do |pairing| %>
+      <%= render partial: "final_pairing", locals: {pairing: pairing} %>
     <% end %>
-    <%= form_tag finalize_round_round_individuals_path(id: @round, system_id: @system.id) do %>
-      <%= submit_tag "Finalize Round", class: "btn btn-primary" %>
+    <%= form_tag complete_round_rounds_path(id: @round.id) do %>
+      <%= submit_tag("Complete Round", class: "btn btn-primary") unless @round.complete? %>
     <% end %>
   </div>
 </div>

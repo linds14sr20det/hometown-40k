@@ -42,6 +42,12 @@ class RegistrantsController < ApplicationController
     redirect_to registrants_path(cohort_id: registrant.system.cohort.id)
   end
 
+  def toggle_start_event
+    system = System.find(params[:id])
+    system.update_attributes(event_started: !system.event_started?)
+    redirect_to registrants_path(cohort_id: system.cohort.id)
+  end
+
   private
 
     def registrant_params

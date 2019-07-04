@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-12 ticket">
+    <div class="ticket-card">
+      <div class="row">
+        <div class="col-sm-5">
+          <%= f.object.player_a.name %>
+        </div>
+        <div class="col-sm-2">
+          vs.
+        </div>
+        <div class="col-sm-5">
+          <%= f.object.player_b.name %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= f.hidden_field :player_a_id %>
+  <%= f.hidden_field :player_b_id %>
+</div>

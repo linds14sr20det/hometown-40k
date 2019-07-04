@@ -1,31 +1,32 @@
 <div class="row bottom-buffer">
   <div class="col-md-12">
     <ul class="nav nav-tabs">
-      <% @system.round_count.times do |round| %>
-        <li <%= "class=active" if round == @round.round.to_i %> role="presentation"><a href="<%= round_individual_path(id: round, system_id: @system.id) %>">Round <%= round + 1 %></a></li>
+      <% @round.system.rounds.each do |round| %>
+        <% if round.persisted? %>
+          <li role="presentation">
+            <a href="<%= round_path(id: round.id ) %>">
+              Round <%= round.round + 1 %>
+            </a>
+          </li>
+        <% else %>
+          <li class="class=active" role="presentation">
+            <a href="#">
+              Round <%= round.round + 1 %>
+            </a>
+          </li>
+        <% end %>
       <% end %>
     </ul>
-    <% @pairings.each do |pairing| %>
-      <div class="row">
-        <div class="col-md-12 ticket">
-          <div class="ticket-card">
-            <div class="row">
-              <div class="col-sm-5">
-                <%= pairing[0].user.name %>
-              </div>
-              <div class="col-sm-2">
-                vs.
-              </div>
-              <div class="col-sm-5">
-                <%= pairing[1].user.name %>
-              </div>
-            </div>
-          </div>
-        </div>
+    <%= form_for @round do |f| %>
+      <%= f.fields_for :round_individuals do |round_individual| %>
+        <%= render 'pairing', :f => round_individual %>
+      <% end %>
+      <%= f.hidden_field :round %>
+      <%= f.hidden_field :system_id %>
+      <%= f.hidden_field :complete %>
+      <div>
+        <%= f.submit 'Start Round', class: "btn btn-primary" %>
       </div>
-    <% end %>
-    <%= form_tag set_initial_pairings_round_individuals_path(id: @system.id) do %>
-      <div><%= submit_tag 'Set pairings', class: "btn btn-primary" %></div>
     <% end %>
   </div>
 </div>

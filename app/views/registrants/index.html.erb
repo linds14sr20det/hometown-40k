@@ -18,7 +18,7 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="systemDropdown<%= system.id %>">
             <li><%= link_to "Add Player", new_registrant_path(system_id: system.id) %></li>
-            <li><%= link_to "#{system.event_started? ? "Deactivate" : "Activate"} Event", toggle_start_event_round_individuals_path(id: system.id) %></li>
+            <li><%= link_to "#{system.event_started? ? "Deactivate" : "Activate"} Event", toggle_start_event_registrants_path(id: system.id) %></li>
             <li><%= link_to "Enter Results", rounds_path(:system_id => system.id) if system.event_started? %></li>
           </ul>
         </div>

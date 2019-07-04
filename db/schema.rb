@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_03_063023) do
+ActiveRecord::Schema.define(version: 2019_07_04_022711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2019_07_03_063023) do
     t.string "uuid"
     t.string "payment_id"
     t.bigint "user_id"
+    t.boolean "checked_in"
     t.index ["system_id"], name: "index_registrants_on_system_id"
     t.index ["user_id"], name: "index_registrants_on_user_id"
   end
@@ -73,7 +74,6 @@ ActiveRecord::Schema.define(version: 2019_07_03_063023) do
   create_table "round_individuals", id: :serial, force: :cascade do |t|
     t.integer "player_a_id"
     t.integer "player_b_id"
-    t.integer "round"
     t.integer "player_a_points"
     t.integer "player_b_points"
     t.bigint "round_id"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2019_07_03_063023) do
     t.integer "round"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "finalized"
+    t.boolean "complete"
     t.index ["system_id"], name: "index_rounds_on_system_id"
   end
 
