@@ -30,7 +30,7 @@ class RegistrantsController < ApplicationController
       flash[:success] = "Player updated"
       redirect_to registrants_path(cohort_id: @registrant.system.cohort.id)
     else
-      redirect_to edit_registrants_path(@registrant)
+      redirect_to edit_registrant_path(@registrant)
     end
   end
 
