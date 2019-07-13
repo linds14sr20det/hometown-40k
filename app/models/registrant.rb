@@ -2,8 +2,8 @@ class Registrant < ApplicationRecord
   belongs_to :system
   belongs_to :user
 
-  scope :paid, -> { joins(:user).where(paid: true).order('name DESC') }
-  scope :failed_payment, -> { joins(:user).where(paid: false).order('name DESC') }
+  scope :paid, -> { joins(:user).where(paid: true).order('name ASC') }
+  scope :failed_payment, -> { joins(:user).where(paid: false).order('name ASC') }
 
   # validates :system_id, uniqueness: { scope: :user_id }, if: Proc.new { |registrant| registrant.paid? }
   validate :only_one_paid_registrant
