@@ -1,6 +1,6 @@
 class CreateRoundsTables < ActiveRecord::Migration[5.0]
   def change
-    create_table :round_individuals do |t|
+    create_table :round_individual do |t|
     	t.references :player_a, index: true, foreign_key:{to_table: :users}
     	t.references :player_b, index: true, foreign_key:{to_table: :users}
     	t.belongs_to :system
@@ -9,7 +9,7 @@ class CreateRoundsTables < ActiveRecord::Migration[5.0]
     	t.integer :player_b_points
     end
 
-    create_table :round_aggregates do |t|
+    create_table :round_aggregate do |t|
     	t.references :player, index: true, foreign_key:{to_table: :users}
     	t.belongs_to :system
     	t.integer :wins

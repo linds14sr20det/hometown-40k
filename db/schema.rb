@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 2019_07_04_022711) do
     t.datetime "updated_at", null: false
     t.integer "cohort_id"
     t.datetime "start_date"
-    t.integer "round_count"
+    t.integer "round_individuals"
     t.integer "current_round"
     t.boolean "event_started"
     t.index ["cohort_id"], name: "index_systems_on_cohort_id"
