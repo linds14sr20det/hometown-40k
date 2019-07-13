@@ -15,7 +15,7 @@ class RoundsController < ApplicationController
 
   def new
     @system = System.find(params[:system_id])
-    redirect_to @system.rounds.last unless @system.rounds.empty? || @system.rounds.last.complete? || @system.rounds.count < @system.round_count
+    redirect_to @system.rounds.last unless @system.rounds.empty? || @system.rounds.last.complete? || @system.rounds.count < @system.round_individuals
     @round = @system.rounds.new(:round => @system.rounds.count, :complete => false)
     set_initial_pairings(@system.registrants)
   end
