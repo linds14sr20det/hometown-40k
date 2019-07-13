@@ -6,7 +6,16 @@ class Registrant < ApplicationRecord
   scope :failed_payment, -> { joins(:user).where(paid: false).order('name ASC') }
 
   # validates :system_id, uniqueness: { scope: :user_id }, if: Proc.new { |registrant| registrant.paid? }
-  validate :only_one_paid_registrant
+  validate :only_one_paid_registrant, unless: :check_in_edit?
+
+  def check_in_edit?
+    @check_in_edit
+  end
+
+  def check_in_edit
+    @check_in_edit = true
+  end
+
 
   def only_one_paid_registrant
     if Registrant.find_by(user_id: user_id, system_id: system_id, paid: true).present?

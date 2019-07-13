@@ -26,10 +26,12 @@ class RegistrantsController < ApplicationController
 
   def update
     @registrant = Registrant.find(params[:id])
+    @registrant.check_in_edit
     if @registrant.update_attributes(registrant_params)
       flash[:success] = "Player updated"
       redirect_to registrants_path(cohort_id: @registrant.system.cohort.id)
     else
+      flash[:warning] = "Something went wrong"
       redirect_to edit_registrant_path(@registrant)
     end
   end
