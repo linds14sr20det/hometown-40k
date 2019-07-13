@@ -8,6 +8,9 @@
     <div class="form-group">
         <%= f.check_box :paid %> Paid?
     </div>
+    <div class="form-group">
+      <%= f.check_box :checked_in %> Checked In?
+    </div>
     <%= f.hidden_field :system_id, value: @registrant.system.id %>
   </div>
 
