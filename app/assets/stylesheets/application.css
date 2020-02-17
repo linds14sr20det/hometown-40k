@@ -10,12 +10,14 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+
  *= require froala_editor.min.css
  *= require froala_style.min.css
- *= require font-awesome
+ *= require plugins/char_counter.min.css
+ *= require plugins/image.min.css
+ *= require plugins/image_manager.min.css
  *= require_tree .
  *= require_self
  *= require bootstrap-datepicker3
- *= require plugins/image.min.css
  *= require font-awesome
  */

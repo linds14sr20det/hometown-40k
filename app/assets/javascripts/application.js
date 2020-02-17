@@ -20,14 +20,16 @@
 //= require cocoon
 //= require froala_editor.min.js
 //= require plugins/image.min.js
-//= require plugins/link.min.js
+//= require plugins/image_manager.min.js
+//= require plugins/char_counter.min.js
+
 
 $(document).ready(function(){
-    $('textarea:not(.no-wysiwyg)').froalaEditor($.froala_creds);
+    new FroalaEditor('textarea:not(.no-wysiwyg)', $.froala_creds);
 });
 
 $(document).on('cocoon:after-insert', function(e, insertedItem) {
-    insertedItem.find('textarea').froalaEditor($.froala_creds);
+    new FroalaEditor(insertedItem.find('textarea')[0], $.froala_creds);
 });
 
 $.fn.datepicker.defaults.format = "yyyy-mm-dd";

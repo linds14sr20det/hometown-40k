@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
         bucket: ENV['S3_BUCKET'],
 
         # S3 region. If you are using the default us-east-1, it this can be ignored.
-        region: 'us-west-2',
+        region: "#{ENV["S3_REGION"]}",
 
         # The folder where to upload the images.
         keyStart: 'uploads',

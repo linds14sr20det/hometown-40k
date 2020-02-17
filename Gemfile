@@ -1,21 +1,21 @@
 source 'https://rubygems.org'
-ruby "2.6.0"
+ruby "2.6.3"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.2', '>= 5.0.0.1'
+gem 'rails', '~> 6.0.2.1', '>= 6.0.0.1'
 gem 'rails-controller-testing'
 gem 'bcrypt',                  '3.1.11'
 gem 'faker',                   '1.6.6'
-gem 'will_paginate',           '3.1.0'
+gem 'will_paginate',           '3.1.1'
 gem 'bootstrap-will_paginate', '0.0.10'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.21'
+gem 'pg', '~> 0.18.4'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem "bootstrap-sass", ">= 3.4.1"
-gem 'bootstrap-datepicker-rails', '~> 1.6', '>= 1.6.1.1'
+gem 'bootstrap-datepicker-rails', '~> 1.9.0.1'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -34,8 +34,8 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 gem 'froala-editor-sdk'
-gem 'wysiwyg-rails'
-gem 'aws-sdk', '~> 2'
+gem 'wysiwyg-rails', '~> 3.1.0'
+gem 'aws-sdk', '~> 3'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'cocoon'
 gem 'pdfkit'

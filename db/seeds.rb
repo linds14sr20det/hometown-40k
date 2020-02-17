@@ -1,4 +1,4 @@
-# Create some users These shouldn't change after initial deploy
+# Create some users. These shouldn't change after initial deploy
 
 if User.count == 0
   admin = User.new(

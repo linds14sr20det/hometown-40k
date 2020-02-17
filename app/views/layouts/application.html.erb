@@ -12,10 +12,10 @@
                              'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116207095-1"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1" />
   <%= render 'layouts/shim' %>
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116207095-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -23,7 +23,6 @@
 
     gtag('config', 'UA-116207095-1');
   </script>
-
 </head>
 <body>
 <%= render 'layouts/header' %>
@@ -36,25 +35,12 @@
 <%= render 'layouts/footer' %>
 <script>
     $.froala_creds = {
-        toolbarSticky: true,
-        toolbarStickyOffset: 50,
         key: 'PG-10dpj1xB3wwdqwI2J3B10B7B7A5F4igqknsfxyG5hcj1==',
         imageUploadToS3: <%= @aws_data.to_json.html_safe %>,
         toolbarButtons: ['undo', 'redo' , '|', 'bold', 'italic', 'underline', 'strikeThrough', '|', 'insertLink', 'insertImage'],
         toolbarButtonsMD: ['undo', 'redo' , '|', 'bold', 'italic', 'underline', 'strikeThrough', '|', 'insertLink', 'insertImage'],
         toolbarButtonsSM: ['undo', 'redo' , '|', 'bold', 'italic', 'underline', '|', 'insertLink', 'insertImage'],
         toolbarButtonsXS: ['undo', 'redo' , '|', 'bold', 'italic', 'underline', '|', 'insertLink', 'insertImage'],
-        linkList: [
-            {
-                text: 'Games Workshop',
-                href: 'https://games-workshop.com',
-                target: '_blank'
-            },
-            {
-                text: 'HNIC Facebook',
-                href: "<%= I18n.t('social_links.facebook') %>"
-            }
-        ]
     };
 </script>
 </body>
