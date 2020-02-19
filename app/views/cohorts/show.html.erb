@@ -3,11 +3,11 @@
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Tournament Organizer Settings
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
-    </div>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <li><a href="<%= edit_cohort_path(@cohort) %>">Edit this event page</a></li>
+      <li role="separator" class="divider"></li>
+      <li><a href="<%= tickets_path(cohort_id: @cohort.id) %>">Manage individual systems</a></li>
+    </ul>
   </div>
 <% end %>
 
