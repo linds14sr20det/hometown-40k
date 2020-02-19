@@ -3,7 +3,7 @@ class CohortsController < ApplicationController
   before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
   def index
-    @active_cohort = current_user.cohorts.where(active: true)
+    @active_cohort = current_user.cohorts.where(active: true).order("start_at DESC", "name")
     @cohorts = current_user.cohorts.where(active: false).paginate(page: params[:page], :per_page => 12)
   end
 

@@ -17,7 +17,7 @@
     if ( typeof define === "function" && define.amd ) {
 
         // AMD. Register as an anonymous module.
-        define( [ "jquery", "./version" ], factory );
+        define( [ "../../.rvm/gems/ruby-2.6.3/gems/jquery-rails-4.3.5/vendor/assets/javascripts/jquery", "./version" ], factory );
     } else {
 
         // Browser globals

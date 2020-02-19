@@ -1,8 +1,5 @@
-<tr>
+<tr class="cohortLink js-cohortIndex" data-link="<%= cohort_path(cohort) %>">
   <td><%= cohort.name %></td>
   <td><%= cohort.start_at.strftime("%B %d, %Y") %></td>
   <td><%= cohort.end_at.strftime("%B %d, %Y") %></td>
-  <td><%= link_to 'players', registrants_path(cohort_id: cohort.id) %>
-    | <%= link_to 'edit', edit_cohort_path(cohort) %>
-    | <%= link_to "delete", cohort, method: :delete, data: { confirm: "You sure?" } %></td>
 </tr>

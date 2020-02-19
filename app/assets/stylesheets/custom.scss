@@ -440,6 +440,10 @@ div.datepicker{
   z-index: 2;
 }
 
+.table-hover tbody tr:hover td {
+  background-color: #dadada;
+}
+
 /* Set the size of the div element that contains the map */
 #map {
   height: 300px;  /* The height is 400 pixels */

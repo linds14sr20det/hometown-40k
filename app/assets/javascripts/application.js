@@ -15,8 +15,8 @@
 //= require bootstrap
 //= require_tree .
 //= require bootstrap-datepicker
-//= require jquery.ui.widget
-//= require z.jquery.fileupload
+//= require utils/jquery.ui.widget.js
+//= require utils/z.jquery.fileupload.js
 //= require cocoon
 //= require froala_editor.min.js
 //= require plugins/image.min.js
