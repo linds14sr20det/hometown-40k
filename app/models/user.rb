@@ -12,10 +12,14 @@ class User < ApplicationRecord
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
 
+  def is_to?(cohort)
+    cohorts.include?(cohort)
+  end
+
   private
 
-    # Converts email to all lower-case.
-    def downcase_email
-      self.email = email.downcase
-    end
+  # Converts email to all lower-case.
+  def downcase_email
+    self.email = email.downcase
+  end
 end
