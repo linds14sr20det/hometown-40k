@@ -8,11 +8,14 @@ Hometown40k is an opensource website built to help Warhammer 40K players and tou
 ### Prerequisites
 * Ruby 2.6.3
 * Postgres 10
+* ElasticSearch
+    * All of the above must be installed and running locally
 
 ### External Services
 * Google Maps API (used for finding local events)
 * AWS S3 (image storage, army list upload)
 * Sendgrid (email communication with players, managed through Heroku)
+* PayPal (taking payments via the site)
 
 ### Setup
 * run `git clone git@github.com:linds14sr20det/hometown-40k.git`
