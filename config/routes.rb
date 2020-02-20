@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update]
 
   resources :registrants do
+    post :check_in_player, on: :member
     get :toggle_start_event, on: :collection
   end
 end

@@ -61,6 +61,14 @@ class RegistrantsController < ApplicationController
     redirect_to registrants_path(cohort_id: system.cohort.id)
   end
 
+  def check_in_player
+    registrant = Registrant.find(params['id'])
+    registrant.check_in_edit
+    registrant.checked_in = !registrant.checked_in
+    registrant.save
+    head :no_content
+  end
+
   private
 
   def registrant_params

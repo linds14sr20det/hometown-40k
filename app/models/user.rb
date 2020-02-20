@@ -12,8 +12,13 @@ class User < ApplicationRecord
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
 
-  def is_to?(cohort)
+  def is_cohort_to?(cohort)
     cohorts.include?(cohort)
+  end
+
+  def is_system_to?(system)
+    # TODO: This should eventually allow delegate system TO's
+    is_cohort_to?(system.cohort)
   end
 
   private

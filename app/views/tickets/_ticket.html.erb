@@ -1,4 +1,17 @@
 <div class="col-md-4 ticket">
+  <% if current_user.is_system_to?(ticket) %>
+    <div class="dropdown btn-group-vertical btn-block">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Tournament Organizer Settings
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="<%= edit_cohort_path(ticket.cohort) %>">Edit this system</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="<%= registrants_path(cohort_id: ticket.cohort.id) %>">Check in players</a></li>
+        <li><a href="#">Start Event</a></li>
+      </ul>
+    </div>
+  <% end %>
   <%= link_to_if ticket.cohort.registration_open?, ticket_path(ticket) do %>
     <div class="ticket-card <%= "sold-out" if ticket.full? %> <%= "coming-soon" if ticket.cohort.active_but_registration_closed? %>">
       <img class="ticket-thumb-index" src="<%= ticket.first_image %>">
