@@ -4,7 +4,9 @@
                             remote: true,
                             url: url_for(action: :check_in_player, id: registrant.id),
                             method: "POST"
-                        } %></td>
+                        },
+                        class: "registrant-checkbox"
+  %></td>
     <td><%= registrant.user.name %></td>
     <td><%= registrant.user.email %></td>
 </tr>
