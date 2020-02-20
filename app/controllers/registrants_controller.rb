@@ -66,7 +66,9 @@ class RegistrantsController < ApplicationController
     registrant.check_in_edit
     registrant.checked_in = !registrant.checked_in
     registrant.save
-    head :no_content
+    respond_to do |format|
+      format.js { render "check_in_player", :locals => {registrant: registrant} }
+    end
   end
 
   private

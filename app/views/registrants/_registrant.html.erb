@@ -6,7 +6,9 @@
                             method: "POST"
                         },
                         class: "registrant-checkbox"
-  %></td>
+  %>
+    <span class="check-in-save" id="js-saved-<%= registrant.id %>">Saved</span>
+  </td>
     <td><%= registrant.user.name %></td>
     <td><%= registrant.user.email %></td>
 </tr>

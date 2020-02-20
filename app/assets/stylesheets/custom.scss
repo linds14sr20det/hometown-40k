@@ -454,6 +454,20 @@ div.datepicker{
   height: 15px;
 }
 
+.check-in-save {
+  opacity: 0;
+  color: green;
+}
+
+.fade-in-save {
+  animation: fade 1s linear;
+}
+
+@keyframes fade {
+  0%,100% { opacity: 0 }
+  50% { opacity: 1 }
+}
+
 /* Set the size of the div element that contains the map */
 #map {
   height: 300px;  /* The height is 400 pixels */
