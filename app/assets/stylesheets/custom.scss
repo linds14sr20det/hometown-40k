@@ -444,6 +444,10 @@ div.datepicker{
   background-color: #dadada;
 }
 
+.table-link:hover {
+  cursor: pointer;
+}
+
 /* Set the size of the div element that contains the map */
 #map {
   height: 300px;  /* The height is 400 pixels */

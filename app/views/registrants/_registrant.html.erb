@@ -1,13 +1,10 @@
-<tr>
+<tr class="table-link js-registrantLink" data-link="<%= edit_registrant_path(registrant) %>">
   <td><%= check_box_tag "checked_in", registrant.checked_in, registrant.checked_in,
                         data: {
                             remote: true,
                             url: url_for(action: :check_in_player, id: registrant.id),
                             method: "POST"
                         } %></td>
-  <td><%= registrant.user.name %></td>
-  <td><%= registrant.user.email %></td>
-  <td><%= link_to 'edit', edit_registrant_path(registrant) %>
-  | <%= link_to "delete", registrant, method: :delete, data: { confirm: "You sure?" } %>
-  </td>
+    <td><%= registrant.user.name %></td>
+    <td><%= registrant.user.email %></td>
 </tr>
