@@ -47,16 +47,24 @@ class RegistrantsController < ApplicationController
   def toggle_start_event
     system = System.find(params[:id])
     system.update_attributes(event_started: !system.event_started?)
-    system.registrants.where(checked_in: true).each do |registrant|
-      system.round_aggregates.create(
-        player: registrant.user,
-        wins: 0,
-        losses: 0,
-        draws: 0,
-        total_points: 0,
-        opponents: [],
-        withdrawn: false,
-      )
+    if system.event_started
+      system.registrants.where(checked_in: true).each do |registrant|
+        attributes = {
+            player_id: registrant.user.id,
+            system_id: system.id,
+            wins: 0,
+            losses: 0,
+            draws: 0,
+            total_points: 0,
+            opponents: [],
+            withdrawn: false
+        }
+        RoundAggregate.upsert(attributes, unique_by: [:system_id, :player_id])
+      end
+      system.registrants.where(checked_in: false).each do |registrant|
+        RoundAggregate.where(player_id: registrant.user.id).where(system: system).destroy_all
+      end
+      redirect_to new_round_path(system_id: system.id) and return
     end
     redirect_to registrants_path(cohort_id: system.cohort.id)
   end
