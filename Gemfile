@@ -48,6 +48,7 @@ gem 'devise'
 gem 'geocoder'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+gem 'bonsai-elasticsearch-rails', github: 'omc/bonsai-elasticsearch-rails', branch: '7.x'
 gem 'sendgrid-ruby'
 
 ## Command line ============
