@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.6.3"
+ruby "2.7.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2.1', '>= 6.0.0.1'
@@ -9,7 +9,7 @@ gem 'faker',                   '1.6.6'
 gem 'will_paginate',           '3.1.1'
 gem 'bootstrap-will_paginate', '0.0.10'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.18.4'
+gem 'pg', '~> 1.3.5'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
