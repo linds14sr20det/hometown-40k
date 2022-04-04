@@ -4,7 +4,7 @@ ruby "2.7.2"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2.1', '>= 6.0.0.1'
 gem 'rails-controller-testing'
-gem 'bcrypt',                  '3.1.11'
+gem 'bcrypt'
 gem 'faker',                   '1.6.6'
 gem 'will_paginate',           '3.1.1'
 gem 'bootstrap-will_paginate', '0.0.10'
