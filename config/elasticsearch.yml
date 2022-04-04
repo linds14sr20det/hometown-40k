@@ -1,6 +1,0 @@
-development: &default
-  es_bin: '../elasticsearch-6.6.2/bin/elasticsearch'
-  port: '9200'
-production:
-  es_bin: '../elasticsearch-6.6.2/bin/elasticsearch'
-  port: '9400'
