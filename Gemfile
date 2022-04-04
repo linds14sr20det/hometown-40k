@@ -46,9 +46,9 @@ gem 'paypal-sdk-rest'
 
 gem 'devise'
 gem 'geocoder'
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
-gem 'bonsai-elasticsearch-rails', github: 'omc/bonsai-elasticsearch-rails', branch: '7.x'
+gem 'elasticsearch-model', '~>6'
+gem 'elasticsearch-rails', '~>6'
+gem 'bonsai-elasticsearch-rails', github: 'omc/bonsai-elasticsearch-rails', branch: '6.x'
 gem 'sendgrid-ruby'
 
 ## Command line ============

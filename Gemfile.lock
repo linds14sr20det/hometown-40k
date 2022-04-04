@@ -1,11 +1,11 @@
 GIT
   remote: https://github.com/omc/bonsai-elasticsearch-rails.git
-  revision: 3c6ab58c5b3701cf5ddc0cc70a89161a98725f4e
-  branch: 7.x
+  revision: 4089c7916601ef7ec5e496c199004a6958cd8016
+  branch: 6.x
   specs:
-    bonsai-elasticsearch-rails (7.0.1)
-      elasticsearch-model (< 8)
-      elasticsearch-rails (< 8)
+    bonsai-elasticsearch-rails (6.0.0)
+      elasticsearch-model (~> 6)
+      elasticsearch-rails (~> 6)
 
 GEM
   remote: https://rubygems.org/
@@ -1328,17 +1328,17 @@ GEM
     dotenv-rails (2.7.6)
       dotenv (= 2.7.6)
       railties (>= 3.2)
-    elasticsearch (7.17.1)
-      elasticsearch-api (= 7.17.1)
-      elasticsearch-transport (= 7.17.1)
-    elasticsearch-api (7.17.1)
+    elasticsearch (6.8.3)
+      elasticsearch-api (= 6.8.3)
+      elasticsearch-transport (= 6.8.3)
+    elasticsearch-api (6.8.3)
       multi_json
-    elasticsearch-model (7.2.1)
+    elasticsearch-model (6.1.1)
       activesupport (> 3)
-      elasticsearch (~> 7)
+      elasticsearch (~> 6)
       hashie
-    elasticsearch-rails (7.2.1)
-    elasticsearch-transport (7.17.1)
+    elasticsearch-rails (6.1.1)
+    elasticsearch-transport (6.8.3)
       faraday (~> 1)
       multi_json
     erubi (1.10.0)
@@ -1552,8 +1552,8 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   dotenv-rails
-  elasticsearch-model
-  elasticsearch-rails
+  elasticsearch-model (~> 6)
+  elasticsearch-rails (~> 6)
   faker (= 1.6.6)
   font-awesome-rails
   froala-editor-sdk
