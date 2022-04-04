@@ -18,5 +18,6 @@ module Hometown
     config.autoload_paths += %W(#{config.root}/lib)
     config.time_zone = 'Mountain Time (US & Canada)'
     config.active_record.default_timezone = :local
+    Elasticsearch::Model.client = Elasticsearch::Client.new host: ENV['SEARCHBOX_URL']
   end
 end
