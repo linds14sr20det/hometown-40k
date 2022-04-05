@@ -32,7 +32,8 @@ class PaypalController < ApplicationController
 
     PayPal::SDK::REST.set_config(
       :client_id => cohort.paypal_client_id,
-      :client_secret => cohort.paypal_client_secret)
+      :client_secret => cohort.paypal_client_secret,
+      ssl_options: { ca_file: nil })
 
     @payment = Payment.new({
     :intent =>  "sale",

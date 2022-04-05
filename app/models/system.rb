@@ -35,7 +35,7 @@ class System < ApplicationRecord
   end
 
   def registration_open?
-    start_date < Time.now && Time.now < end_date
+    registration_open < Time.now && Time.now < registration_close
   end
 
   def active_but_registration_closed?

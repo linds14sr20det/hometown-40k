@@ -14,7 +14,7 @@ class TicketsController < ApplicationController
 
   def add_to_cart
     @ticket = System.find(params["id"])
-    unless @ticket.cohort.active? && @ticket.cohort.registration_open?
+    unless @ticket.cohort.active? && @ticket.registration_open?
       redirect_to tickets_path and return
     end
     if Registrant.find_by(system_id: params["id"], user_id: current_user.id, paid: true)
