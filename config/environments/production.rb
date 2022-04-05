@@ -112,16 +112,16 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = 'hometown-40k.herokuapp.com'
+  host = 'safe-harbor-96088.herokuapp.com'
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
   config.action_mailer.asset_host = "https://#{host}"
   ActionMailer::Base.smtp_settings = {
-    :user_name      => ENV['SENDGRID_USERNAME'],
-    :password       => ENV['SENDGRID_PASSWORD'],
-    :domain         => 'hometown-40k.herokuapp.com',
-    :address        => 'smtp.sendgrid.net',
-    :port           => 587,
+    :port           => ENV['MAILGUN_SMTP_PORT'],
+    :address        => ENV['MAILGUN_SMTP_SERVER'],
+    :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
+    :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+    :domain         => 'safe-harbor-96088.herokuapp.com',
     :authentication => :plain,
-    :enable_starttls_auto => true
   }
+  ActionMailer::Base.delivery_method = :smtp
 end
