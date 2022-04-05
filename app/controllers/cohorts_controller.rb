@@ -110,7 +110,8 @@ class CohortsController < ApplicationController
 
   def date_range
     return "end_at < '#{Time.now}'" if params['timeframe'] == 'past'
-    "end_at >= '#{Time.now}' AND start_at <= '#{Time.now}'" if params['timeframe'] == 'future'
+    return "end_at >= '#{Time.now}' AND start_at <= '#{Time.now}'" if params['timeframe'] == 'current'
+    "start_at > '#{Time.now}'" if params['timeframe'] == 'future'
   end
 
   def elasticsearch_dsl(term)
