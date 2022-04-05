@@ -79,6 +79,7 @@ class CohortsController < ApplicationController
                  find_cohorts_by_location
                else
                  response = Cohort.search elasticsearch_dsl(params["search_term"])
+                 puts response.to_a.count
                  ids = response.results.map { |r| r._id.to_i }
                  Cohort.where(id: ids).where(active: true).where(date_range).paginate(page: params[:page], per_page: 50)
                end
