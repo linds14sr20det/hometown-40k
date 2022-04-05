@@ -10,7 +10,9 @@ class System < ApplicationRecord
 
   validates :title, :presence => true
   validates :start_date, :presence => true
-  validates :descriptive_date, :presence => true
+  validates :end_date, :presence => true
+  validates :registration_open, :presence => true
+  validates :registration_close, :presence => true
   validates :description, :presence => true
   validates :max_players, :presence => true
   validates :cost, :presence => true
@@ -26,6 +28,18 @@ class System < ApplicationRecord
 
   def full?
     registrants.paid.count >= max_players
+  end
+
+  def descriptive_date
+    "#{start_date.strftime("%B %e %Y")} - #{end_date.strftime("%B %e %Y")}"
+  end
+
+  def registration_open?
+    start_date < Time.now && Time.now < end_date
+  end
+
+  def active_but_registration_closed?
+    cohort.active? && !registration_open?
   end
 
   private

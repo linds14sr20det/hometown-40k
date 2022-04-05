@@ -18,25 +18,17 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :descriptive_date %>
+      <%= f.label :start_at, "Event Start Date" %>
       <div class="small">
-        When is your event? When does it start and when does it end?
-      </div>
-      <%= f.text_field :descriptive_date, class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :start_at, "Registration opens" %>
-      <div class="small">
-        Players will be able to register for your event on midnight on this date.
+        When do the doors for the event open?
       </div>
       <%= f.text_field :start_at, data:{ provide:'datepicker' }, class: 'form-control' %>
     </div>
 
     <div class="form-group">
-      <%= f.label :end_at, "Registration closes" %>
+      <%= f.label :end_at, "Event End Date" %>
       <div class="small">
-        Registration will close at 11:59PM on this date.
+        When do the doors for the event close?
       </div>
       <%= f.text_field :end_at, data:{ provide:'datepicker' }, class: 'form-control' %>
     </div>

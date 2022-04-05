@@ -20,7 +20,6 @@ class Cohort < ApplicationRecord
 
   validates :name, :presence => true
   validates :body, :presence => true
-  validates :descriptive_date, :presence => true
   validates :start_at, :presence => true
   validates :end_at, :presence => true
   # TODO: Validate dates are actual datetimes.
@@ -30,14 +29,6 @@ class Cohort < ApplicationRecord
 
   def address
     [street, city, state, country].compact.join(', ')
-  end
-
-  def registration_open?
-    start_at < Time.now && Time.now < end_at
-  end
-
-  def active_but_registration_closed?
-    active? && !registration_open?
   end
 
   def address_present?
@@ -50,6 +41,10 @@ class Cohort < ApplicationRecord
 
   def inactive?
     !active?
+  end
+
+  def descriptive_date
+    "#{start_at.strftime("%B %e %Y")} - #{end_at.strftime("%B %e %Y")}"
   end
 
   def first_image

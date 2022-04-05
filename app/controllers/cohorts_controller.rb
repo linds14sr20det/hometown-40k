@@ -88,7 +88,7 @@ class CohortsController < ApplicationController
   private
 
   def cohort_params
-    params.require(:cohort).permit(:name, :body, :street, :city, :state, :country, :start_at, :end_at, :descriptive_date, :paypal_client_id, :paypal_client_secret, :active, :attachment_url, systems_attributes: [:id, :title, :description, :descriptive_date, :start_date, :max_players, :cost, :round_individuals, :_destroy])
+    params.require(:cohort).permit(:name, :body, :street, :city, :state, :country, :start_at, :end_at, :paypal_client_id, :paypal_client_secret, :active, :attachment_url, systems_attributes: [:id, :title, :description, :start_date, :end_date, :registration_open, :registration_close, :max_players, :cost, :round_individuals, :_destroy])
   end
 
   def set_s3_direct_post

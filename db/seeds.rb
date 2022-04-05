@@ -26,18 +26,19 @@ if Rails.env == "development"
       latitude: address.latitude,
       start_at: Time.zone.now,
       end_at: Time.zone.now + 1.year,
-      descriptive_date: "immediately",
       active: true,
       user: User.first
     )
 
     system = System.new(
       title: 'Test Game',
-      descriptive_date: 'right now',
       description: 'this is a test game',
       max_players: 40,
       cost: 30,
-      start_date: Time.zone.now,
+      start_date: Time.zone.now + 30.days,
+      end_date: Time.zone.now + 32.days,
+      registration_open: Time.zone.now,
+      registration_close: Time.zone.now + 28.days,
       round_individuals: 5,
       )
     a.systems << system
@@ -54,21 +55,22 @@ if Rails.env == "development"
     country: "Canada",
     latitude: 37.751425,
     longitude: -122.419443,
-    start_at: Time.zone.now,
-    end_at: Time.zone.now + 1.year,
-    descriptive_date: "immediately",
+    start_at: Time.zone.now + 30.days,
+    end_at: Time.zone.now + 32.days,
     active: true,
     user: User.first
   )
 
   game = System.new(
     title: 'Test Game',
-    descriptive_date: 'right now',
     description: 'this is a test game',
     max_players: 41,
     cost: 30,
     cohort: event,
-    start_date: Time.zone.now,
+    start_date: Time.zone.now + 30.days,
+    end_date: Time.zone.now + 32.days,
+    registration_open: Time.zone.now,
+    registration_close: Time.zone.now + 28.days,
     round_individuals: 4
   )
 
@@ -91,3 +93,5 @@ if Rails.env == "development"
     )
   end
 end
+
+Cohort.import(force: true)

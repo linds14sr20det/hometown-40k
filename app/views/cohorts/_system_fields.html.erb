@@ -10,8 +10,18 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :descriptive_date %>
-    <%= f.text_field :descriptive_date, class: 'form-control' %>
+    <%= f.label :end_date, "System end date" %>
+    <%= f.text_field :end_date, data:{ provide:'datepicker' }, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :registration_open, "Registration opens date" %>
+    <%= f.text_field :registration_open, data:{ provide:'datepicker' }, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :registration_close, "Registration close date" %>
+    <%= f.text_field :registration_close, data:{ provide:'datepicker' }, class: 'form-control' %>
   </div>
 
   <div class="form-group">

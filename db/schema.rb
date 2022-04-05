@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_21_224736) do
+ActiveRecord::Schema.define(version: 2022_04_05_200528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 2020_02_21_224736) do
   create_table "cohorts", id: :serial, force: :cascade do |t|
     t.datetime "start_at"
     t.datetime "end_at"
-    t.string "descriptive_date"
     t.boolean "active", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -94,7 +93,6 @@ ActiveRecord::Schema.define(version: 2020_02_21_224736) do
 
   create_table "systems", id: :serial, force: :cascade do |t|
     t.string "title"
-    t.string "descriptive_date"
     t.string "description"
     t.integer "max_players"
     t.decimal "cost", precision: 8, scale: 2
@@ -105,6 +103,9 @@ ActiveRecord::Schema.define(version: 2020_02_21_224736) do
     t.integer "round_individuals"
     t.integer "current_round"
     t.boolean "event_started"
+    t.datetime "end_date"
+    t.datetime "registration_open"
+    t.datetime "registration_close"
     t.index ["cohort_id"], name: "index_systems_on_cohort_id"
   end
 
