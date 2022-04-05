@@ -75,7 +75,6 @@ class CohortsController < ApplicationController
   end
 
   def search
-    puts("_________#{params["search_term"].length}__________")
     @cohorts = if params["search_term"].length == 0
                  find_cohorts_by_location
                else
@@ -104,9 +103,18 @@ class CohortsController < ApplicationController
 
   def find_cohorts_by_location
     location_raw = request.location&.coordinates
+    # Default lat long is san fran
     coordinates = location_raw.empty? ? [37.7, -122.4] : location_raw
 
-    Cohort.where(active: true).where(date_range).near(coordinates, 15000).paginate(page: params[:page], per_page: 50)
+    puts("_________#{params[location_raw]}__________")
+    puts("_________#{params[coordinates]}__________")
+
+
+    cohorts = Cohort.where(active: true).where(date_range).near(coordinates, 15000).paginate(page: params[:page], per_page: 50)
+    puts("_________#{date_range}__________")
+    puts("_________#{cohorts.to_json}__________")
+
+    cohorts
   end
 
   def date_range
