@@ -1,4 +1,4 @@
-<% if current_user.is_cohort_to?(@cohort) %>
+<% if current_user&.is_cohort_to?(@cohort) %>
   <div class="dropdown btn-group-vertical btn-block">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Tournament Organizer Settings
