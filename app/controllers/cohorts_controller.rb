@@ -83,7 +83,7 @@ class CohortsController < ApplicationController
                  ids = response.results.map { |r| r._id.to_i }
                  Cohort.where(id: ids).where(active: true).where(date_range).paginate(page: params[:page], per_page: 50)
                end
-    puts("_________#{@cohorts}__________")
+    puts("_________#{@cohorts.first.to_json}__________")
     render json: { html: render_to_string(partial: 'search') }
   end
 
