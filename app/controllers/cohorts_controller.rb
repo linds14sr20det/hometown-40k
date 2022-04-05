@@ -75,19 +75,14 @@ class CohortsController < ApplicationController
   end
 
   def search
+    puts("_________#{params["search_term"].length}__________")
     @cohorts = if params["search_term"].length == 0
                  find_cohorts_by_location
                else
                  response = Cohort.search elasticsearch_dsl(params["search_term"])
-                 puts("_________#{response.to_a.count}__________")
                  ids = response.results.map { |r| r._id.to_i }
-                 puts("_________#{ids}__________")
-                 puts("_________#{date_range}__________")
-                 puts("_________#{params[:page]}__________")
-
                  Cohort.where(id: ids).where(active: true).where(date_range).paginate(page: params[:page], per_page: 50)
                end
-    puts("_________#{@cohorts.first.to_json}__________")
     render json: { html: render_to_string(partial: 'search') }
   end
 
