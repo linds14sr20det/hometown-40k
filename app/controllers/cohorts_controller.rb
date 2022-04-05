@@ -105,21 +105,12 @@ class CohortsController < ApplicationController
     location_raw = request.location&.coordinates
     # Default lat long is san fran
     coordinates = location_raw.empty? ? [37.7, -122.4] : location_raw
-
-    puts("_________#{params[location_raw]}__________")
-    puts("_________#{params[coordinates]}__________")
-
-
-    cohorts = Cohort.where(active: true).where(date_range).near(coordinates, 15000).paginate(page: params[:page], per_page: 50)
-    puts("_________#{date_range}__________")
-    puts("_________#{cohorts.to_json}__________")
-
-    cohorts
+    Cohort.where(active: true).where(date_range).near(coordinates, 15000).paginate(page: params[:page], per_page: 50)
   end
 
   def date_range
     return "end_at < '#{Time.now}'" if params['timeframe'] == 'past'
-    "end_at >= '#{Time.now}' AND start_at <= '#{Time.now}'" if params['timeframe'] == 'current'
+    "end_at >= '#{Time.now}' AND start_at <= '#{Time.now}'" if params['timeframe'] == 'future'
   end
 
   def elasticsearch_dsl(term)
