@@ -1301,6 +1301,9 @@ GEM
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.17)
     bindex (0.8.1)
+    bonsai-elasticsearch-rails (7.0.1)
+      elasticsearch-model (< 8)
+      elasticsearch-rails (< 8)
     bootstrap-datepicker-rails (1.9.0.1)
       railties (>= 3.0)
     bootstrap-sass (3.4.1)
@@ -1335,7 +1338,6 @@ GEM
       elasticsearch-transport (= 7.17.1)
     elasticsearch-api (7.17.1)
       multi_json
-    elasticsearch-dsl (0.1.10)
     elasticsearch-transport (7.17.1)
       faraday (~> 1)
       multi_json
@@ -1542,6 +1544,7 @@ DEPENDENCIES
   acts_as_list
   aws-sdk (~> 3)
   bcrypt
+  bonsai-elasticsearch-rails (~> 7)
   bootstrap-datepicker-rails (~> 1.9.0.1)
   bootstrap-sass (>= 3.4.1)
   bootstrap-will_paginate (= 0.0.10)
@@ -1549,7 +1552,6 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   dotenv-rails
-  elasticsearch-dsl
   elasticsearch-model!
   elasticsearch-rails!
   faker (= 1.6.6)
