@@ -78,7 +78,7 @@ class CohortsController < ApplicationController
     @cohorts = if params["search_term"].length == 0
                  find_cohorts_by_location
                else
-                 response = Cohort.search params["search_term"]
+                 response = Cohort.search elasticsearch_dsl(params["search_term"])
                  ids = response.results.map { |r| r._id.to_i }
                  Cohort.where(id: ids).where(active: true).where(date_range).paginate(page: params[:page], per_page: 50)
                end
@@ -112,5 +112,17 @@ class CohortsController < ApplicationController
   def date_range
     return "end_at < '#{Time.now}'" if params['timeframe'] == 'past'
     "end_at >= '#{Time.now}' AND start_at <= '#{Time.now}'" if params['timeframe'] == 'current'
+  end
+
+  def elasticsearch_dsl(term)
+    {
+      query: {
+        fuzzy: {
+          name: {
+            value: term,
+          },
+        }
+      },
+    }
   end
 end

@@ -1,3 +1,14 @@
+GIT
+  remote: https://github.com/elastic/elasticsearch-rails.git
+  revision: 03fa16b2774988c59978abb13aae962c9580ec57
+  branch: main
+  specs:
+    elasticsearch-model (7.2.1)
+      activesupport (> 3)
+      elasticsearch (~> 7)
+      hashie
+    elasticsearch-rails (7.2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -1324,11 +1335,7 @@ GEM
       elasticsearch-transport (= 7.17.1)
     elasticsearch-api (7.17.1)
       multi_json
-    elasticsearch-model (7.2.1)
-      activesupport (> 3)
-      elasticsearch (~> 7)
-      hashie
-    elasticsearch-rails (7.2.1)
+    elasticsearch-dsl (0.1.10)
     elasticsearch-transport (7.17.1)
       faraday (~> 1)
       multi_json
@@ -1542,8 +1549,9 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   dotenv-rails
-  elasticsearch-model
-  elasticsearch-rails
+  elasticsearch-dsl
+  elasticsearch-model!
+  elasticsearch-rails!
   faker (= 1.6.6)
   font-awesome-rails
   froala-editor-sdk
