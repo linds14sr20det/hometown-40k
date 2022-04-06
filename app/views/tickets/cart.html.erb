@@ -1,8 +1,8 @@
-<% provide(:title, 'Shopping Cart') %>
+<% provide(:title, 'Event Shopping Carts') %>
 <% provide(:meta_description, t('seo.cart')) %>
 <div class="ticket">
   <div class="ticket-title">
-    Shopping cart
+    Shopping <%= "cart".pluralize(@structured_cart.count) %>
   </div>
 
   <% @structured_cart.each do |cohort, registrants| %>
