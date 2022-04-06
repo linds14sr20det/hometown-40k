@@ -1,5 +1,5 @@
 <div class="col-md-4 ticket">
-  <%= link_to edit_registrant_path(registrant) do %>
+  <%= link_to system_path(registrant.system) do %>
     <div class="ticket-card">
       <img class="ticket-thumb-index" src="<%= registrant.system.first_image %>">
       <div class="ticket-card-content">
@@ -11,7 +11,7 @@
         </div>
         <small><p><%= "Event size: #{registrant.system.max_players}" %></p></small>
       </div>
-      <div class="btn-group-vertical btn btn-primary">Check In/Upload List</div>
+      <div class="btn btn-primary systemsDetail">Check In/Upload List</div>
     </div>
   <% end %>
 </div>
