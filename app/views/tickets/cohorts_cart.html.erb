@@ -1,8 +1,9 @@
 <% provide(:title, 'Shopping Cart') %>
 <% provide(:meta_description, t('seo.cart')) %>
 <div class="ticket">
-  <div class="ticket-title">
-    Shopping cart for: <%= @registrants[0].system.cohort.name %>
+  <div>
+    Shopping cart for:
+    <div class="ticket-title"><%= @registrants[0].system.cohort.name %></div>
   </div>
   <% unless @registrants.nil? %>
     <% @registrants.each do |registrant| %>
