@@ -13,25 +13,25 @@
     <%= sanitize(@system.description) %>
   </div>
   <div class="btn-group-vertical btn-block">
+    <div class="btn btn-primary">Roster</div>
+    <div class="btn btn-primary">Pairings</div>
+    <div class="btn btn-primary">Placings</div>
+  </div>
+
+  <h4>Player Tools</h4>
+  <div class="btn-group-vertical btn-block">
     <% if @system.cohort.attachment_url.blank? %>
       <div class="btn btn-primary disabled">Player pack unavailable</div>
     <% else %>
       <%= link_to "Download player pack", @system.cohort.attachment_url, class: "btn btn-primary" %>
     <% end %>
-  </div>
-  <div class="btn-group-vertical btn-block">
-    <div class="btn btn-primary">Roster</div>
-    <div class="btn btn-primary">Pairings</div>
-    <div class="btn btn-primary">Placings</div>
-  </div>
-  <% if @registrant.persisted? %>
-    <h4>Player Tools</h4>
-    <div class="btn-group-vertical btn-block">
+    <% if @registrant.persisted? %>
       <div class="btn btn-primary">Check In</div>
       <div class="btn btn-primary">Upload List</div>
-    </div>
+    <% end %>
+  </div>
 
-  <% else %>
+  <% unless @registrant.persisted? %>
     <%= form_for(@registrant, url: add_to_cart_system_path) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 

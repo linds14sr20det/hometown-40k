@@ -103,7 +103,7 @@ class CohortsController < ApplicationController
   end
 
   def my_paid_registrants_for_cohort(cohort)
-    current_user.registrants.where(paid: true).where(system_id: cohort.systems.pluck(:id))
+    current_user.registrants.where(paid: true).where(system_id: cohort.systems.pluck(:id)) if current_user
   end
 
   def find_cohorts_by_location

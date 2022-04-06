@@ -9,7 +9,7 @@ class SystemsController < ApplicationController
 
   def show
     @system= System.find(params[:id])
-    @registrant = current_user.registrants.where(paid: true).where(system_id: @system.id).first
+    @registrant = current_user.registrants.where(paid: true).where(system_id: @system.id).first if current_user
     unless @registrant.present?
       @registrant = Registrant.new(:system_id => @system.id)
     end
