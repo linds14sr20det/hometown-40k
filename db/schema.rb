@@ -53,7 +53,8 @@ ActiveRecord::Schema.define(version: 2022_04_06_063855) do
     t.string "payment_id"
     t.bigint "user_id"
     t.boolean "checked_in"
-    t.string "list_url"
+    t.string "list"
+    t.string "faction"
     t.index ["system_id"], name: "index_registrants_on_system_id"
     t.index ["user_id"], name: "index_registrants_on_user_id"
   end

@@ -82,7 +82,7 @@ class RegistrantsController < ApplicationController
   # Figure out upload list
   def upload_list
     registrant = Registrant.find(params['id'])
-    registrant.list_url = params["list"]
+    registrant.list = params["list"]
     registrant.save
     respond_to do |format|
       format.js { render "check_in_player", :locals => {registrant: registrant} }

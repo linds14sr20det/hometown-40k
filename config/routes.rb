@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     get :cart, on: :collection
     get :cohorts_cart, on: :collection
     get :success, on: :collection
+    get :roster, on: :member
   end
 
   resources :rounds, only: [:index, :new, :show] do

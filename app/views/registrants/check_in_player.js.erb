@@ -1,5 +1,8 @@
 elm = $("#js-saved-<%= registrant.id %>")
 elm.addClass('fade-in-save');
 trueelm = elm[0]
-var newone = trueelm.cloneNode(true);
-trueelm.parentNode.replaceChild(newone, trueelm);
+if(trueelm) {
+    var newone = trueelm.cloneNode(true);
+    trueelm.parentNode.replaceChild(newone, trueelm);
+}
+toggleElm = $("#js-checkedIn")[0].checked = <%= registrant.checked_in? %>;

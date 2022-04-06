@@ -66,4 +66,8 @@ class SystemsController < ApplicationController
     @registrants = all_registrants.select{ |registrant| system_ids.include?(registrant.system_id) }
     redirect_to cohort_path(params[:cohort_id]) if @registrants.blank?
   end
+
+  def roster
+    @registrants = System.find_by(id: params[:id]).registrants
+  end
 end
