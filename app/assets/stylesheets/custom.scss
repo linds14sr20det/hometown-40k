@@ -156,9 +156,12 @@ form {
   display: block !important;
 }
 
+.search-nav {
+  display: flex;
+}
+
 .search-nav>li {
-  max-width: 33%;
-  min-width: 33%;
+  flex-grow: 1;
   text-align: center;
 }
 
