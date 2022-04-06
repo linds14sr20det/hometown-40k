@@ -1,0 +1,13 @@
+<% provide(:title, 'Systems') %>
+<% provide(:meta_description, t('seo.systems')) %>
+<% unless @systems.nil? %>
+  <h3 class="mt-0"><%= @cohort.name %>'s Systems</h3>
+  <!-- TODO: sort by day -->
+  <% @systems.in_groups_of(3) do |system_group| %>
+    <div class="row">
+      <% system_group.each do |system| %>
+        <%= render :partial => 'system', :locals => {:system => system} unless system.nil? %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

@@ -9,7 +9,7 @@
     </button>
 
     <%= link_to image_tag("Hometown40K_64x64.png"), root_path, class: "navbar-brand" %>
-    <%= link_to sanitize("#{fa_icon("shopping-cart")}"), cart_tickets_path, class: "cart-icon logo-text pull-right #{Cart.badge_count(cookies)}" %>
+    <%= link_to sanitize("#{fa_icon("shopping-cart")}"), cart_systems_path, class: "cart-icon logo-text pull-right #{Cart.badge_count(cookies)}" %>
     <%= link_to "HOMETOWN 40K", root_path, class: "logo-text pull-right branding-text" %>
   </div>
 

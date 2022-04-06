@@ -6,12 +6,12 @@
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
       <li><a href="<%= edit_cohort_path(@cohort) %>">Edit this event page</a></li>
       <li role="separator" class="divider"></li>
-      <li><a href="<%= tickets_path(cohort_id: @cohort.id) %>">Manage individual systems</a></li>
+      <li><a href="<%= systems_path(cohort_id: @cohort.id) %>">Manage individual systems</a></li>
     </ul>
   </div>
 <% end %>
 
-<%= link_to tickets_path(cohort_id: @cohort.id), class: "banner banner-show" do %>
+<%= link_to systems_path(cohort_id: @cohort.id), class: "banner banner-show" do %>
   <div class="banner-card tickets">
     <p class="banner-date"><%= @cohort.name %></p>
     <p class="banner-date"><%= @cohort.descriptive_date %></p>
@@ -24,7 +24,7 @@
 </div>
 
 <% if @paid_registrants.present? %>
-  <h3 class="mt-0">You're registered in the following systems:</h3>
+  <h4>You're registered in the following systems for this event:</h4>
   <% @paid_registrants.in_groups_of(3) do |registrant_group| %>
     <div class="row">
       <% registrant_group.each do |registrant| %>

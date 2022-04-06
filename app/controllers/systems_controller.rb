@@ -1,36 +1,36 @@
-class TicketsController < ApplicationController
+class SystemsController < ApplicationController
   before_action :authenticate_user!, only: [:add_to_cart]
 
   def index
     @cohort = Cohort.find_by(id: params[:cohort_id])
-    @tickets = @cohort.systems.order(:start_date, :title) unless @cohort.nil? || @cohort.inactive?
-    redirect_to find_cohorts_path if @tickets.blank?
+    @systems = @cohort.systems.order(:start_date, :title) unless @cohort.nil? || @cohort.inactive?
+    redirect_to find_cohorts_path if @systems.blank?
   end
 
   def show
-    @ticket = System.find(params[:id])
-    @registrant = Registrant.new(:system_id => @ticket.id)
+    @system= System.find(params[:id])
+    @registrant = Registrant.new(:system_id => @system.id)
   end
 
   def add_to_cart
-    @ticket = System.find(params["id"])
-    unless @ticket.cohort.active? && @ticket.registration_open?
-      redirect_to tickets_path and return
+    @system = System.find(params["id"])
+    unless @system.cohort.active? && @system.registration_open?
+      redirect_to systems_path and return
     end
     if Registrant.find_by(system_id: params["id"], user_id: current_user.id, paid: true)
       flash[:warning] = "You've already registered for this system"
-      redirect_to ticket_path(params["id"]) and return
+      redirect_to system_path(params["id"]) and return
     end
     @registrant = current_user.registrants.create(:system_id => params["id"], :paid => false, :uuid => SecureRandom.uuid)
-    if @ticket.full?
+    if @system.full?
       flash[:warning] = "Unfortunately that system has sold out!"
-      redirect_to tickets_path
+      redirect_to systems_path
     elsif @registrant.valid?
       registrants = Cart.decode_cart(cookies)
       registrants |= [@registrant]
       cookies[:registrants] = Cart.encode_cart(registrants)
       flash[:success] = "Ticket added to cart."
-      redirect_to cart_tickets_path
+      redirect_to cart_systems_path
     else
       render :show
     end
@@ -48,7 +48,7 @@ class TicketsController < ApplicationController
       end
     end
     cookies[:registrants] = Cart.encode_cart(registrants)
-    redirect_to cohorts_cart_tickets_path(:cohort_id => deleted_registrants_cohort_id)
+    redirect_to cohorts_cart_systems_path(:cohort_id => deleted_registrants_cohort_id)
   end
 
   def cart

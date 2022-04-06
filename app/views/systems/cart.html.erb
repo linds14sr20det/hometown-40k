@@ -6,7 +6,7 @@
   </div>
 
   <% @structured_cart.each do |cohort, registrants| %>
-    <%= link_to cohorts_cart_tickets_path(:cohort_id => cohort.id) do %>
+    <%= link_to cohorts_cart_systems_path(:cohort_id => cohort.id) do %>
       <div class="ticket-card">
         <div class="row">
           <div class="col-md-12">
@@ -39,7 +39,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="btn-group-vertical cont-shopping">
-        <%= link_to "Continue shopping", tickets_path, class: "btn btn-default" %>
+        <%= link_to "Continue shopping", systems_path, class: "btn btn-default" %>
       </div>
     </div>
   </div>

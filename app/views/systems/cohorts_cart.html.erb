@@ -28,7 +28,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="btn-group-vertical cont-shopping">
-        <%= link_to "Continue shopping", tickets_path, class: "btn btn-primary" %>
+        <%= link_to "Continue shopping", systems_path, class: "btn btn-primary" %>
       </div>
     </div>
   </div>
@@ -64,7 +64,7 @@
                     if (res.success) {
                         return res.paymentID;
                     } else {
-                        window.location.replace("<%= cart_tickets_url %>");
+                        window.location.replace("<%= cart_systems_url %>");
                     }
 
                 });
@@ -85,7 +85,7 @@
             // Make a call to your server to execute the payment
             return paypal.request.post(EXECUTE_URL, data)
                 .then(function (res) {
-                    window.location.replace("<%= success_tickets_url %>");
+                    window.location.replace("<%= success_systems_url %>");
                 });
         }
 

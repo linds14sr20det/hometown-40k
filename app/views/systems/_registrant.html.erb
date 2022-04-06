@@ -5,8 +5,8 @@
             <%= registrant.system.cohort.name %> - <%= registrant.system.descriptive_date %>
         </div>
         <div class="ticket-title">
-          <a href="<%= ticket_path(registrant.system.id) %>"><%= registrant.system.title %></a>
-          <%= link_to sanitize("Remove #{fa_icon("trash")}"), remove_from_cart_tickets_path(:uuid => registrant.uuid), :class => "pull-right remove" %>
+          <a href="<%= system_path(registrant.system.id) %>"><%= registrant.system.title %></a>
+          <%= link_to sanitize("Remove #{fa_icon("trash")}"), remove_from_cart_systems_path(:uuid => registrant.uuid), :class => "pull-right remove" %>
         </div>
         <small><p><%= "Event size: #{registrant.system.max_players}" %></p></small>
         <div class="player-info">

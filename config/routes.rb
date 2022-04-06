@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     post :my_search, on: :collection
   end
 
-  resources :tickets, only: [:index, :show] do
+  resources :systems, only: [:index, :show] do
     post :add_to_cart, on: :member
     get :remove_from_cart, on: :collection
     get :cart, on: :collection
