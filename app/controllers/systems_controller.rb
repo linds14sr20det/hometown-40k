@@ -9,7 +9,10 @@ class SystemsController < ApplicationController
 
   def show
     @system= System.find(params[:id])
-    @registrant = Registrant.new(:system_id => @system.id)
+    @registrant = current_user.registrants.where(paid: true).where(system_id: @system.id).first
+    unless @registrant.present?
+      @registrant = Registrant.new(:system_id => @system.id)
+    end
   end
 
   def add_to_cart

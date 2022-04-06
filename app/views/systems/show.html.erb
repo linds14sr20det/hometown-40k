@@ -6,6 +6,9 @@
   </div>
   <div class="ticket-title"><%= @system.title %></div>
   <small><p> <%= "Event size: #{@system.max_players}" %></p></small>
+  <div>
+    <%= sanitize(@system.description) %>
+  </div>
   <div class="btn-group-vertical btn-block">
     <% if @system.cohort.attachment_url.blank? %>
       <div class="btn btn-primary disabled">Player pack unavailable</div>
@@ -13,21 +16,33 @@
       <%= link_to "Download player pack", @system.cohort.attachment_url, class: "btn btn-primary" %>
     <% end %>
   </div>
-  <%= form_for(@registrant, url: add_to_cart_system_path) do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
-
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <span class="price">$<%= number_with_precision(@system.cost, :precision => 2) %></span>
-      </div>
+  <div class="btn-group-vertical btn-block">
+    <div class="btn btn-primary">Roster</div>
+    <div class="btn btn-primary">Pairings</div>
+    <div class="btn btn-primary">Placings</div>
+  </div>
+  <% if @registrant.persisted? %>
+    <h4>Player Tools</h4>
+    <div class="btn-group-vertical btn-block">
+      <div class="btn btn-primary">Upload List</div>
+      <div class="btn btn-primary">Check In</div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="btn-group-vertical btn-block">
-          <%= f.submit "Add to cart", class: "btn btn-primary" %>
+  <% else %>
+    <%= form_for(@registrant, url: add_to_cart_system_path) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <span class="price">$<%= number_with_precision(@system.cost, :precision => 2) %></span>
         </div>
       </div>
-    </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="btn-group-vertical btn-block">
+            <%= f.submit "Add to cart", class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   <% end %>
-  <%= sanitize(@system.description) %>
 </div>
