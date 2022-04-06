@@ -1,0 +1,16 @@
+<div class="col-md-4 ticket">
+  <%= link_to edit_registrant_path(registrant) do %>
+    <div class="ticket-card">
+      <img class="ticket-thumb-index" src="<%= registrant.system.first_image %>">
+      <div class="ticket-card-content">
+        <div class="ticket-date">
+          <%= registrant.system.descriptive_date %>
+        </div>
+        <div class="ticket-title">
+          <%= registrant.system.title %>
+        </div>
+        <small><p><%= "Event size: #{registrant.system.max_players}" %></p></small>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -9,6 +9,7 @@ class CohortsController < ApplicationController
 
   def show
     @cohort = Cohort.where(active: true).where(id: params[:id]).first
+    @paid_registrants = my_paid_registrants_for_cohort(@cohort)
   end
 
   def new
@@ -99,6 +100,10 @@ class CohortsController < ApplicationController
     # TODO: This needs to not be three queries :facepalm:
     system_ids = current_user.registrants.where(:paid => true).map{ |registrant| registrant.system_id }
     System.where(id: system_ids).map{ |system| system.cohort_id }
+  end
+
+  def my_paid_registrants_for_cohort(cohort)
+    current_user.registrants.where(paid: true).where(system_id: cohort.systems.pluck(:id))
   end
 
   def find_cohorts_by_location

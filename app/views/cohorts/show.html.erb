@@ -22,6 +22,18 @@
   <h4>About <%= @cohort.name %>:</h4>
   <p><%= sanitize(@cohort.body) %></p>
 </div>
+
+<% if @paid_registrants.present? %>
+  <h3 class="mt-0">You're registered in the following systems:</h3>
+  <% @paid_registrants.in_groups_of(3) do |registrant_group| %>
+    <div class="row">
+      <% registrant_group.each do |registrant| %>
+        <%= render :partial => 'registrant_stub_banner', :locals => {:registrant => registrant} unless registrant.nil? %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
 <div class="btn-group-vertical btn-block">
   <% if @cohort.attachment_url.blank? %>
     <div class="btn btn-primary disabled">Player pack unavailable</div>
