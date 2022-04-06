@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_05_200528) do
+ActiveRecord::Schema.define(version: 2022_04_06_063855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2022_04_05_200528) do
     t.string "payment_id"
     t.bigint "user_id"
     t.boolean "checked_in"
+    t.string "list_url"
     t.index ["system_id"], name: "index_registrants_on_system_id"
     t.index ["user_id"], name: "index_registrants_on_user_id"
   end
