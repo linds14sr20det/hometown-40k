@@ -41,9 +41,7 @@ en:
     cart: "Checkout with your tickets"
     success: "Transaction success"
   social_links:
-    facebook: "https://facebook.com/hometown40k/"
     itc: "https://www.frontlinegaming.org/community/frontline-gamings-independent-tournament-circuit/"
-    hnic: "http://www.hobbynight.ca"
   activerecord:
     attributes:
       cohort:
