@@ -1,6 +1,6 @@
 <% provide(:title, @system.title) %>
 <% provide(:meta_description, truncate(strip_tags(@system.description), :length => 120)) %>
-<div class="ticket" style="height: 100%">
+<div class="ticket">
   <div class="ticket-date">
     <%= @system.cohort.name %>
   </div>
@@ -12,6 +12,7 @@
   <div>
     <%= sanitize(@system.description) %>
   </div>
+  <br />
   <div class="btn-group-vertical btn-block">
     <% if @system.cohort.attachment_url.blank? %>
       <div class="btn btn-primary disabled">Player pack unavailable</div>
@@ -22,7 +23,6 @@
     <div class="btn btn-primary disabled">Pairings</div>
     <div class="btn btn-primary disabled">Placings</div>
   </div>
-
   <% if @registrant.persisted? %>
     <div class="row">
       <div class="toggle-row col-md-offset-2 col-md-8">
@@ -46,14 +46,13 @@
       <div class="col-md-offset-2 col-md-8">
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Faction<span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li>Asuryani</li>
-              <li>Drukhari</li>
-              <li>Harlequins</li>
-            </ul>
+            <label style="display: none" for="js-factionSelect">Faction Select</label>
+            <select id="js-factionSelect" class="form-control" onchange="if (this.selectedIndex) submitFaction(this);">
+              <option value="" selected disabled hidden>Faction</option>
+              <option value="Asuryani">Asuryani</option>
+              <option value="Drukhari">Drukhari</option>
+              <option value="Harlequins">Harlequins</option>
+            </select>
           </div>
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Upload Army List</button>
@@ -61,7 +60,12 @@
         </div>
       </div>
     </div>
-    <pre><%= sanitize @registrant.list %></pre>
+    <br />
+    <div class="row">
+      <div class="col-md-12">
+        <pre><%= sanitize @registrant.list %></pre>
+      </div>
+    </div>
   <% end %>
 
   <% unless @registrant.persisted? %>
@@ -109,13 +113,19 @@
         $('#myInput').focus()
     })
 
-    $("#js-submitList").on("click", function() {
+    $( document ).ready(function() {
+        $("#js-factionSelect option").filter(function() {
+            return $(this).text() === "<%= @registrant.faction %>";
+        }).prop('selected', true);
+    });
+
+    function submitFaction(selectList) {
         Rails.ajax({
-            url: "<%= submit_list_registrant_path(@registrant.id)%>",
+            url: "<%= submit_faction_registrant_path(@registrant.id)%>",
             type: "post",
-            data: new URLSearchParams({listContent: $("#js-listContent")[0].value}).toString(),
+            data: new URLSearchParams({faction: selectList.value}).toString(),
             success: function(data) {},
             error: function(data) {}
         })
-    })
+    }
 </script>
