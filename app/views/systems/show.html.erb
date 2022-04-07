@@ -1,6 +1,6 @@
 <% provide(:title, @system.title) %>
 <% provide(:meta_description, truncate(strip_tags(@system.description), :length => 120)) %>
-<div class="ticket">
+<div class="ticket" style="height: 100%">
   <div class="ticket-date">
     <%= @system.cohort.name %>
   </div>
@@ -46,7 +46,14 @@
       <div class="col-md-offset-2 col-md-8">
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default">Faction...</button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Faction<span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li>Asuryani</li>
+              <li>Drukhari</li>
+              <li>Harlequins</li>
+            </ul>
           </div>
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Upload Army List</button>
@@ -54,8 +61,8 @@
         </div>
       </div>
     </div>
+    <pre><%= sanitize @registrant.list %></pre>
   <% end %>
-
 
   <% unless @registrant.persisted? %>
     <%= form_for(@registrant, url: add_to_cart_system_path) do |f| %>
@@ -83,13 +90,15 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="myModalLabel">Upload List</h4>
         </div>
+        <%= form_for @registrant, url: submit_list_registrant_path(@registrant.id), method: :post do |form| %>
         <div class="modal-body">
-          <textarea class="form-control" rows="50"></textarea>
+          <%= form.text_area :list %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <%= form.submit "Save changes", class: "btn btn-primary" %>
         </div>
+        <% end %>
       </div>
     </div>
   </div>
@@ -98,5 +107,15 @@
 <script>
     $('#myModal').on('shown.bs.modal', function () {
         $('#myInput').focus()
+    })
+
+    $("#js-submitList").on("click", function() {
+        Rails.ajax({
+            url: "<%= submit_list_registrant_path(@registrant.id)%>",
+            type: "post",
+            data: new URLSearchParams({listContent: $("#js-listContent")[0].value}).toString(),
+            success: function(data) {},
+            error: function(data) {}
+        })
     })
 </script>

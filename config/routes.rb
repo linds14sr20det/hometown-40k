@@ -37,6 +37,8 @@ Rails.application.routes.draw do
 
   resources :registrants do
     post :check_in_player, on: :member
+    post :submit_list, on: :member
+    post :submit_faction, on: :member
     get :toggle_start_event, on: :collection
   end
 end

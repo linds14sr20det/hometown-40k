@@ -71,7 +71,7 @@ class RegistrantsController < ApplicationController
 
   def check_in_player
     registrant = Registrant.find(params['id'])
-    registrant.check_in_edit
+    registrant.post_paid_edit
     registrant.checked_in = !registrant.checked_in
     registrant.save
     respond_to do |format|
@@ -79,14 +79,20 @@ class RegistrantsController < ApplicationController
     end
   end
 
-  # Figure out upload list
-  def upload_list
+  def submit_list
     registrant = Registrant.find(params['id'])
-    registrant.list = params["list"]
+    registrant.post_paid_edit
+    registrant.list = params["registrant"]["list"]
     registrant.save
-    respond_to do |format|
-      format.js { render "check_in_player", :locals => {registrant: registrant} }
-    end
+    redirect_to system_path(registrant.system)
+  end
+
+  def submit_faction
+    registrant = Registrant.find(params['id'])
+    registrant.post_paid_edit
+    registrant.faction = params["faction"]
+    registrant.save
+    redirect_to system_path(registrant.system)
   end
 
   private
