@@ -87,7 +87,9 @@
       </div>
     <% end %>
   <% end %>
+</div>
 
+<% if @registrant.persisted? %>
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -96,37 +98,37 @@
           <h4 class="modal-title" id="myModalLabel">Upload List</h4>
         </div>
         <%= form_for @registrant, url: submit_list_registrant_path(@registrant.id), method: :post do |form| %>
-        <div class="modal-body">
-          <%= form.text_area :list %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <%= form.submit "Save changes", class: "btn btn-primary" %>
-        </div>
+          <div class="modal-body">
+            <%= form.text_area :list %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= form.submit "Save changes", class: "btn btn-primary" %>
+          </div>
         <% end %>
       </div>
     </div>
   </div>
-</div>
 
-<script>
-    $('#myModal').on('shown.bs.modal', function () {
-        $('#myInput').focus()
-    })
+  <script>
+      $('#myModal').on('shown.bs.modal', function () {
+          $('#myInput').focus()
+      })
 
-    $( document ).ready(function() {
-        $("#js-factionSelect option").filter(function() {
-            return $(this).text() === "<%= @registrant.faction %>";
-        }).prop('selected', true);
-    });
+      $( document ).ready(function() {
+          $("#js-factionSelect option").filter(function() {
+              return $(this).text() === "<%= @registrant.faction %>";
+          }).prop('selected', true);
+      });
 
-    function submitFaction(selectList) {
-        Rails.ajax({
-            url: "<%= submit_faction_registrant_path(@registrant.id)%>",
-            type: "post",
-            data: new URLSearchParams({faction: selectList.value}).toString(),
-            success: function(data) {},
-            error: function(data) {}
-        })
-    }
-</script>
+      function submitFaction(selectList) {
+          Rails.ajax({
+              url: "<%= submit_faction_registrant_path(@registrant.id)%>",
+              type: "post",
+              data: new URLSearchParams({faction: selectList.value}).toString(),
+              success: function(data) {},
+              error: function(data) {}
+          })
+      }
+  </script>
+<% end %>
