@@ -112,7 +112,7 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = 'hometown40k.com'
+  host = 'www.hometown40k.com'
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
   config.action_mailer.asset_host = "https://#{host}"
   ActionMailer::Base.smtp_settings = {
@@ -120,7 +120,7 @@ Rails.application.configure do
     :address        => ENV['MAILGUN_SMTP_SERVER'],
     :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
     :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-    :domain         => 'safe-harbor-96088.herokuapp.com',
+    :domain         => 'mg.hometown40k.com',
     :authentication => :plain,
   }
   ActionMailer::Base.delivery_method = :smtp
