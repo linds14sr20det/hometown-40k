@@ -49,9 +49,55 @@
             <label style="display: none" for="js-factionSelect">Faction Select</label>
             <select id="js-factionSelect" class="form-control" onchange="if (this.selectedIndex) submitFaction(this);">
               <option value="" selected disabled hidden>Faction</option>
-              <option value="Asuryani">Asuryani</option>
-              <option value="Drukhari">Drukhari</option>
-              <option value="Harlequins">Harlequins</option>
+              <optgroup label="Imperium">
+                <option value="Imperium">Imperium</option>
+                <option value="Adeptus Astartes">Adeptus Astartes</option>
+                <option value="Space Marines">Space Marines</option>
+                <option value="Black Templars">Black Templars</option>
+                <option value="Blood Angels">Blood Angels</option>
+                <option value="Dark Angels">Dark Angels</option>
+                <option value="Deathwatch">Deathwatch</option>
+                <option value="Grey Knights">Grey Knights</option>
+                <option value="Imperial Fists">Imperial Fists</option>
+                <option value="Iron Hands">Iron Hands</option>
+                <option value="Salamanders">Salamanders</option>
+                <option value="Space Wolves">Space Wolves</option>
+                <option value="Ultra Marines">Ultra Marines</option>
+                <option value="White Scars">White Scars</option>
+                <option value="Adeptus Sororitas">Adeptus Sororitas</option>
+                <option value="Adeptus Custodes">Adeptus Custodes</option>
+                <option value="Adeptus Mechanicus">Adeptus Mechanicus</option>
+                <option value="Astra Militarum">Astra Militarum</option>
+                <option value="Imperial Knights">Imperial Knights</option>
+              </optgroup>
+              <optgroup label="Chaos">
+                <option value="Chaos">Chaos</option>
+                <option value="Chaos Daemons">Chaos Daemons</option>
+                <option value="Chaos Knights">Chaos Knights</option>
+                <option value="Chaos Space Marines">Chaos Space Marines</option>
+                <option value="Death Guard">Death Guard</option>
+                <option value="Thousand Sons">Thousand Sons</option>
+              </optgroup>
+              <optgroup label="Aeldari">
+                <option value="Aeldari">Aeldari</option>
+                <option value="Asuryani">Asuryani</option>
+                <option value="Harlequins">Harlequins</option>
+                <option value="Drukhari">Drukhari</option>
+              </optgroup>
+              <optgroup label="Hive Mind">
+                <option value="Hive Mind">Hive Mind</option>
+                <option value="Tyranids">Tyranids</option>
+                <option value="Genestealer Cults">Genestealer Cults</option>
+              </optgroup>
+              <optgroup label="Necrons">
+                <option value="Necrons">Necrons</option>
+              </optgroup>
+              <optgroup label="Orks">
+                <option value="Orks">Orks</option>
+              </optgroup>
+              <optgroup label="Tau Empire">
+                <option value="Tau Empire">Tau Empire</option>
+              </optgroup>
             </select>
           </div>
           <div class="btn-group" role="group">
