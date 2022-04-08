@@ -112,7 +112,7 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = 'safe-harbor-96088.herokuapp.com'
+  host = 'hometown40k.com'
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
   config.action_mailer.asset_host = "https://#{host}"
   ActionMailer::Base.smtp_settings = {

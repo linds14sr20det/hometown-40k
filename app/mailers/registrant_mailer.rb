@@ -1,7 +1,7 @@
 class RegistrantMailer < ApplicationMailer
   require 'open-uri'
 
-  default from: 'hometown40k@gmail.com'
+  default from: 'noreply@hometown40k.com'
 
   def registration_email(registrant_group)
     @registrant_group = registrant_group
