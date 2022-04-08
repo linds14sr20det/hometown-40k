@@ -111,6 +111,14 @@ form {
   padding: 90px 10px 32px 10px;
 }
 
+.alert-notice {
+  @extend .alert-info
+}
+
+.alert-alert {
+  @extend .alert-danger
+}
+
 #error_explanation {
   color: red;
   ul {
