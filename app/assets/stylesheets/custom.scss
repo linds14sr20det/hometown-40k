@@ -111,6 +111,14 @@ form {
   padding: 90px 10px 32px 10px;
 }
 
+pre {
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
 .alert-notice {
   @extend .alert-info
 }
@@ -385,6 +393,20 @@ span.picture {
     margin-bottom: 20px;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 5px 4px rgba(0,0,0,0.22);
   }
+  .roster-card {
+    position: relative;
+    border: 1px solid #e2e2e2;
+    padding: 12px;
+    margin-bottom: 24px;
+    background: #f4f4f4;
+    -webkit-transition: all 250ms;
+    -moz-transition: all 250ms;
+    transition: all 250ms;
+    box-shadow: 0 10px 10px rgba(0,0,0,0.30), 0 10px 10px rgba(0,0,0,0.22);
+    max-height: 50px;
+    min-height: 50px;
+  }
+
   .ticket-card {
     position: relative;
     border: 1px solid #e2e2e2;

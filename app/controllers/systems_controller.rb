@@ -68,6 +68,6 @@ class SystemsController < ApplicationController
   end
 
   def roster
-    @registrants = System.find_by(id: params[:id]).registrants
+    @registrants = Registrant.includes(:user).where(system_id: params[:id]).where(paid: true).order("users.name ASC")
   end
 end

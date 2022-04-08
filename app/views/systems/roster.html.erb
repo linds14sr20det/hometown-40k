@@ -1,5 +1,58 @@
+<h4 class="mt-0">Roster for <%= @registrants.first.system.cohort.name %> - <%= @registrants.first.system.title %> </h4>
+<%= label_tag :search, "Find a player", :class => "small" %>
+<div class="form-group">
+  <%= search_field_tag(:registrant_name, "", :onkeyup => 'sendSearch()', class: 'form-control') %>
+</div>
+
 <% @registrants.each do |registrant| %>
-  <div>
-    <%= registrant.user.name %>
+  <div class="row">
+    <div class="col-md-12 ticket">
+      <div class="roster-card bg-success">
+        <div class="row">
+          <div class="col-md-12">
+            <%= registrant.user.name %>
+            <% if registrant.checked_in? %>
+              <span class="label label-success">Checked in</span>
+            <% end %>
+            <% if registrant.list %>
+              <button type="button" class="pull-right glyphicon glyphicon-th-list" data-toggle="modal" data-target="#<%= registrant.id %>"></button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="<%= registrant.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">List for <%= registrant.user.name %></h4>
+        </div>
+        <div class="modal-body">
+          <pre><%= sanitize registrant.list %></pre>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>
+
+<script>
+    function sendSearch() {
+        const searchTerm = document.querySelector("#cohort_name").value;
+        const tabActive = document.querySelector(".active").getAttribute("data-timeframe");
+        Rails.ajax({
+            url: "",
+            type: "POST",
+            data: `search_term=${searchTerm}&timeframe=${tabActive}`,
+            success: function (data) {
+                document.querySelector("#cohorts_search_results").innerHTML = data.html;
+            }
+        });
+    }
+</script>
