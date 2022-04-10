@@ -4,9 +4,11 @@
   <%= search_field_tag(:registrant_name, "", :onkeyup => 'sendSearch()', class: 'form-control') %>
 </div>
 
-<% @registrants.each do |registrant| %>
-  <%= render 'registrant_stub_banner', :registrant => registrant %>
-<% end %>
+<div id="registrants_search_results">
+    <% @registrants.each do |registrant| %>
+      <%= render 'registrant_stub_banner', :registrant => registrant %>
+    <% end %>
+</div>
 
 <script>
     function sendSearch() {
@@ -14,9 +16,9 @@
         Rails.ajax({
             url: "<%= roster_search_systems_path %>",
             type: "POST",
-            data: `search_term=${searchTerm}&system_id=<%= @system.id %>}`,
+            data: `search_term=${searchTerm}&id=<%= @system.id %>}`,
             success: function (data) {
-                document.querySelector("#cohorts_search_results").innerHTML = data.html;
+                document.querySelector("#registrants_search_results").innerHTML = data.html;
             }
         });
     }

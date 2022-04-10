@@ -1,6 +1,4 @@
 class Registrant < ApplicationRecord
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
   belongs_to :system
   belongs_to :user
 
