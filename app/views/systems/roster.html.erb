@@ -1,4 +1,4 @@
-<h4 class="mt-0">Roster for <%= @registrants.first.system.cohort.name %> - <%= @registrants.first.system.title %> </h4>
+<h4 class="mt-0">Roster for <%= @system.cohort.name %> - <%= @system.title %> </h4>
 <%= label_tag :search, "Find a player", :class => "small" %>
 <div class="form-group">
   <%= search_field_tag(:registrant_name, "", :onkeyup => 'sendSearch()', class: 'form-control') %>
