@@ -1,5 +1,5 @@
 class CohortsController < ApplicationController
-  before_action :authenticate_user!, except: [:find, :search, :show]
+  before_action :authenticate_user!, except: [:find, :search, :show, :cohort_search]
   before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
   def index

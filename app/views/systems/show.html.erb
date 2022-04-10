@@ -109,7 +109,10 @@
     <br />
     <div class="row">
       <div class="col-md-12">
-        <pre><%= sanitize @registrant.list %></pre>
+        <% if @registrant.list.present? %>
+          <h5>Army List Preview</h5>
+          <pre><%= sanitize @registrant.list %></pre>
+        <% end %>
       </div>
     </div>
     <br />

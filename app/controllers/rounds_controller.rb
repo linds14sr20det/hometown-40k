@@ -84,7 +84,6 @@ class RoundsController < ApplicationController
     pairings.in_groups_of(2, 1).each do |pairing|
       @round.round_individuals.new(player_a_id: pairing[0], player_b_id: pairing[1], player_a_points: 0, player_b_points: 0)
     end
-    binding.pry
   end
 
   def rounds_params
