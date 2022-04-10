@@ -5,4 +5,7 @@ if(trueelm) {
     var newone = trueelm.cloneNode(true);
     trueelm.parentNode.replaceChild(newone, trueelm);
 }
-toggleElm = $("#js-checkedIn")[0].checked = <%= registrant.checked_in? %>;
+var checkedIn = $("#js-checkedIn")[0];
+if (checkedIn) {
+    checkedIn.checked = <%= registrant.checked_in? %>;
+}

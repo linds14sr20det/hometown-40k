@@ -48,7 +48,7 @@ class RegistrantsController < ApplicationController
     system = System.find(params[:id])
     system.update_attributes(event_started: !system.event_started?)
     if system.event_started
-      system.registrants.where(checked_in: true).each do |registrant|
+      system.registrants.where(checked_in: true).where(paid: true).each do |registrant|
         attributes = {
             player_id: registrant.user.id,
             system_id: system.id,

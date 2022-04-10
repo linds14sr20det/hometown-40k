@@ -23,20 +23,22 @@
           </ul>
         </div>
       </div>
-      <table class="table table-striped table-hover">
-        <thead>
-        <tr>
-          <th>Checked in?</th>
-          <th>Name</th>
-          <th>Email</th>
-        </tr>
-        </thead>
-        <% unless system.registrants.paid.nil? %>
-          <% system.registrants.paid.each do |registrant|%>
-            <%= render partial: "registrant", locals: {registrant: registrant} %>
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+          <tr>
+            <th>Checked in?</th>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+          </thead>
+          <% unless system.registrants.paid.nil? %>
+            <% system.registrants.paid.each do |registrant|%>
+              <%= render partial: "registrant", locals: {registrant: registrant} %>
+            <% end %>
           <% end %>
-        <% end %>
-      </table>
+        </table>
+      </div>
       <div class="row title-row">
         <div class="col-md-9">
           <h5>Failed Payments</h5>
