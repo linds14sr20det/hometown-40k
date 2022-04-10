@@ -1,5 +1,5 @@
 <% provide(:title, 'Systems') %>
-<% provide(:meta_description, t('seo.systems')) %>
+<% provide(:meta_description, truncate(strip_tags(@cohort.body), :length => 120)) %>
 <% unless @systems.nil? %>
   <h3 class="mt-0"><%= @cohort.name %>'s Systems</h3>
   <!-- TODO: sort by day -->
