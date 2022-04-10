@@ -75,7 +75,7 @@ class CohortsController < ApplicationController
     @cohorts = find_cohorts_by_location
   end
 
-  def search
+  def cohort_search
     @cohorts = if params["search_term"].length == 0
                  find_cohorts_by_location
                else

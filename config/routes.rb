@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :cohorts do
     get :find, on: :collection
     get :my_events, on: :collection
-    post :search, on: :collection
+    post :cohort_search, on: :collection
     post :my_search, on: :collection
   end
 
@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get :cohorts_cart, on: :collection
     get :success, on: :collection
     get :roster, on: :member
+    post :roster_search, on: :collection
   end
 
   resources :rounds, only: [:index, :new, :show] do

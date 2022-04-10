@@ -68,6 +68,28 @@ class SystemsController < ApplicationController
   end
 
   def roster
-    @registrants = Registrant.includes(:user).where(system_id: params[:id]).where(paid: true).order("users.name ASC")
+    @system = System.find(params[:id])
+    @registrants = Registrant.includes(:user).where(system_id: @system).where(paid: true).order("users.name ASC")
+  end
+
+  def roster_search
+     response = Registrant.search elasticsearch_dsl(params["search_term"], params["system_id"])
+     ids = response.results.map { |r| r._id.to_i }
+     @registrants = Registrant.where(id: ids).where(system_id: params["system_id"]).paginate(page: params[:page], per_page: 50)
+    render json: { html: render_to_string(partial: 'search') }
+  end
+
+  private
+
+  def elasticsearch_dsl(term, system_id)
+    {
+      query: {
+        fuzzy: {
+          name: {
+            value: term,
+          },
+        }
+      },
+    }
   end
 end

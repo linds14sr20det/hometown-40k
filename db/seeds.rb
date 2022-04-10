@@ -95,3 +95,4 @@ if Rails.env == "development"
 end
 
 Cohort.import(force: true)
+Registrant.import(force: true)

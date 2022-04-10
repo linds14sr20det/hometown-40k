@@ -22,7 +22,7 @@
     const searchTerm = document.querySelector("#cohort_name").value;
     const tabActive = document.querySelector(".active").getAttribute("data-timeframe");
     Rails.ajax({
-      url: "<%= search_path %>",
+      url: "<%= cohort_search_cohorts_path %>",
       type: "POST",
       data: `search_term=${searchTerm}&timeframe=${tabActive}`,
       success: function (data) {
