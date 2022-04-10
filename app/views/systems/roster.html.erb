@@ -1,25 +1,30 @@
 <h4 class="mt-0">Roster for <%= @system.cohort.name %> - <%= @system.title %> </h4>
-<%= label_tag :search, "Find a player", :class => "small" %>
-<div class="form-group">
-  <%= search_field_tag(:registrant_name, "", :onkeyup => 'sendSearch()', class: 'form-control') %>
-</div>
+<% if @registrants.present? %>
+  <%= label_tag :search, "Find a player", :class => "small" %>
+  <div class="form-group">
+    <%= search_field_tag(:registrant_name, "", :onkeyup => 'sendSearch()', class: 'form-control') %>
+  </div>
 
-<div id="registrants_search_results">
+  <div id="registrants_search_results">
     <% @registrants.each do |registrant| %>
       <%= render 'registrant_stub_banner', :registrant => registrant %>
     <% end %>
-</div>
+  </div>
 
-<script>
-    function sendSearch() {
-        const searchTerm = document.querySelector("#registrant_name").value;
-        Rails.ajax({
-            url: "<%= roster_search_systems_path %>",
-            type: "POST",
-            data: `search_term=${searchTerm}&id=<%= @system.id %>}`,
-            success: function (data) {
-                document.querySelector("#registrants_search_results").innerHTML = data.html;
-            }
-        });
-    }
-</script>
+  <script>
+      function sendSearch() {
+          const searchTerm = document.querySelector("#registrant_name").value;
+          Rails.ajax({
+              url: "<%= roster_search_systems_path %>",
+              type: "POST",
+              data: `search_term=${searchTerm}&id=<%= @system.id %>}`,
+              success: function (data) {
+                  document.querySelector("#registrants_search_results").innerHTML = data.html;
+              }
+          });
+      }
+  </script>
+<% else %>
+  Looks like no one's registered yet. Click here to be the first!
+  <%= link_to "Register for system", system_path(@system) %>
+<% end %>
