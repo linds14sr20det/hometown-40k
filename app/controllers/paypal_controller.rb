@@ -44,7 +44,7 @@ class PaypalController < ApplicationController
     # ###Redirect URLs
     :redirect_urls => {
       :return_url => execute_url,
-      :cancel_url => tickets_url
+      :cancel_url => systems_url
     },
     # ###Transaction
     # A transaction defines the contract of a
