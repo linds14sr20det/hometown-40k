@@ -22,7 +22,7 @@
         <div class="ticket-title">
           <%= system.title %>
         </div>
-        <small><p><%= "Event size: #{system.max_players}" %></p></small>
+        <small><p><%= "Event size: #{system.max_players} - Spots left: #{system.spots_left}" %></p></small>
       </div>
       <div class="price price-card pull-right"><%= number_to_currency(system.cost) %></div>
     </div>

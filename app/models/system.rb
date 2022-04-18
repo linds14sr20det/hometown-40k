@@ -42,6 +42,10 @@ class System < ApplicationRecord
     cohort.active? && !registration_open?
   end
 
+  def spots_left
+    max_players - registrants.where(paid: true).count
+  end
+
   private
 
   def check_for_registrants
