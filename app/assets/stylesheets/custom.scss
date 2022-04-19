@@ -603,3 +603,23 @@ input:checked + .slider:before {
   font-weight: 300;
   line-height: 1.4;
 }
+
+.pairing-card {
+  position: relative;
+  border: 1px solid #e2e2e2;
+  padding: 4px;
+  margin-bottom: 24px;
+  background: #f4f4f4;
+  -webkit-transition: all 250ms;
+  -moz-transition: all 250ms;
+  transition: all 250ms;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.30), 0 10px 10px rgba(0, 0, 0, 0.22);
+  max-height: 50px;
+  min-height: 50px;
+}
+
+.pairing-player {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

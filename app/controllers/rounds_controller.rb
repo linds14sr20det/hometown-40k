@@ -76,6 +76,7 @@ class RoundsController < ApplicationController
   def set_initial_pairings(registrants)
     if @round.round == 0
       pairings = registrants.where(checked_in: true).map(&:user_id)
+      pairings = pairings.shuffle
     else
       # TODO: This is where we can get fancy to avoid people who have already played having collisions.
       pairings = RoundAggregate.where(system_id: @round.system.id).where(withdrawn: false).order(total_points: :desc).map(&:player_id)

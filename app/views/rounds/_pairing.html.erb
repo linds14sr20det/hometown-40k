@@ -1,15 +1,17 @@
 <div class="row">
-  <div class="col-md-12 ticket">
-    <div class="ticket-card" style="<%= "background: #c76565" if already_played?(f.object.round.system.id, f.object.player_a_id, f.object.player_b_id) %>">
+  <div class="col-sm-12">
+    <div class="pairing-card">
       <div class="row">
-        <div class="col-sm-5">
-          <%= f.object.player_a.name %>
+        <div class="col-xs-5" draggable="true">
+          <div class="row"><div class="col-xs-12 pairing-player"><%= f.object.player_a.name %></div></div>
+          <div class="row"><div class="col-xs-12">Win/Loss</div></div>
         </div>
-        <div class="col-sm-2">
-          vs.
+        <div class="col-xs-2 text-center">
+          <%= f.index + 1 %>
         </div>
-        <div class="col-sm-5">
-          <%= f.object.player_b.name %>
+        <div class="col-xs-5" draggable="true">
+          <div class="row"><div class="col-xs-12 pairing-player text-right"><%= f.object.player_b.name %></div></div>
+          <div class="row"><div class="col-xs-12 pairing-player text-right">Win/Loss</div></div>
         </div>
       </div>
     </div>
