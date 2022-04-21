@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
   has_many :cohorts, inverse_of: :user, dependent: :destroy
   has_many :registrants, inverse_of: :user, dependent: :destroy
+  has_many :round_aggregates, foreign_key: :player_id, inverse_of: :player
   before_save :downcase_email
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

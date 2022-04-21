@@ -8,7 +8,9 @@
         <li><a href="<%= edit_cohort_path(system.cohort) %>">Edit this system</a></li>
         <li role="separator" class="divider"></li>
         <li><a href="<%= registrants_path(cohort_id: system.cohort.id) %>">Check in players</a></li>
-        <li><a href="#">Start Event</a></li>
+        <% unless system.event_started? %>
+          <li><a href="<%= toggle_start_event_registrants_path(id: system.id) %>">Start Event</a></li>
+        <% end %>
       </ul>
     </div>
   <% end %>

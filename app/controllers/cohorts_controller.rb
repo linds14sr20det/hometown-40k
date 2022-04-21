@@ -109,7 +109,7 @@ class CohortsController < ApplicationController
   def find_cohorts_by_location
     location_raw = request.location&.coordinates
     # Default lat long is san fran
-    coordinates = location_raw.empty? ? [37.7, -122.4] : location_raw
+    coordinates = location_raw.blank? ? [37.7, -122.4] : location_raw
     Cohort.where(active: true).where(date_range).near(coordinates, 15000).paginate(page: params[:page], per_page: 50)
   end
 

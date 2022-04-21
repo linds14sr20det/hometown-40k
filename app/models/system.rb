@@ -46,6 +46,22 @@ class System < ApplicationRecord
     max_players - registrants.where(paid: true).count
   end
 
+  def generate_current_pairings
+    current_players = round_aggregates.where(withdrawn: false)
+
+    current_players.each do |player|
+      player.combined_wld = "#{player.wins}-#{player.losses}-#{player.draws}"
+    end
+    player_brackets = current_players.group_by { |player| player.combined_wld }
+    temp = player_brackets.sort_by { |key| key }.reverse!.to_h
+
+    # To here the ordering is working nicely
+    # sort now in each grouping
+
+    ranked_players = player_brackets.each { |_key, bracket| bracket.sort_by(&:total_points) }
+    ranked_players.map(&:player_id)
+  end
+
   private
 
   def check_for_registrants

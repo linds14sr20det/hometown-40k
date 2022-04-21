@@ -17,7 +17,7 @@ class RoundsController < ApplicationController
     @system = System.find(params[:system_id])
     redirect_to @system.rounds.last unless @system.rounds.empty? || @system.rounds.last.complete? || @system.rounds.count < @system.round_individuals
     @round = @system.rounds.new(:round => @system.rounds.count, :complete => false)
-    set_initial_pairings(@system.registrants)
+    set_initial_pairings(@system)
   end
 
   def create
@@ -57,14 +57,14 @@ class RoundsController < ApplicationController
         player_b[:draw] = 1
       end
       para.update_attributes(
-        total_points: para.total_points + pairing.player_a_points + (player_a[:win] * 1000) + (player_a[:draw] * 500),
+        total_points: para.total_points + pairing.player_a_points,
         wins: para.wins + player_a[:win],
         draws: para.draws + player_a[:draw],
         losses: para.losses + player_a[:loss],
         opponents: para.opponents << pairing.player_b.id,
         )
       parb.update_attributes(
-        total_points: parb.total_points + pairing.player_b_points + (player_b[:win] * 1000) + (player_b[:draw] * 500),
+        total_points: parb.total_points + pairing.player_b_points,
         wins: parb.wins + player_b[:win],
         draws: parb.draws + player_b[:draw],
         losses: parb.losses + player_b[:loss],
@@ -73,17 +73,15 @@ class RoundsController < ApplicationController
     end
   end
 
-  def set_initial_pairings(registrants)
+  def set_initial_pairings(system)
     if @round.round == 0
-      pairings = registrants.where(checked_in: true).map(&:user_id)
-      pairings = pairings.shuffle
+      player_ids = system.registrants.where(checked_in: true).map(&:user_id).shuffle
     else
-      # TODO: This is where we can get fancy to avoid people who have already played having collisions.
-      pairings = RoundAggregate.where(system_id: @round.system.id).where(withdrawn: false).order(total_points: :desc).map(&:player_id)
+      player_ids = system.generate_current_pairings
     end
     # TODO: fill_with 1 here links back to user 1 effectively. We need to reseed the DB with a 'bye' player
-    pairings.in_groups_of(2, 1).each do |pairing|
-      @round.round_individuals.new(player_a_id: pairing[0], player_b_id: pairing[1], player_a_points: 0, player_b_points: 0)
+    player_ids.in_groups_of(2, 1).each do |pairing|
+      @round.round_individuals.new(player_a_id: pairing[0], player_b_id: pairing[1], player_a_points: 0, player_b_points: 0, player_a_round_aggregate: RoundAggregate.where(player_id: pairing[0]).where(system_id: system.id).first, player_b_round_aggregate: RoundAggregate.where(player_id: pairing[1]).where(system_id: system.id).first)
     end
   end
 

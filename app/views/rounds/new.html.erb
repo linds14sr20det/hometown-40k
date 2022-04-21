@@ -28,5 +28,21 @@
         <%= f.submit 'Start Round', class: "btn btn-primary" %>
       </div>
     <% end %>
+    <% if Rails.env.development? %>
+      <button onClick="setResults()">Set Results</button>
+    <% end %>
   </div>
 </div>
+
+<% if Rails.env.development? %>
+  <script>
+    function setResults() {
+        for(let i = 0; i < <%= @round.round_individuals.length %>; i++) {
+          var playerAString = `input[name='round[round_individuals_attributes][${i}][player_a_points]']`
+          var playerBString = `input[name='round[round_individuals_attributes][${i}][player_b_points]']`
+          document.querySelector(playerAString).value = Math.floor(Math.random() * 101);
+          document.querySelector(playerBString).value = Math.floor(Math.random() * 101);
+        }
+    }
+  </script>
+<% end %>

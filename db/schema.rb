@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_06_063855) do
+ActiveRecord::Schema.define(version: 2022_04_19_214942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,8 +79,10 @@ ActiveRecord::Schema.define(version: 2022_04_06_063855) do
     t.integer "player_a_points"
     t.integer "player_b_points"
     t.bigint "round_id"
+    t.bigint "round_aggregate_id", null: false
     t.index ["player_a_id"], name: "index_round_individuals_on_player_a_id"
     t.index ["player_b_id"], name: "index_round_individuals_on_player_b_id"
+    t.index ["round_aggregate_id"], name: "index_round_individuals_on_round_aggregate_id"
     t.index ["round_id"], name: "index_round_individuals_on_round_id"
   end
 
@@ -132,6 +134,7 @@ ActiveRecord::Schema.define(version: 2022_04_06_063855) do
   add_foreign_key "attachments", "systems"
   add_foreign_key "cohorts", "users"
   add_foreign_key "round_aggregates", "users", column: "player_id"
+  add_foreign_key "round_individuals", "round_aggregates"
   add_foreign_key "round_individuals", "users", column: "player_a_id"
   add_foreign_key "round_individuals", "users", column: "player_b_id"
   add_foreign_key "systems", "cohorts"

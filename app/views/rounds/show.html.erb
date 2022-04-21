@@ -16,8 +16,8 @@
         </li>
       <% end %>
     </ul>
-    <% @round.round_individuals.order(:id).each do |pairing| %>
-      <%= render partial: "game", locals: {pairing: pairing} %>
+    <% @round.round_individuals.order(:id).each_with_index do |pairing, index| %>
+      <%= render partial: "game", locals: { pairing: pairing, index: index } %>
     <% end %>
     <%= form_tag complete_round_rounds_path(id: @round.id) do %>
       <%= submit_tag("Complete Round", class: "btn btn-primary") unless @round.complete? %>
