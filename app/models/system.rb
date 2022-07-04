@@ -50,10 +50,13 @@ class System < ApplicationRecord
     current_players = round_aggregates.where(withdrawn: false)
 
     current_players.each do |player|
-      player.combined_wld = "#{player.wins}-#{player.losses}-#{player.draws}"
+      # This algorithm allows for a 50 round tournament, which is more than the population of the earth.
+      player.combined_wld_string = "#{player.wins}-#{player.losses}-#{player.draws}"
+      player.combined_wld_points = player.wins * 50 + player.draws
     end
-    player_brackets = current_players.group_by { |player| player.combined_wld }
-    temp = player_brackets.sort_by { |key| key }.reverse!.to_h
+    player_brackets = current_players.group_by { |player| player.combined_wld_points }
+
+    # temp = player_brackets.sort_by { |key| key }.reverse!.to_h
 
     # To here the ordering is working nicely
     # sort now in each grouping
