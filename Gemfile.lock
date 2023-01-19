@@ -1376,7 +1376,7 @@ GEM
       mini_magick (~> 4.5)
       wysiwyg-rails (~> 3.1)
     geocoder (1.7.5)
-    globalid (1.0.0)
+    globalid (1.0.1)
       activesupport (>= 5.0)
     hashie (5.0.0)
     i18n (0.9.5)
@@ -1415,7 +1415,7 @@ GEM
     mini_magick (4.11.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
-    minitest (5.15.0)
+    minitest (5.17.0)
     multi_json (1.15.0)
     multipart-post (2.1.1)
     nio4r (2.5.8)
@@ -1516,7 +1516,7 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
-    tzinfo (1.2.9)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
@@ -1535,7 +1535,7 @@ GEM
       railties (>= 3.2, < 7.0)
     xml-simple (1.1.9)
       rexml
-    zeitwerk (2.5.4)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   ruby
