@@ -8,7 +8,7 @@ class CohortsController < ApplicationController
   end
 
   def show
-    @cohort = Cohort.where(active: true).where(id: params[:id]).first
+    @cohort = Cohort.where(id: params[:id]).first
     @paid_registrants = my_paid_registrants_for_cohort(@cohort)
   end
 
