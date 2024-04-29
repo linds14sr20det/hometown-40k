@@ -1,7 +1,5 @@
 <h2 class="mt-0">Log in</h2>
 
-<div class="alert alert-info" role="alert">The database for this website was reset March 28th 2023. If you created a user prior to this date you will have to recreate one.</div>
-
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <%= f.label :email %><br />
   <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
