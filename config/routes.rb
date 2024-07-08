@@ -37,15 +37,9 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update]
 
   resources :registrants do
-    post :check_in_player, on: :member
-    post :submit_list, on: :member
-    post :submit_faction, on: :member
+    # post :check_in_player, on: :member
+    # post :submit_list, on: :member
+    # post :submit_faction, on: :member
     get :toggle_start_event, on: :collection
   end
-
-  get :ruins, to: "terrain#ruins"
-  get :woods, to: "terrain#woods"
-  get :craters, to: "terrain#craters"
-  get :armoured_containers, to: "terrain#armoured_containers"
-  get :barricades, to: "terrain#barricades"
 end

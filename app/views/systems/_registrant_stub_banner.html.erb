@@ -4,12 +4,6 @@
       <div class="row">
         <div class="col-md-12">
           <%= registrant.user.name %>
-          <% if registrant.checked_in? %>
-            <span class="label label-success">Checked in</span>
-          <% end %>
-          <% if registrant.list %>
-            <button type="button" class="pull-right glyphicon glyphicon-th-list" data-toggle="modal" data-target="#<%= registrant.id %>"></button>
-          <% end %>
         </div>
       </div>
     </div>
